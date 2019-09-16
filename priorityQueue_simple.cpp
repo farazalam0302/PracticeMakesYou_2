@@ -19,11 +19,13 @@ public :
     int prev;
     int curr; 
 
-    student (int r=0 , int rankk=0 ,  char s='E')
+
+    student (int r=0 , int pre=0 ,  int cur=0)
     {
         rollNo = r ;
-        rank = rankk;
-        supw = s;
+        prev = pre;
+        curr = cur;
+
         // extracurricular  = extra; 
     }
 
@@ -45,66 +47,52 @@ class MyComp
 {
     public : 
     bool operator () (student& lhs , student& rhs)
-    {
-        if (lhs.rank > rhs.rank){
+
+{
+        if (abs(lhs.prev - lhs.curr)  < abs(rhs.prev - rhs.curr)){
             return true;
         }
-        else if (lhs.rank < rhs.rank){
-            return false;
-        }
-        else if ( lhs.rank == rhs.rank && lhs.supw > rhs.supw){
-                return true;
-        }
-        else if (lhs.rank == rhs.rank && lhs.supw < rhs.supw)
-        {
+        else if (abs(lhs.prev - lhs.curr)  > abs(rhs.prev - rhs.curr)){
             return false;
         }
         else 
-        return lhs.rollNo > rhs.rollNo;
+        return lhs.rollNo < rhs.rollNo;
+
     }
 };
 
 bool compFunc(student& lhs , student& rhs)
-    {
-         if (lhs.rank < rhs.rank){
+
+{
+        if (abs(lhs.prev - lhs.curr)  < abs(rhs.prev - rhs.curr)){
             return true;
         }
-        else if (lhs.rank > rhs.rank){
-            return false;
-        }
-        else if ( lhs.rank == rhs.rank && lhs.supw > rhs.supw){
-                return true;
-        }
-        else if (lhs.rank == rhs.rank && lhs.supw < rhs.supw)
-        {
+        else if (abs(lhs.prev - lhs.curr)  > abs(rhs.prev - rhs.curr)){
             return false;
         }
         else 
-        return lhs.rollNo > rhs.rollNo;        
-    }
+        return lhs.rollNo < rhs.rollNo;
+}
+
 
 int main() 
 { 
     int n ; 
     // cin >> n ; // no of students
     auto lambdaCompare = [] (student& lhs , student& rhs)
-    {
-         if (lhs.rank > rhs.rank){
+
+   {
+        if (abs(lhs.prev - lhs.curr)  < abs(rhs.prev - rhs.curr)){
             return true;
         }
-        else if (lhs.rank < rhs.rank){
-            return false;
-        }
-        else if ( lhs.rank == rhs.rank && lhs.supw > rhs.supw){
-                return true;
-        }
-        else if (lhs.rank == rhs.rank && lhs.supw < rhs.supw)
-        {
+        else if (abs(lhs.prev - lhs.curr)  > abs(rhs.prev - rhs.curr)){
             return false;
         }
         else 
-        return lhs.rollNo > rhs.rollNo;        
+        return lhs.rollNo < rhs.rollNo;
     };
+
+
     // priority_queue <student,vector<student>,MyComp> heap;
     // priority_queue <student,vector<student>,decltype(lambdaCompare)> heap (lambdaCompare);
 
@@ -116,31 +104,31 @@ int main()
     //     cin >> roll >> rnk >> spw;
     //     heap.emplace(roll,rnk,spw);
     // }
-heap.emplace(1 ,6, 'E');
-heap.emplace(2 ,4, 'A');
-heap.emplace(3 ,5, 'B');
-heap.emplace(4 ,3, 'A');
-heap.emplace(5 ,3, 'B');
-heap.emplace(6 ,1, 'A');
-heap.emplace(7 ,1, 'C');
-heap.emplace(8 ,7, 'A');
-heap.emplace(9 ,8, 'B');
-heap.emplace(10 ,8, 'A');
+
+heap.emplace( 1 ,100, 1000);
+heap.emplace( 2 ,200, 1000);
+heap.emplace( 3 ,400, 1000);
+heap.emplace( 4 ,300, 1000);
+heap.emplace( 5 ,600, 1000);
+heap.emplace( 6 ,500, 1000);
+heap.emplace( 7 ,900, 1000);
+heap.emplace( 8 ,700, 1000);
+heap.emplace( 9 ,850, 1000);
+heap.emplace(10 ,850, 1000);
+
 student hnode;
 for (int i = 0; i < 10; i++)
 {
     hnode = heap.top();
-    cout << "[ RollNo = " << hnode.rollNo << ", Rank = " << hnode.rank << ", SUPW = " << hnode.supw << " ]" << endl;
+
+    cout << "[ RollNo = " << hnode.rollNo << ", PrevousYearMarks = " << hnode.prev << ", CurrentYearMarks = " << hnode.curr <<
+    " PerfDiff = " << abs(hnode.prev - hnode.curr) << " ]" <<  endl;
     heap.pop();
 }
-
-
-    
 
 
 
 
 	
 	return 0; 
-} 
-
+}
