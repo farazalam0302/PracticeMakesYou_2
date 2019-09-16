@@ -12,6 +12,7 @@ int main ()
   mypq.emplace(2);
   mypq.emplace(3);
   mypq.emplace(4);
+  
 
   std::cout << "mypq contains:";
   while (!mypq.empty())
