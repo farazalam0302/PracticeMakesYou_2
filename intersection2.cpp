@@ -76,6 +76,7 @@ string integerVectorToString(vector<int> list, int length = -1) {
         return "[]";
     }
 
+
     string result;
     for(int index = 0; index < length; index++) {
         int number = list[index];
