@@ -1,3 +1,4 @@
+
 /*
 
 student
@@ -19,13 +20,11 @@ public :
     int prev;
     int curr; 
 
-
     student (int r=0 , int pre=0 ,  int cur=0)
     {
         rollNo = r ;
         prev = pre;
         curr = cur;
-
         // extracurricular  = extra; 
     }
 
@@ -47,7 +46,6 @@ class MyComp
 {
     public : 
     bool operator () (student& lhs , student& rhs)
-
 {
         if (abs(lhs.prev - lhs.curr)  < abs(rhs.prev - rhs.curr)){
             return true;
@@ -57,12 +55,10 @@ class MyComp
         }
         else 
         return lhs.rollNo < rhs.rollNo;
-
     }
 };
 
 bool compFunc(student& lhs , student& rhs)
-
 {
         if (abs(lhs.prev - lhs.curr)  < abs(rhs.prev - rhs.curr)){
             return true;
@@ -74,13 +70,11 @@ bool compFunc(student& lhs , student& rhs)
         return lhs.rollNo < rhs.rollNo;
 }
 
-
 int main() 
 { 
     int n ; 
     // cin >> n ; // no of students
     auto lambdaCompare = [] (student& lhs , student& rhs)
-
    {
         if (abs(lhs.prev - lhs.curr)  < abs(rhs.prev - rhs.curr)){
             return true;
@@ -91,7 +85,6 @@ int main()
         else 
         return lhs.rollNo < rhs.rollNo;
     };
-
 
     // priority_queue <student,vector<student>,MyComp> heap;
     // priority_queue <student,vector<student>,decltype(lambdaCompare)> heap (lambdaCompare);
@@ -104,7 +97,6 @@ int main()
     //     cin >> roll >> rnk >> spw;
     //     heap.emplace(roll,rnk,spw);
     // }
-
 heap.emplace( 1 ,100, 1000);
 heap.emplace( 2 ,200, 1000);
 heap.emplace( 3 ,400, 1000);
@@ -115,17 +107,14 @@ heap.emplace( 7 ,900, 1000);
 heap.emplace( 8 ,700, 1000);
 heap.emplace( 9 ,850, 1000);
 heap.emplace(10 ,850, 1000);
-
 student hnode;
 for (int i = 0; i < 10; i++)
 {
     hnode = heap.top();
-
     cout << "[ RollNo = " << hnode.rollNo << ", PrevousYearMarks = " << hnode.prev << ", CurrentYearMarks = " << hnode.curr <<
     " PerfDiff = " << abs(hnode.prev - hnode.curr) << " ]" <<  endl;
     heap.pop();
 }
-
 
 
 
