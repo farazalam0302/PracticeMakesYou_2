@@ -15,7 +15,8 @@ int main() {
   while (!mypq.empty()) {
     std::cout << ' ' << mypq.top();
     mypq.pop();
-  }
+    }
+  cout << " faraz is back " << endl;
   std::cout << '\n';
 
   return 0;
