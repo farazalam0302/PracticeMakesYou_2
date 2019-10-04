@@ -36,23 +36,57 @@ acac
 #include <bits/stdc++.h>
 using namespace std;
 
+class DupRemove {
+
+public:
+  char *dupRemove(char *s, char *lastChar) {
+    if (s[0] == '\0' || s[1] == '\0')
+      return s;
+    if (s[0] == s[1]) {
+      *lastChar = s[0];
+      while (s[1] && s[0] == s[1])
+        s++;
+      s++;
+      return (dupRemove(s, lastChar));
+    }
+    char *remainingStr = dupRemove(s + 1, lastChar);
+
+    if (remainingStr[0] && remainingStr[0] == s[0]) {
+      *lastChar = s[0];
+      return (remainingStr + 1);
+    }
+
+    if (remainingStr[0] == '\0' && *lastChar == s[0]) {
+      return remainingStr;
+    }
+    remainingStr--;
+    remainingStr[0] = s[0];
+    return remainingStr;
+  }
+};
+
 int main() {
   int t;
-  cin >> t;
+  // cin >> t;
+  t = 1;
   while (t--) {
-    string s;
-    cin >> s;
-    int n = s.length();
-    string ret = "";
-    for (int i = 0; i < n; i++) {
-      while (s[i] == s[i + 1]) {
-        i++;
-        // continue;
-      }
-      if (s[i] == s[i - 1] && i != 0)
-        continue;
-      ret = ret + s[i];
-    }
+    char s[] = "geeks";
+    // cin >> s;
+
+    // int n = s.length();
+    // string ret = "";
+    // for (int i = 0; i < n; i++) {
+    //   while (s[i] == s[i + 1]) {
+    //     i++;
+    //     // continue;
+    //   }
+    //   if (s[i] == s[i - 1] && i != 0)
+    //     continue;
+    //   ret = ret + s[i];
+    // }
+    DupRemove dr;
+    char lastChar = '\0';
+    char *ret = dr.dupRemove(s, &lastChar);
     cout << "\nresult = " << ret << endl;
   }
 
