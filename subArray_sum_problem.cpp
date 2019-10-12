@@ -49,7 +49,6 @@ int main() {
     }
 
     SubArraySum ss;
-
     vector<int> ret = ss.subArraySum(a, k);
 
     for (auto i : ret) {
