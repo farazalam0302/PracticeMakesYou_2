@@ -83,6 +83,15 @@ public:
 Node *LastNodeOf1 = NULL;
 Node *LastNodeOf2 = NULL;
 Node *LastNodeOf3 = NULL;
+void pushAtStarting(Node **h, int data) {
+  if (*h == NULL) {
+    *h = new Node(data, nullptr);
+    return;
+  }
+  Node *newNode = new Node(data, *h);
+  *h = newNode;
+  return;
+}
 void insert(Node **h, int data, int serNo) {
   if (*h == NULL) {
     *h = new Node(data, nullptr);
@@ -118,9 +127,11 @@ void insert(Node **h, int data, int serNo) {
 void displayList(Node *head) {
   // print linked list
   Node *scanner = head;
-  while (scanner) {
+  int timeout = 60;
+  while (scanner && timeout) {
     cout << scanner->data << "->";
     scanner = scanner->next;
+    timeout--;
   }
   cout << "NULL" << endl;
   // print linked list
@@ -250,6 +261,113 @@ int y_intesectPointOf_lengthMethod(Node *h1, Node *h2) {
 
   return -1;
 }
+Node *ReverseLinkedList(Node *head) {
+  if (!head || !(head->next))
+    return head;
+  Node *prev = NULL;
+  Node *curr = head;
+  Node *nextt = NULL;
+  while (curr) {
+    nextt = curr->next;
+    curr->next = prev;
+    prev = curr;
+    curr = nextt;
+  }
+  return prev;
+}
+
+Node *ReverseLinkedListMtoN(Node *head, int m, int n) {
+  if (!head || !(head->next))
+    return head;
+  Node *prev = NULL;
+  Node *curr = head;
+  Node *nextt = NULL;
+  Node *beg = nullptr;
+  Node *end = nullptr;
+  Node *cont = nullptr;
+  int k = n - m + 1;
+  m--;
+  while (m > 0 && curr) {
+    prev = curr;
+    curr = curr->next;
+    m--;
+  }
+  cont = prev;
+  beg = curr;
+
+  while (k > 0 && curr) {
+    nextt = curr->next;
+    curr->next = prev;
+    prev = curr;
+    curr = nextt;
+    k--;
+  }
+
+  cont->next = prev;
+  beg->next = curr;
+
+  return head;
+}
+Node *rotate(Node *head, int k) {
+  if (!head || !head->next)
+    return head;
+  Node *headold = head;
+  Node *curr = head;
+  Node *prev = NULL;
+  Node *KthNode = NULL;
+  Node *LastNode = NULL;
+  int i = 1;
+  while (curr->next) {
+    if (i == k) {
+      KthNode = curr;
+    }
+    prev = curr;
+    curr = curr->next;
+    i++;
+  }
+  LastNode = curr;
+  LastNode->next = headold;
+  headold = KthNode->next;
+  KthNode->next = NULL;
+  return headold;
+}
+
+int detectloop(Node *head) {
+
+  if (!head || !head->next)
+    return 0;
+  Node *slow = head;
+  Node *fast = head;
+
+  while (fast && fast->next && fast->next->next) {
+    fast = fast->next->next;
+    slow = slow->next;
+    if (slow == fast) {
+      return 1;
+    }
+  }
+  return 0;
+}
+
+Node *RemoveLoopFromLinkList(Node *head) {
+  if (!head || !head->next)
+    return head;
+  unordered_map<Node *, Node *> mymap;
+  Node *curr = head;
+  Node *prev = NULL;
+  while (curr) {
+    if (mymap.find(curr) == mymap.end()) {
+      mymap.insert(make_pair(curr, curr));
+    } else {
+      prev->next = NULL;
+      break;
+    }
+    prev = curr;
+    curr = curr->next;
+  }
+
+  return head;
+}
 
 int main() {
 
@@ -258,35 +376,70 @@ int main() {
   // cin >> t;
   int x, y, z, tmp;
   while (t--) {
-    cin >> x;
-    cin >> y;
-    cin >> z;
+    // cin >> x;
+    // cin >> y;
+    // cin >> z;
     // list X
+    x = 10;
     Node *head1 = NULL;
     for (int i = 0; i < x; i++) {
-      cin >> tmp;
-      insert(&head1, tmp, 1);
+      // cin >> tmp;
+
+      // insert(&head1, i + 1, 1);
+      pushAtStarting(&head1, i + 1);
+    }
+    cout << "---------------1-------------" << endl;
+    displayList(head1);
+
+    Node *s = head1;
+    int c;
+    cout << "want cicle in linked list at node number ??" << endl;
+    cin >> c;
+    if (c > 0) {
+      c--;
+      Node *tmp = head1;
+      while (c--) {
+        tmp = tmp->next;
+      }
+      s = tmp;
+      while (tmp->next) {
+        tmp = tmp->next;
+      }
+      tmp->next = s;
     }
 
-    Node *head2 = NULL;
-    for (int i = 0; i < y; i++) {
-      cin >> tmp;
-      insert(&head2, tmp, 2);
-    }
-    Node *head3 = NULL;
-    for (int i = 0; i < z; i++) {
-      cin >> tmp;
-      insert(&head3, tmp, 3);
-    }
+    cout << "---------------2-------------" << endl;
+    displayList(head1);
+
+    if (detectloop(head1))
+      cout << "True" << endl;
+    else
+      cout << "False" << endl;
+    // RemoveLoopFromLinkList
+
+    cout << "--------------End-------------" << endl;
+    displayList(RemoveLoopFromLinkList(head1));
+
+    // Node *head2 = NULL;
+    // for (int i = 0; i < y; i++) {
+    //   cin >> tmp;
+    //   insert(&head2, tmp, 2);
+    // }
+    // Node *head3 = NULL;
+    // for (int i = 0; i < z; i++) {
+    //   cin >> tmp;
+    //   insert(&head3, tmp, 3);
+    // }
     // cout << "---------------1-------------" << endl;
     // displayList(head1);
+
     // cout << "---------------2-------------" << endl;
     // displayList(head2);
     // cout << "---------------3-------------" << endl;
     // displayList(head3);
 
-    LastNodeOf1->next = head3;
-    LastNodeOf2->next = head3;
+    // LastNodeOf1->next = head3;
+    // LastNodeOf2->next = head3;
 
     // cout << "---------------1-------------" << endl;
     // displayList(head1);
@@ -307,8 +460,8 @@ int main() {
     // cout << "result of intesection flag Method = "
     //      << y_intesectPointOf_flagDS_Method(head1, head2) << endl;
 
-    cout << "result of intesection Cycle Method = "
-         << y_intesectPointOf_cycleMethod(head1, head2) << endl;
+    // cout << "result of intesection Cycle Method = "
+    //      << y_intesectPointOf_cycleMethod(head1, head2) << endl;
 
     // cout << y_intesectPointOf_lengthMethod(head1, head2) << endl;
 

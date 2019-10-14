@@ -78,11 +78,16 @@ int main() {
       a.push_back(tmp);
     }
 
-    LeaderinArray la;
-    vector<int> ret = la.leaderinArray(a);
-    for (auto i = ret.rbegin(); i != ret.rend(); i++) {
-      cout << *i << " ";
+    sort(a.begin(), a.end());
+    for (auto i : a) {
+      cout << i << " ";
     }
+
+    // LeaderinArray la;
+    // vector<int> ret = la.leaderinArray(a);
+    // for (auto i = ret.rbegin(); i != ret.rend(); i++) {
+    //   cout << *i << " ";
+    // }
     cout << endl;
   }
 
