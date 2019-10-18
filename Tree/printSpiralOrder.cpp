@@ -93,26 +93,29 @@ void printSpiralLevelOrder_recursive(Node *R) {
 void printSpiralLevelOrder_iterative(Node *R) {
   if (!R)
     return;
-  bool dir = true;
-  queue<Node *> Q;
-  Node *tmp = R;
-  Q.push(R);
-  while (!Q.empty() && tmp) {
-    tmp = Q.front();
-    Q.pop();
-    cout << tmp->data << " ";
-    if (dir) {
-      if (tmp->left)
-        Q.push(tmp->left);
+  stack<Node *> L2R;
+  stack<Node *> R2L;
+  L2R.push(R);
+  Node *tmp = NULL;
+  while (L2R.empty() == false || R2L.empty() == false) {
+
+    while (!L2R.empty()) {
+      tmp = L2R.top();
+      L2R.pop();
+      cout << tmp->data << " ";
       if (tmp->right)
-        Q.push(tmp->right);
-      dir = !dir;
-    } else {
-      if (tmp->right)
-        Q.push(tmp->right);
+        R2L.push(tmp->right);
       if (tmp->left)
-        Q.push(tmp->left);
-      dir = !dir;
+        R2L.push(tmp->left);
+    }
+    while (!R2L.empty()) {
+      tmp = R2L.top();
+      R2L.pop();
+      cout << tmp->data << " ";
+      if (tmp->left)
+        L2R.push(tmp->left);
+      if (tmp->right)
+        L2R.push(tmp->right);
     }
   }
   cout << endl;
@@ -136,6 +139,9 @@ int main() {
   cout << "printSpiralLevelOrder = ";
   printSpiralLevelOrder_recursive(R1);
   cout << endl;
-
+  // printSpiralLevelOrder_iterative
+  cout << "printSpiralLevelOrder_iterative = ";
+  printSpiralLevelOrder_iterative(R1);
+  cout << endl;
   return 0;
 }
