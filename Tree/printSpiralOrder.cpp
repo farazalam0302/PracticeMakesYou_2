@@ -64,9 +64,58 @@ void printVerticalOrder_levelOrderway(Node *R) {
   }
 }
 
-void printSpiralLevelOrder(Node *R) {
+void printSpiralLevelOrder_recursive_utility(Node *R, int level,
+                                             bool direction) {
+  if (!R || (level <= 0))
+    return;
+
+  if (level == 1)
+    cout << R->data << " ";
+  if (direction) {
+    printSpiralLevelOrder_recursive_utility(R->left, level - 1, direction);
+    printSpiralLevelOrder_recursive_utility(R->right, level - 1, direction);
+  } else {
+    printSpiralLevelOrder_recursive_utility(R->right, level - 1, direction);
+    printSpiralLevelOrder_recursive_utility(R->left, level - 1, direction);
+  }
+}
+void printSpiralLevelOrder_recursive(Node *R) {
   if (!R)
     return;
+  int depth = height_depth(R);
+  bool direction = false;
+  for (int level = 1; level <= depth; level++) {
+    printSpiralLevelOrder_recursive_utility(R, level, direction);
+    direction = !direction;
+  }
+}
+
+void printSpiralLevelOrder_iterative(Node *R) {
+  if (!R)
+    return;
+  bool dir = true;
+  queue<Node *> Q;
+  Node *tmp = R;
+  Q.push(R);
+  while (!Q.empty() && tmp) {
+    tmp = Q.front();
+    Q.pop();
+    cout << tmp->data << " ";
+    if (dir) {
+      if (tmp->left)
+        Q.push(tmp->left);
+      if (tmp->right)
+        Q.push(tmp->right);
+      dir = !dir;
+    } else {
+      if (tmp->right)
+        Q.push(tmp->right);
+      if (tmp->left)
+        Q.push(tmp->left);
+      dir = !dir;
+    }
+  }
+  cout << endl;
 }
 
 int main() {
@@ -84,12 +133,8 @@ int main() {
   int prev = INT_MIN;
 
   // // //  printLeftViewofTreeUtility
-  cout << "printLeftViewofTreeUtility = ";
-  printLeftViewofTreeUtility(R1);
-  cout << endl;
-
-  cout << "printrightViewofTreeUtility = ";
-  printRightViewofTreeUtility(R1);
+  cout << "printSpiralLevelOrder = ";
+  printSpiralLevelOrder_recursive(R1);
   cout << endl;
 
   return 0;
