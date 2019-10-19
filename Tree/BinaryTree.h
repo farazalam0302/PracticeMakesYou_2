@@ -6,17 +6,20 @@ public:
   int data;
   Node *left;
   Node *right;
+  Node *nextRight;
   int h_dist;
   Node() {
     data = 0;
     left = nullptr;
     right = nullptr;
+    nextRight = nullptr;
     h_dist = 0;
   }
   Node(int d) {
     data = d;
     left = nullptr;
     right = nullptr;
+    nextRight = nullptr;
     h_dist = 0;
   }
 };

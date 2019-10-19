@@ -1,5 +1,5 @@
 #include "BinaryTree.h"
-
+#include <deque>
 void printLeftViewofTree(Node *R, int level, int *maxlevel) {
   if (!R)
     return;
@@ -90,7 +90,7 @@ void printSpiralLevelOrder_recursive(Node *R) {
   }
 }
 
-void printSpiralLevelOrder_iterative(Node *R) {
+void printSpiralLevelOrder_iterative_usingStack(Node *R) {
   if (!R)
     return;
   stack<Node *> L2R;
@@ -121,6 +121,21 @@ void printSpiralLevelOrder_iterative(Node *R) {
   cout << endl;
 }
 
+void printSpiralLevelOrder_iterative_usingDeQueue(Node *R) {
+  if (!R)
+    return;
+  deque<Node *> L2R;
+  // deque<Node *> R2L;
+  L2R.push_front(R);
+  Node *tmp = NULL;
+  bool direction = true;
+  while (L2R.empty() == false) {
+    tmp = L2R.front()
+    
+  }
+  cout << endl;
+}
+
 int main() {
 
   Node *R1;
@@ -137,11 +152,15 @@ int main() {
 
   // // //  printLeftViewofTreeUtility
   cout << "printSpiralLevelOrder = ";
-  printSpiralLevelOrder_recursive(R1);
+  printSpiralLevelOrder_recursive(R2);
   cout << endl;
   // printSpiralLevelOrder_iterative
-  cout << "printSpiralLevelOrder_iterative = ";
-  printSpiralLevelOrder_iterative(R1);
+  cout << "printSpiralLevelOrder_iterative using stacks = ";
+  printSpiralLevelOrder_iterative_usingStack(R2);
+  cout << endl;
+
+  cout << "printSpiralLevelOrder_iterative using Queue = ";
+  printSpiralLevelOrder_iterative_usingQueue(R2);
   cout << endl;
   return 0;
 }
