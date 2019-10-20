@@ -3,3 +3,4 @@ a.out
 vscode*
 *.out
 .vscode/*
+temp.*Runner.*.cpp
