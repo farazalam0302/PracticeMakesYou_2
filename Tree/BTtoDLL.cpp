@@ -7,13 +7,34 @@ void BT2DLL_inorder(Node *R, vector<Node *> &a) {
   a.push_back(R);
   BT2DLL_inorder(R->right, a);
 }
-
-void BT2DLL_inorder_2(Node *R, Node *prev) {
+void BT2DLL_inorder_withO_1_extraSpace_Util(Node *R, Node **HeadDLL,
+                                            Node **prev) {
   if (R == NULL)
     return;
-  BT2DLL_inorder_2(R->left, a);
+  BT2DLL_inorder_withO_1_extraSpace_Util(R->left, HeadDLL, prev);
+  if (*prev == NULL) {
+    *HeadDLL = R;
+  } else {
+    (*prev)->left = R;
+    R->right = *prev;
+  }
+  *prev = R;
 
-  BT2DLL_inorder_2(R->right, a);
+  BT2DLL_inorder_withO_1_extraSpace_Util(R->right, HeadDLL, prev);
+}
+void BT2DLL_inorder_withO_1_extraSpace(Node *R, Node **head) {
+  if (R == NULL)
+    return; // NULL;
+  static Node *prev = NULL;
+  BT2DLL_inorder_withO_1_extraSpace(R->left, head);
+  if (prev == NULL) {
+    *head = R;
+  } else {
+    R->left = prev;
+    prev->right = R;
+  }
+  prev = R;
+  BT2DLL_inorder_withO_1_extraSpace(R->right, head);
 }
 
 int main() {
@@ -48,12 +69,22 @@ int main() {
   cout << endl;
   cout << "inorder = ";
   inorder(BT2DLL_Treexample);
-  cout << "\n\n---------------\n" << endl;
-  vector<Node *> a;
-  BT2DLL_inorder(BT2DLL_Treexample, a);
-  int sz = a.size();
+  cout << "\n--1-------------\n" << endl;
+  cout << "\n--2-------------\n" << endl;
+  Node *head1 = NULL;
+  BT2DLL_inorder_withO_1_extraSpace(BT2DLL_Treexample, &head1);
+  while (head1) {
+    cout << head1->data << " ";
+    head1 = head1->right;
+  }
 
-  //   a[0]->left = NULL;
+  cout << "\n\n---------------\n" << endl;
+  cout << "\n\n---------------\n" << endl;
+  // vector<Node *> a;
+  // BT2DLL_inorder(BT2DLL_Treexample, a);
+  // int sz = a.size();
+
+  // //   a[0]->left = NULL;
   //   a[1]->left = a[0];
   //   a[2]->left = a[1];
   //   a[3]->left = a[2];
@@ -69,33 +100,33 @@ int main() {
   //   a[4 + 1]->right = a[3 + 1];
   //   a[5 + 1]->right = a[4 + 1];
 
-  for (int i = 0; i < (sz - 1); i++) {
-    a[i]->right = a[i + 1];
-  }
-  for (int i = sz - 1; i > 0; i--) {
-    a[i]->left = a[i - 1];
-  }
+  // for (int i = 0; i < (sz - 1); i++) {
+  //   a[i]->right = a[i + 1];
+  // }
+  // for (int i = sz - 1; i > 0; i--) {
+  //   a[i]->left = a[i - 1];
+  // }
 
-  Node *head = a[0];
+  // Node *head = a[0];
 
-  Node *tail = a[sz - 1];
+  // Node *tail = a[sz - 1];
 
-  for (auto i : a) {
-    cout << i->data << " ";
-  }
-  cout << endl;
-  //   cout << "inorder = ";
-  //   inorder(R1);
-  cout << "\n\n---------------\n" << endl;
-  while (head) {
-    cout << head->data << " ";
-    head = head->right;
-  }
-  cout << "\n\n---------------\n" << endl;
-  while (tail) {
-    cout << tail->data << " ";
-    tail = tail->left;
-  }
+  // for (auto i : a) {
+  //   cout << i->data << " ";
+  // }
+  // cout << endl;
+  // //   cout << "inorder = ";
+  // //   inorder(R1);
+  // cout << "\n\n---------------\n" << endl;
+  // while (head) {
+  //   cout << head->data << " ";
+  //   head = head->right;
+  // }
+  // cout << "\n\n---------------\n" << endl;
+  // while (tail) {
+  //   cout << tail->data << " ";
+  //   tail = tail->left;
+  // }
 
   return 0;
 }
