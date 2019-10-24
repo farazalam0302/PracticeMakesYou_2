@@ -39,60 +39,57 @@ Testcase1:  20 and 80 are the only common elements
 
 #include <bits/stdc++.h>
 using namespace std;
-class CommonElementsInArray
-{
+class CommonElementsInArray {
 public:
-    vector<int> commonsInABC( vector<int>& a, vector<int>& b, vector<int>& c )
-    {
-	vector<int> ret;
-	int na, nb, nc;
-	na = a.size();
-	nb = b.size();
-	nc = c.size();
-	map<int, int> mapp;
-	for( auto i : a ) {
-	    mapp[i] = 0;
-	}
-	for( auto i : b ) {
-	    if( mapp.find( i ) != mapp.end() )
-		mapp[i] = 1;
-	}
-	for( auto i : c ) {
-	    if( mapp.find( i ) != mapp.end() ) {
-		if( mapp[i] == 1 )
-		    ret.push_back( i );
-	    }
-	}
-	return ret;
+  vector<int> commonsInABC(vector<int> &a, vector<int> &b, vector<int> &c) {
+    vector<int> ret;
+    int na, nb, nc;
+    na = a.size();
+    nb = b.size();
+    nc = c.size();
+    map<int, int> mapp;
+    for (auto i : a) {
+      mapp[i] = 0;
     }
+    for (auto i : b) {
+      if (mapp.find(i) != mapp.end())
+        mapp[i] = 1;
+    }
+    for (auto i : c) {
+      if (mapp.find(i) != mapp.end()) {
+        if (mapp[i] == 1)
+          ret.push_back(i);
+      }
+    }
+    return ret;
+  }
 };
 
-int main()
-{
-    int t;
-    cin >> t;
-    while( t-- ) {
-	int n1, n2, n3, x;
-	cin >> n1 >> n2 >> n3;
-	vector<int> a, b, c;
-	for( int i = 0; i < na; i++ ) {
-	    cin >> x;
-	    a.push_back( x );
-	}
-	for( int i = 0; i < nb; i++ ) {
-	    cin >> x;
-	    b.push_back( x );
-	}
-	for( int i = 0; i < nc; i++ ) {
-	    cin >> x;
-	    c.push_back( x );
-	}
-	CommonElementsInArray ae;
-	vector<int> ret = ae.commonsInABC( a, b, c );
-	for( auto i : ret ) {
-	    cout << i << " ";
-	}
-	cout << endl;
+int main() {
+  int t;
+  cin >> t;
+  while (t--) {
+    int n1, n2, n3, x;
+    cin >> n1 >> n2 >> n3;
+    vector<int> a, b, c;
+    for (int i = 0; i < na; i++) {
+      cin >> x;
+      a.push_back(x);
     }
-    return 0;
+    for (int i = 0; i < nb; i++) {
+      cin >> x;
+      b.push_back(x);
+    }
+    for (int i = 0; i < nc; i++) {
+      cin >> x;
+      c.push_back(x);
+    }
+    CommonElementsInArray ae;
+    vector<int> ret = ae.commonsInABC(a, b, c);
+    for (auto i : ret) {
+      cout << i << " ";
+    }
+    cout << endl;
+  }
+  return 0;
 }
