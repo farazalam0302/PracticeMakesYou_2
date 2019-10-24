@@ -4,3 +4,4 @@ vscode*
 *.out
 .vscode/*
 temp*.cpp
+tempCodeRunnerFile.cpp

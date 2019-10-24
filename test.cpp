@@ -10,46 +10,48 @@ void hashingUtil(vector<int> &a, map<int, int> &mp) {
       mp[i]++;
   }
 }
+
+// bool Mycompare(int l, int r) {}
+
+void displayMap(map<int, pair<int, bool>> &oldMAp, bool flag, bool all) {
+  for (auto i : oldMAp) {
+    if ((!(i.second.second) ^ flag) || all)
+      cout << "{" << i.first << "-->" << (bool)(i.second.second) << "} ";
+  }
+  cout << endl;
+}
 int main() {
-  // vector<int> a{1, 3, 4, 5, 6, 4, 3, 6};
-  // map<int, int> mmap;
-  list<int> dll;
-  deque<int> dq;
-  dq.push_back(1);
-  dq.push_back(2);
-  dq.push_back(3);
-  dq.push_front(10);
-  dq.push_front(20);
-  dq.push_front(30);
+  vector<int> a; //{1, 5, 4, 3, 2, 6};
+  for (int i = 1; i <= 20; i++) {
+    a.push_back(i);
+  }
 
-  dll.push_back(1);
-  dll.push_back(2);
-  dll.push_back(3);
-  dll.push_front(10);
-  dll.push_front(20);
-  dll.push_front(30);
+  map<int, pair<int, bool>> oldMAp;
+  for (auto i : a) {
+    oldMAp[i] = {i, false};
+  }
 
-  int r = 1;
-  dq.resize(6);
-  r = 2;
+  for (auto i = oldMAp.begin(); i != oldMAp.end(); i++) {
+    if (i->first & 0x1) {
+      i->second.second = true;
+    }
+  }
 
-  dq.pop_back();
-  r = 29;
-  dq.pop_back();
-  r = 2;
-  dq.pop_front();
-  r = 23;
-  dq.pop_front();
-  r = 100;
+  for (auto i = oldMAp.begin(); i != oldMAp.end(); i++) {
+    if (i->second.second) {
+      oldMAp.erase(i);
+    }
+  }
 
-  dll.pop_back();
-  r = 29;
-  dll.pop_back();
-  r = 2;
-  dll.pop_front();
-  r = 23;
-  dll.pop_front();
-  r = 100;
+  // displayMap(oldMAp, true, false);
+  // cout << "-------------------------------------" << endl;
+  // displayMap(oldMAp, false, false);
+  cout << "\n-----------------All "
+          "keys---------------------------------------------------------"
+       << endl;
+  displayMap(oldMAp, false, true);
+
+
 
   return 0;
 }

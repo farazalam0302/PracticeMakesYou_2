@@ -1,2 +1,1 @@
-
-  Node *nextt = NULL;
+alse

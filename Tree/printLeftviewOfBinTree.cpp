@@ -64,11 +64,6 @@ void printVerticalOrder_levelOrderway(Node *R) {
   }
 }
 
-void printSpiralLevelOrder(Node *R) {
-  if (!R)
-    return;
-}
-
 int main() {
 
   Node *R1;
