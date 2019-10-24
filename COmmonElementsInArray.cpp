@@ -69,8 +69,8 @@ int main() {
   int t;
   cin >> t;
   while (t--) {
-    int n1, n2, n3, x;
-    cin >> n1 >> n2 >> n3;
+    int na, nb, nc, x;
+    cin >> na >> nb >> nc;
     vector<int> a, b, c;
     for (int i = 0; i < na; i++) {
       cin >> x;
