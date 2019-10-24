@@ -36,7 +36,6 @@ Testcase1:  20 and 80 are the only common elements
 
 ** For More Input/Output Examples Use 'Expected Output' option **
  * */
-
 #include <bits/stdc++.h>
 using namespace std;
 class CommonElementsInArray {
@@ -49,15 +48,17 @@ public:
     nc = c.size();
     map<int, int> mapp;
     for (auto i : a) {
-      mapp[i] = 0;
+      mapp[i] = 1;
     }
     for (auto i : b) {
-      if (mapp.find(i) != mapp.end())
-        mapp[i] = 1;
+      if (mapp.find(i) != mapp.end()) {
+        if (mapp[i] == 1)
+          mapp[i] = 2;
+      }
     }
     for (auto i : c) {
       if (mapp.find(i) != mapp.end()) {
-        if (mapp[i] == 1)
+        if (mapp[i] == 2)
           ret.push_back(i);
       }
     }
@@ -86,6 +87,10 @@ int main() {
     }
     CommonElementsInArray ae;
     vector<int> ret = ae.commonsInABC(a, b, c);
+    if (ret.size() == 0) {
+      cout << (-1) << endl;
+      return -1;
+    }
     for (auto i : ret) {
       cout << i << " ";
     }
