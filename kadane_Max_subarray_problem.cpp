@@ -1,8 +1,10 @@
 
 #include <bits/stdc++.h>
 using namespace std;
+#define SZ 3
 int main() {
-  int A[8] = {-1, -2, 2, 1, 10, -4, 10, -100};
+  int A[SZ] = {-2, 5, -1};
+  // {-1, -2, 2, 1, 10, -4, 10, -100};
 
   // Kadane algo
   int maxSum_now = A[0];
@@ -11,7 +13,7 @@ int main() {
   int start = 0;
   int end = 0;
   int sentinel = 0;
-  for (int i = 0; i < 8; i++) {
+  for (int i = 0; i < SZ; i++) {
     // currentsumMaxima = max(currentsumMaxima + A[i], A[i]);
     // maxSum_now = max(currentsumMaxima, maxSum_now);
 
