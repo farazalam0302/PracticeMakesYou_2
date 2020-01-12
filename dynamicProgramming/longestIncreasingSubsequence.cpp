@@ -53,4 +53,42 @@ many subsequence, but listing one of them): 5 7 9.
 #include <bits/stdc++.h>
 using namespace std;
 
-int main(int argc, char const *argv[]) { return 0; }
+int main(int argc, char const *argv[]) {
+  int t;
+  cin >> t;
+  while (t--) {
+    int n;
+    cin >> n;
+    vector<int> a;
+    vector<int> lenArray;
+    vector<int> trackingArray;
+    vector<int> index;
+    int tmp;
+    for (int i = 0; i < n; i++) {
+      cin >> tmp;
+      a.push_back(tmp);
+      lenArray.push_back(1);
+      trackingArray.push_back(i);
+      index.push_back(i);
+    }
+    // LIS
+    for (int i = 1; i < n; i++) {
+      for (int j = 0; j < i; j++) {
+        if (a[j] <= a[i]) {
+          if ((lenArray[i] <= lenArray[j] + 1)) {
+            lenArray[i] = lenArray[j] + 1;
+            trackingArray[i] = j;
+          }
+        }
+      }
+    }
+    int maxLength = lenArray[0];
+    for (auto i : lenArray) {
+      maxLength = max(maxLength, i);
+    }
+
+    cout << " LIS length = " << maxLength << endl;
+  }
+
+  return 0;
+}
