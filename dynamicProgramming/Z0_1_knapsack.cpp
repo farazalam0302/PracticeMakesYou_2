@@ -97,8 +97,9 @@ int main() {
         if (weights[i] > j) {
           knapsackMat[i][j] = knapsackMat[i - 1][j];
         } else {
-          knapsackMat[i][j] = max(knapsackMat[i - 1][j],
-                                  profits[i] + knapsackMat[i - 1][j - i]);
+          knapsackMat[i][j] =
+              max(knapsackMat[i - 1][j],
+                  profits[i] + knapsackMat[i - 1][j - weights[i]]);
         }
       }
     }
