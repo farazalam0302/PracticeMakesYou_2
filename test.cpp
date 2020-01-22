@@ -20,38 +20,52 @@ void displayMap(map<int, pair<int, bool>> &oldMAp, bool flag, bool all) {
   }
   cout << endl;
 }
-int main() {
-  vector<int> a; //{1, 5, 4, 3, 2, 6};
-  for (int i = 1; i <= 20; i++) {
-    a.push_back(i);
-  }
 
-  map<int, pair<int, bool>> oldMAp;
-  for (auto i : a) {
-    oldMAp[i] = {i, false};
-  }
-
-  for (auto i = oldMAp.begin(); i != oldMAp.end(); i++) {
-    if (i->first & 0x1) {
-      i->second.second = true;
-    }
-  }
-
-  for (auto i = oldMAp.begin(); i != oldMAp.end(); i++) {
-    if (i->second.second) {
-      oldMAp.erase(i);
-    }
-  }
-
-  // displayMap(oldMAp, true, false);
-  // cout << "-------------------------------------" << endl;
-  // displayMap(oldMAp, false, false);
-  cout << "\n-----------------All "
-          "keys---------------------------------------------------------"
-       << endl;
-  displayMap(oldMAp, false, true);
-
-
+int main(int argc, char const *argv[]) {
+  vector<int> temp(4, 0);
+  vector<int> a(temp.begin(), temp.end());
+  vector<int> b = temp;
+  a[1] = 2;
+  b[2] = 3;
+  
+   b = temp;
+  temp[2] = 200;
 
   return 0;
 }
+
+// int main() {
+// /////////
+
+//   vector<int> a; //{1, 5, 4, 3, 2, 6};
+//   for (int i = 1; i <= 20; i++) {
+//     a.push_back(i);
+//   }
+
+//   map<int, pair<int, bool>> oldMAp;
+//   for (auto i : a) {
+//     oldMAp[i] = {i, false};
+//   }
+
+//   for (auto i = oldMAp.begin(); i != oldMAp.end(); i++) {
+//     if (i->first & 0x1) {
+//       i->second.second = true;
+//     }
+//   }
+
+//   for (auto i = oldMAp.begin(); i != oldMAp.end(); i++) {
+//     if (i->second.second) {
+//       oldMAp.erase(i);
+//     }
+//   }
+
+//   // displayMap(oldMAp, true, false);
+//   // cout << "-------------------------------------" << endl;
+//   // displayMap(oldMAp, false, false);
+//   cout << "\n-----------------All "
+//           "keys---------------------------------------------------------"
+//        << endl;
+//   displayMap(oldMAp, false, true);
+
+//   return 0;
+// }
