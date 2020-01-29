@@ -6,7 +6,10 @@ dog god".
 
 
 6
-qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM poiuytrewqlkjhgfdsamnbvcxzPOIUYTREWQLKJHGFDSAMNBVCXZ qazwsxedcrfvtgbyhnujmikolpQAZWSXEDCRFVTGBYHNUJMIKOLP qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNMpoiuytrewqlkjhgfdsamnbvcxzPOIUYTREWQLKJHGFDSAMNBVCXZ
+qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM
+poiuytrewqlkjhgfdsamnbvcxzPOIUYTREWQLKJHGFDSAMNBVCXZ
+qazwsxedcrfvtgbyhnujmikolpQAZWSXEDCRFVTGBYHNUJMIKOLP
+qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNMpoiuytrewqlkjhgfdsamnbvcxzPOIUYTREWQLKJHGFDSAMNBVCXZ
 poiuytrewqlkjhgfdsamnbvcxzPOIUYTREWQLKJHGFDSAMNBVCXZqazwsxedcrfvtgbyhnujmikolpQAZWSXEDCRFVTGBYHNUJMIKOLP
 qazwsxedcrfvtgbyhnujmikolpQAZWSXEDCRFVTGBYHNUJMIKOLPpoiuytrewqlkjhgfdsamnbvcxzPOIUYTREWQLKJHGFDSAMNBVCXZ
 
@@ -22,7 +25,8 @@ void groupByAnaGrams(vector<string> &s) {
   unordered_map<uint64_t, vector<string>> mmap;
   uint64_t mask = 0;
   uint64_t key = 0;
-  int len = 0;
+  uint64_t len = 0;
+  uint64_t temp;
   for (auto i : s) {
     mask = 0;
     len = i.length();
@@ -30,12 +34,17 @@ void groupByAnaGrams(vector<string> &s) {
     for (int j = 0; j < len; j++) {
 
       if (i[j] >= 'a' && i[j] <= 'z') {
-        mask = mask | (0x1 << (i[j] - 'a'));
+        mask = mask | (1L << (i[j] - 'a'));
         continue;
-      }
-      if (i[j] >= 'A' && i[j] <= 'Z') {
-        mask = mask | (0x1 << (i[j] - 'A' + 26));
+      } else if (i[j] >= 'A' && i[j] <= 'Z') {
+        temp = (1L << (i[j] - 'A' + 26));
+        mask = mask | temp;
         continue;
+      } else {
+        cout << i
+             << " is Bad Character string!! \nString must be (a-zA-Z)+ Regex"
+             << endl;
+        exit(EXIT_FAILURE);
       }
     }
     key = mask + len;
@@ -44,6 +53,7 @@ void groupByAnaGrams(vector<string> &s) {
     } else {
       mmap[key].push_back(i);
     }
+    mask = mask ^ mask;
   }
   int count = 1;
   cout << "sno "
@@ -51,7 +61,7 @@ void groupByAnaGrams(vector<string> &s) {
        << "keyVal"
        << "\n";
   for (auto i : mmap) {
-    cout << count << " | " << i.first << " -> ";
+    cout << count << " | " << hex << i.first << " -> ";
     for (auto j : i.second) {
       cout << j << " ";
     }
@@ -64,10 +74,16 @@ void groupByAnaGrams(vector<string> &s) {
 int main(int argc, char const *argv[]) {
 
   //{"cat", "dog", "tac", "god", "act"}
+
+#if 0
+  vector<string> s{"qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM",
+                   "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm",
+                   "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm0010"};
+#endif
+
   int n;
   cin >> n;
-  vector<string> s(n, ""); //{"cat", "dog", "tacc", "god", "act", "c",   "cc",
-                           //"ccccccccccccccc"};
+  vector<string> s(n, "");
   for (int i = 0; i < n; i++) {
     cin >> s[i];
   }
