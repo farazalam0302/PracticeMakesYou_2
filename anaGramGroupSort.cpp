@@ -6,12 +6,12 @@ dog god".
 
 
 6
-qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM
-poiuytrewqlkjhgfdsamnbvcxzPOIUYTREWQLKJHGFDSAMNBVCXZ
-qazwsxedcrfvtgbyhnujmikolpQAZWSXEDCRFVTGBYHNUJMIKOLP
-qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNMpoiuytrewqlkjhgfdsamnbvcxzPOIUYTREWQLKJHGFDSAMNBVCXZ
-poiuytrewqlkjhgfdsamnbvcxzPOIUYTREWQLKJHGFDSAMNBVCXZqazwsxedcrfvtgbyhnujmikolpQAZWSXEDCRFVTGBYHNUJMIKOLP
-qazwsxedcrfvtgbyhnujmikolpQAZWSXEDCRFVTGBYHNUJMIKOLPpoiuytrewqlkjhgfdsamnbvcxzPOIUYTREWQLKJHGFDSAMNBVCXZ
+qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM0123456789_
+poiuytrewqlkjhgfdsamnbvcxzPOIUYTREWQLKJHGFDSAMNBVCXZ0123456789_
+qazwsxedcrfvtgbyhnujmikolpQAZWSXEDCRFVTGBYHNUJMIKOLP0123456789_
+qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNMpoiuytrewqlkjhgfdsamnbvcxzPOIUYTREWQLKJHGFDSAMNBVCXZ0123456789_
+0123456789poiuytrewqlkjhgfdsamnbvcxzPOIUYTREWQLKJHGFDSAMNBVCXZqazwsxedcrfvtgbyhnujmikolpQAZWSXEDCRFVTGBYHNUJMIKOLP_
+qazwsxedcrfvtgbyhnujmikolpQAZWSXEDCRFVTGBYHNUJMIKOLPpoiuytrewqlkjhgfdsamnbvcxzPOIUYTREWQLKJHGFDSAMNBVCXZ0123456789_
 
 
 
@@ -40,9 +40,20 @@ void groupByAnaGrams(vector<string> &s) {
         temp = (1L << (i[j] - 'A' + 26));
         mask = mask | temp;
         continue;
-      } else {
+      } else if (i[j] >= '0' && i[j] <= '9') {
+        temp = (1L << (i[j] - '0' + 26 + 26));
+        mask = mask | temp;
+      } else if (i[j] == '_') {
+        temp = (1L << (62));
+        mask = mask | temp;
+      }
+      // else if (i[j] == '-') {
+      //   temp = (1L << (63));
+      //   mask = mask | temp;
+      // }
+      else {
         cout << i
-             << " is Bad Character string!! \nString must be (a-zA-Z)+ Regex"
+             << " is Bad Character string!! \nString must be (a-zA-Z0-9)+ Regex"
              << endl;
         exit(EXIT_FAILURE);
       }
@@ -75,7 +86,7 @@ int main(int argc, char const *argv[]) {
 
   //{"cat", "dog", "tac", "god", "act"}
 
-#if 0
+#if 0 // its commented 
   vector<string> s{"qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM",
                    "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm",
                    "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm0010"};
