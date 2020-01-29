@@ -3,6 +3,15 @@ Given a sequence of words, print all anagrams together | Set 1
 Given an array of words, print all anagrams together. For example, if the given
 array is {"cat", "dog", "tac", "god", "act"}, then output may be "cat tac act
 dog god".
+
+
+6
+qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM poiuytrewqlkjhgfdsamnbvcxzPOIUYTREWQLKJHGFDSAMNBVCXZ qazwsxedcrfvtgbyhnujmikolpQAZWSXEDCRFVTGBYHNUJMIKOLP qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNMpoiuytrewqlkjhgfdsamnbvcxzPOIUYTREWQLKJHGFDSAMNBVCXZ
+poiuytrewqlkjhgfdsamnbvcxzPOIUYTREWQLKJHGFDSAMNBVCXZqazwsxedcrfvtgbyhnujmikolpQAZWSXEDCRFVTGBYHNUJMIKOLP
+qazwsxedcrfvtgbyhnujmikolpQAZWSXEDCRFVTGBYHNUJMIKOLPpoiuytrewqlkjhgfdsamnbvcxzPOIUYTREWQLKJHGFDSAMNBVCXZ
+
+
+
 */
 
 #include <bits/stdc++.h>
@@ -36,12 +45,18 @@ void groupByAnaGrams(vector<string> &s) {
       mmap[key].push_back(i);
     }
   }
+  int count = 1;
+  cout << "sno "
+       << " | "
+       << "keyVal"
+       << "\n";
   for (auto i : mmap) {
-    cout << hex << i.first << " -> ";
+    cout << count << " | " << i.first << " -> ";
     for (auto j : i.second) {
       cout << j << " ";
     }
     cout << endl;
+    count++;
   }
   cout << endl;
 }
