@@ -22,10 +22,6 @@ bool isBSTviaInorderProperty(Node *R, int &prev) {
   return isBSTviaInorderProperty(R->right, prev);
 }
 
-void printSpiralLevelOrder(Node *R) {
-  if (!R)
-    return;
-}
 
 int main() {
   Node *R1;
