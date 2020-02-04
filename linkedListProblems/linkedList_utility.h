@@ -53,6 +53,15 @@ void insertNodeatHead(Node **head, int x) {
   *head = newNode;
 }
 
+Node *getLastNode(Node *head) {
+  if (!head || !(head->next))
+    return head;
+  while (head->next) {
+    head = head->next;
+  }
+  return head;
+}
+
 void displayList(Node *head) {
   while (head) {
     cout << head->data << " -> ";
