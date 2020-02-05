@@ -37,18 +37,11 @@ int main(int argc, char const *argv[]) {
   Node *h1 = nullptr;
   Node *h2 = nullptr;
   Node *h3 = nullptr;
-  //   createLinkedList(&h1); // 365
-  //   int a[3] = {9, 9, 9};
   for (int i = 1; i <= 15; i += 1) {
     if (i % 3 != 1)
       insertNodeatLast(&h2, (i % 3));
   }
-  //   int b[3] = {8, 4, 1}; // 248
-  //   for (int i = 0; i < 3; i += 1) {
-  //     insertNodeatLast(&h3, b[i]);
-  //   }
 
-  //   displayList(h1);
   cout << "list -> ";
   displayList(h2);
 
