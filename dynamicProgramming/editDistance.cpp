@@ -48,7 +48,22 @@ from str2.
 ** For More Input/Output Examples Use 'Expected Output' option **
 Author: abhiraj26
 
+funda to write edit distance formula
+ ===================
+| REPLACE | INSERT  |
+|_________|_________|
+| DELETE  | CURRENT |
+|=========|=========|
 
+DPFORMULA : -
+if (str[i] == str[j])
+{
+  dp[i,j] = dp[i-1,j-1]
+}
+else
+{
+  dp[i,j] = 1 + min(dp[i-1,j],dp[i,j-1],dp[i-1,j-1])
+}
 */
 
 #include <bits/stdc++.h>

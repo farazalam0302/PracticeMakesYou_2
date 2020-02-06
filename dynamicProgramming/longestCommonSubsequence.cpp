@@ -1,7 +1,7 @@
 /*
 Longest Common SubsequenceSubmissions: 66358   Accuracy: 33.33%   Difficulty:
 Medium   Marks: 4 Associated Course(s):   Must Do Interview Preparation
-                  
+
 
 Problems
 Given two sequences, find the length of longest subsequence present in both of
@@ -49,14 +49,14 @@ public:
   int LCS_length_DP(string &s1, string &s2) {
     int m = s1.length();
     int n = s2.length();
-    vector<vector<int>> LCS;
-    for (int i = 0; i < m + 1; i++) {
-      vector<int> temp;
-      for (int j = 0; j < n + 1; j++) {
-        temp.push_back(0);
-      }
-      LCS.push_back(temp);
-    }
+    vector<vector<int>> LCS(m + 1, vector<int>(n + 1, 0));
+    // for (int i = 0; i < m + 1; i++) {
+    //   vector<int> temp;
+    //   for (int j = 0; j < n + 1; j++) {
+    //     temp.push_back(0);
+    //   }
+    //   LCS.push_back(temp);
+    // }
 
     for (int i = 1; i <= m; i++) {
       for (int j = 1; j <= n; j++) {
