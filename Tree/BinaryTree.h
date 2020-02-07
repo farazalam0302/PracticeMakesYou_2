@@ -62,7 +62,7 @@ void makeR1(Node **R1) {
   (*R1)->right->right = new Node(7);
   return;
 }
-void makeR2(Node **R2) {
+void makeBST(Node **R2) {
   (*R2) = new Node(40);
   (*R2)->left = new Node(20);
   (*R2)->right = new Node(60);
