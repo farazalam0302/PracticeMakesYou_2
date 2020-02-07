@@ -23,17 +23,27 @@ void insertIn_BST_iterative(Node *root, int key) {
   }
 }
 
+void minimum_inBST(Node *R) {
+  if (!R)
+    return;
+  Node *itr = R;
+  while (itr->left) {
+    itr = itr->left;
+  }
+  cout << "\n" << itr->data << " <<< minimum in tree " << endl;
+}
+
 int main() {
 
   Node *R2;
   int key;
   makeR2(&R2);
   inorder(R2);
-  cout << "enter key" << endl;
+  cout << "\nenter key" << endl;
   cin >> key;
 
   insertIn_BST_iterative(R2, key);
   inorder(R2);
-
+  minimum_inBST(R2);
   return 0;
 }
