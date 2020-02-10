@@ -43,35 +43,35 @@ void deleteNode_in_BST(Node *R, int key) {
   Node *prev;
 
   Node *tmp;
-  while (itr) {
-    prev = itr;
-    if (key < itr->data) {
-      itr = itr->left;
-    } else if (key > itr->data) {
-      itr = itr->right;
-    } else {
-      if (itr->left == NULL) {
-        tmp = itr->right;
-        delete (itr);
-        return;
-      } else if (itr->right == NULL) {
-        tmp = itr->left;
-        delete (itr);
-        return;
-      }
-      //
-      Node *tmpParent = itr->right;
-      tmp = itr->right;
-      while (tmp->left) {
-        tmpParent = tmp;
-        tmp = tmp->left;
-      }
-      tmpParent->left = tmp->right;
-
-      itr->data = tmp->data;
-
-      delete (tmp);
+  if (key < itr->data) {
+    deleteNode_in_BST(itr->left, key);
+    return;
+  }
+  if (key > itr->data) {
+    deleteNode_in_BST(itr->right, key);
+    return;
+  }
+  if (itr->left == NULL) {
+    tmp = itr->right;
+    delete (itr);
+    return;
+  }
+  if (itr->right == NULL) {
+    tmp = itr->left;
+    delete (itr);
+    return;
+  } else {
+    Node *succParent = itr->right;
+    // find successor
+    Node *succ = itr->right;
+    while (succ->left) {
+      succParent = succ;
+      succ = succ->left;
     }
+    succParent->left = succ->right;
+    itr->data = succ->data;
+    delete succ;
+    return;
   }
 }
 int main() {
@@ -79,7 +79,7 @@ int main() {
   Node *R2;
   int key;
   makeBST(&R2);
-  inorder(R2);
+  // inorder(R2);
   cout << "\nenter key" << endl;
   cin >> key;
 

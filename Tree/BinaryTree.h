@@ -24,19 +24,19 @@ public:
   }
 };
 
-void preorder(Node *R) {
-  if (!R)
-    return;
-  preorder(R->left);
-  preorder(R->right);
-  cout << R->data << " ";
-}
 void postorder(Node *R) {
   if (!R)
     return;
-  cout << R->data << " ";
   postorder(R->left);
   postorder(R->right);
+  cout << R->data << " ";
+}
+void preorder(Node *R) {
+  if (!R)
+    return;
+  cout << R->data << " ";
+  preorder(R->left);
+  preorder(R->right);
 }
 int height_depth(Node *R) {
   if (!R)
