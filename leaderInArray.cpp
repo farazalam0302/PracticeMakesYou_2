@@ -46,11 +46,10 @@ Author: vaibhav95
 #include <bits/stdc++.h>
 using namespace std;
 class LeaderinArray {
-public:
+ public:
   vector<int> leaderinArray(vector<int> &a) {
     int n = a.size();
-    if (n == 0)
-      return {};
+    if (n == 0) return {};
     vector<int> ret;
     ret.push_back(a[n - 1]);
     int max = a[n - 1];
@@ -83,11 +82,11 @@ int main() {
       cout << i << " ";
     }
 
-    // LeaderinArray la;
-    // vector<int> ret = la.leaderinArray(a);
-    // for (auto i = ret.rbegin(); i != ret.rend(); i++) {
-    //   cout << *i << " ";
-    // }
+    LeaderinArray la;
+    vector<int> ret = la.leaderinArray(a);
+    for (auto i = ret.rbegin(); i != ret.rend(); i++) {
+      cout << *i << " ";
+    }
     cout << endl;
   }
 
