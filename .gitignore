@@ -5,3 +5,6 @@ vscode*
 .vscode/*
 temp*.cpp
 tempCodeRunnerFile.cpp
+.cproject
+.metadata/*
+.project
