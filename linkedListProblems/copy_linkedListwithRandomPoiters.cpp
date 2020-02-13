@@ -82,13 +82,13 @@ Node *Tricky_copy_with_noExtraspace(Node *head) {
     itr->next = tmp;
     itr = itr->next->next;
   }
-  //  displayList(head);
+  displayList(head);
   Node *rethead = head->next;
   tmp = rethead;
   itr = head;
-  while (itr) {
-
-  }
+  //  while (itr) {
+  //    itr->next = rethead->next;
+  //  }
   return rethead;
 }
 

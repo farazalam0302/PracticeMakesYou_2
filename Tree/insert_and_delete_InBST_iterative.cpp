@@ -24,8 +24,7 @@ void insertIn_BST_iterative(Node *root, int key) {
 }
 
 Node *minimum_inBST(Node *R) {
-  if (!R)
-    return nullptr;
+  if (!R) return nullptr;
   ;
   Node *itr = R;
   while (itr->left) {
@@ -34,32 +33,32 @@ Node *minimum_inBST(Node *R) {
   //   cout << "\n" << itr->data << " <<< minimum in tree " << endl;
   return itr;
 }
-void deleteNode_in_BST(Node *R, int key) {
+Node *deleteNode_in_BST(Node *R, int key) {
   if (!R) {
     cout << "\nTree Not exist!!!!\n" << endl;
-    return;
+    return R;
   }
   Node *itr = R;
   Node *prev;
 
   Node *tmp;
   if (key < itr->data) {
-    deleteNode_in_BST(itr->left, key);
-    return;
+    itr->left = deleteNode_in_BST(itr->left, key);
+    return itr;
   }
   if (key > itr->data) {
-    deleteNode_in_BST(itr->right, key);
-    return;
+    itr->right = deleteNode_in_BST(itr->right, key);
+    return itr;
   }
   if (itr->left == NULL) {
     tmp = itr->right;
     delete (itr);
-    return;
+    return tmp;
   }
   if (itr->right == NULL) {
     tmp = itr->left;
     delete (itr);
-    return;
+    return tmp;
   } else {
     Node *succParent = itr->right;
     // find successor
@@ -71,11 +70,10 @@ void deleteNode_in_BST(Node *R, int key) {
     succParent->left = succ->right;
     itr->data = succ->data;
     delete succ;
-    return;
+    return itr;
   }
 }
 int main() {
-
   Node *R2;
   int key;
   makeBST(&R2);
@@ -88,7 +86,7 @@ int main() {
   inorder(R2);
   //   minimum_inBST(R2);
   cout << "\n";
-  deleteNode_in_BST(R2, 20);
+  R2 = deleteNode_in_BST(R2, 20);
   cout << "\n";
   inorder(R2);
   return 0;
