@@ -84,11 +84,28 @@ Node *Tricky_copy_with_noExtraspace(Node *head) {
   }
   displayList(head);
   Node *rethead = head->next;
-  tmp = rethead;
-  itr = head;
-  //  while (itr) {
-  //    itr->next = rethead->next;
-  //  }
+
+  // important
+
+  Node *origNode = head;
+  Node *origNode_next = origNode->next->next;
+  Node *copyNode = origNode->next;
+  //  Node *copyNode_next = origNode_next->next;
+  int c = 15;
+  while (origNode && origNode_next && copyNode && (c--)) {
+    copyNode->randptr = origNode->randptr;
+    if (origNode_next)
+      copyNode->next = origNode_next->next;
+    else {
+      copyNode->next = nullptr;
+      break;
+    }
+    if (origNode_next) origNode = origNode_next;
+    if (origNode->next->next) origNode_next = origNode->next->next;
+    if (origNode->next) copyNode = origNode->next;
+    //    copyNode_next = origNode_next->next;
+  }
+  //  copyNode = nullptr;
   return rethead;
 }
 
@@ -114,7 +131,7 @@ int main(int argc, char **argv) {
   Node *resultEasy = EasiestCopy_with_O_n_space(head);
   displayListR(resultEasy);
   cout << "\n\n" << endl;
-  Tricky_copy_with_noExtraspace(head);
-
+  resultEasy = Tricky_copy_with_noExtraspace(head);
+  displayListR(resultEasy);
   return 0;
 }
