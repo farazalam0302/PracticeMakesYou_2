@@ -1,3 +1,18 @@
+/***
+ *
+ * Query : There is a linked list with extra random poiter as follows
+ *
+ * 1->2->3->4->5->6->NULL  <--- this is normal traversal of ll
+ *
+ * [1|4] -> [2|5] -> [3|6] -> [4|1] -> [5|2] -> [6|3] -> NULL
+ *
+ * first node->data = 1; node->next = [2|5] node ; node->randptr = [4|1]Node
+ *
+ * now the query is to copy this LL to some other list using no extra space.
+ *
+ *
+ */
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -33,8 +48,8 @@ void insertNodeatLast(Node **head, int x) {
 }
 void displayList(Node *head) {
   while (head) {
-    cout << head->data << "->";
-    //    cout << head->randptr->data << " -> ";
+    cout << "[" << head->data << "] ->";
+
     head = head->next;
   }
   cout << "NULL\n";
@@ -42,8 +57,8 @@ void displayList(Node *head) {
 
 void displayListR(Node *head) {
   while (head) {
-    cout << head->data << "|";
-    cout << head->randptr->data << " -> ";
+    cout << "[" << head->data << "|";
+    cout << head->randptr->data << "] -> ";
     head = head->next;
   }
   cout << "NULL\n";
@@ -82,30 +97,29 @@ Node *Tricky_copy_with_noExtraspace(Node *head) {
     itr->next = tmp;
     itr = itr->next->next;
   }
-  displayList(head);
-  Node *rethead = head->next;
+  //  displayList(head);
 
   // important
 
   Node *origNode = head;
   Node *origNode_next = origNode->next->next;
   Node *copyNode = origNode->next;
-  //  Node *copyNode_next = origNode_next->next;
-  int c = 15;
-  while (origNode && origNode_next && copyNode && (c--)) {
-    copyNode->randptr = origNode->randptr;
+  Node *rethead = copyNode;
+
+  while (origNode_next) {
+    copyNode->randptr = origNode->randptr->next;
     if (origNode_next)
       copyNode->next = origNode_next->next;
-    else {
+    else
       copyNode->next = nullptr;
-      break;
-    }
-    if (origNode_next) origNode = origNode_next;
-    if (origNode->next->next) origNode_next = origNode->next->next;
-    if (origNode->next) copyNode = origNode->next;
-    //    copyNode_next = origNode_next->next;
+    origNode = origNode_next;
+    copyNode = origNode->next;
+    origNode_next = copyNode->next;
   }
-  //  copyNode = nullptr;
+  // most important line to change random ptrs in last
+  copyNode->randptr = origNode->randptr->next;
+  // most important line to change random ptrs in last
+
   return rethead;
 }
 
@@ -128,10 +142,14 @@ int main(int argc, char **argv) {
   displayListR(head);
   // original Linked list created
 
-  Node *resultEasy = EasiestCopy_with_O_n_space(head);
-  displayListR(resultEasy);
+  //  Node *resultEasy = EasiestCopy_with_O_n_space(head);
+  //  displayListR(resultEasy);
   cout << "\n\n" << endl;
-  resultEasy = Tricky_copy_with_noExtraspace(head);
-  displayListR(resultEasy);
+  Node *result = Tricky_copy_with_noExtraspace(head);
+  //  displayList(result);
+  cout << "\n\n" << endl;
+  //  displayList(result);
+
+  displayListR(result);
   return 0;
 }
