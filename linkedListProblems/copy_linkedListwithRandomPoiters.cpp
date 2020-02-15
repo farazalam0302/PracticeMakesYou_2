@@ -1,8 +1,8 @@
 /***
  *
- * Query : There is a linked list with extra random poiter as follows
+ * Query : There is a linked list with extra random pointer as follows
  *
- * 1->2->3->4->5->6->NULL  <--- this is normal traversal of ll
+ * 1->2->3->4->5->6->NULL  <--- this is normal traversal of Linked List
  *
  * [1|4] -> [2|5] -> [3|6] -> [4|1] -> [5|2] -> [6|3] -> NULL
  *
