@@ -20,16 +20,16 @@ class Node {
  public:
   int data;
   Node *next;
-  Node *randomPointer;
+  Node *randomPtr;
   Node() {
     data = 0;
     next = nullptr;
-    randomPointer = nullptr;
+    randomPtr = nullptr;
   }
   Node(int x) {
     data = x;
     next = nullptr;
-    randomPointer = nullptr;
+    randomPtr = nullptr;
   }
 };
 
@@ -58,7 +58,7 @@ void displayList(Node *head) {
 void displayListR(Node *head) {
   while (head) {
     cout << "[" << head->data << "|";
-    cout << head->randomPointer->data << "] -> ";
+    cout << head->randomPtr->data << "] -> ";
     head = head->next;
   }
   cout << "NULL\n";
@@ -82,7 +82,7 @@ Node *EasiestCopy_with_O_n_space(Node *head) {
     tmp = new Node(copybuffer[i]->data);
     if (i == 0) itr = tmp;
     tmp->next = copybuffer[i]->next;
-    tmp->randomPointer = copybuffer[i]->randomPointer;
+    tmp->randomPtr = copybuffer[i]->randomPtr;
   }
   return itr;
 }
@@ -107,7 +107,7 @@ Node *Tricky_copy_with_noExtraspace(Node *head) {
   Node *rethead = copyNode;
 
   while (origNode_next) {
-    copyNode->randomPointer = origNode->randomPointer->next;
+    copyNode->randomPtr = origNode->randomPtr->next;
     if (origNode_next)
       copyNode->next = origNode_next->next;
     else
@@ -117,7 +117,7 @@ Node *Tricky_copy_with_noExtraspace(Node *head) {
     origNode_next = copyNode->next;
   }
   // most important line to change random ptrs in last
-  copyNode->randomPointer = origNode->randomPointer->next;
+  copyNode->randomPtr = origNode->randomPtr->next;
   // most important line to change random ptrs in last
 
   return rethead;
@@ -134,20 +134,21 @@ int main(int argc, char **argv) {
     itr = itr->next;
   }
   for (int i = 0; i < 3; ++i) {
-    ptrvec[i]->randomPointer = ptrvec[i % 3 + 3];
+    ptrvec[i]->randomPtr = ptrvec[i % 3 + 3];
   }
   for (int i = 3; i < 6; ++i) {
-    ptrvec[i]->randomPointer = ptrvec[i % 3];
+    ptrvec[i]->randomPtr = ptrvec[i % 3];
   }
-  displayListR(head);
-  // original Linked list created
 
-  //  Node *resultEasy = EasiestCopy_with_O_n_space(head);
-  //  displayListR(resultEasy);
-  cout << "\n\n" << endl;
+  //  displayListR(head);
+  // original Linked list created
+  cout << "\nEasy Output\n" << endl;
+  Node *resultEasy = EasiestCopy_with_O_n_space(head);
+  displayListR(resultEasy);
+  cout << "\nTricky Output\n" << endl;
   Node *result = Tricky_copy_with_noExtraspace(head);
   //  displayList(result);
-  cout << "\n\n" << endl;
+  //  cout << "\n\n" << endl;
   //  displayList(result);
 
   displayListR(result);
