@@ -33,7 +33,7 @@ The first line of input contains an integer N denoting the number of elements in
 the stream. Then the next N lines contains integer x denoting the number to be
 inserted into the stream. Output: For each element added to the stream print the
 floor of the new median in a new line.
- 
+
 
 Constraints:
 1 <= N <= 106
@@ -57,24 +57,46 @@ Flow in stream : 5, 15, 1, 3
 15 goes to stream --> median 10 (5, 15)
 1 goes to stream --> median 5 (5, 15, 1)
 3 goes to stream --> median 4 (5, 15, 1, 3)
+*
+*
+*
+* Method : Heaps
+* Method Similar to balancing BST in Method 2 above, we can use a max heap on
+left side
+* to represent elements that are less than effective median, and a min heap on
+* right side to represent elements that are greater than effective median.
+*
+* After processing an incoming element, the number of elements in heaps differ
+* utmost by 1 element. When both heaps contain same number of elements, we pick
+* average of heaps root data as effective median. When the heaps are not
+balanced,
+* we select effective median from the root of heap containing more elements.
+*
+*  lets say a = [ 5 4 3 6 7 ]    ->sort-> a = [3 4 5 6 7]
+*  see this as ,-> 5 <---,
+*              |   / \    |
+* LT can be  <-|   4  6   | clearly see RT side can be seen as min Heap
+*  max_heap    |   /  \   |
+*              -->3   7 <-
+*
+*
 */
 
 #include <bits/stdc++.h>
 using namespace std;
 
 class MedianInStream {
-public:
+ public:
   void medianInStream(vector<int> &a) {
     int sz = a.size();
-    if (sz == 0)
-      return;
+    if (sz == 0) return;
     if (sz == 1) {
       cout << "median = " << a[0] << endl;
       return;
     }
 
-    priority_queue<int> leftQ;                             // maxHeap
-    priority_queue<int, vector<int>, greater<int>> rightQ; // minHeap
+    priority_queue<int> leftQ;                              // maxHeap
+    priority_queue<int, vector<int>, greater<int>> rightQ;  // minHeap
 
     leftQ.push(a[0]);
     int median = a[0];
@@ -121,15 +143,14 @@ public:
 };
 
 int main() {
-
-  vector<int> a{5, 15};
   int n;
-  //   cin >> n;
-  //   int x;
-  //   for (int i = 0; i < n; i++) {
-  //     cin >> x;
-  //     a.push_back(x);
-  //   }
+  cin >> n;
+  vector<int> a(n, 0);
+
+  for (int i = 0; i < n; i++) {
+    cin >> a[i];
+    //       a.push_back(x);
+  }
 
   //   priority_queue<int> pq1(a.begin(), a.end());
   //   for (int i = 0; i < a.size(); i++) {
