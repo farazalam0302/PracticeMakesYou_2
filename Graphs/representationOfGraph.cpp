@@ -7,13 +7,15 @@ void addEdge(vector<int> adj[], int u, int v) {
 }
 
 void printGraph(vector<int> adj[], int V) {
+  cout << "\n\n";
   for (int i = 0; i < V; i++) {
-    std::cout << "Adj list of vertex " << i << " head is " << std::endl;
+    std::cout << "[" << i << "] --";
     for (auto k : adj[i]) {
-      cout << " -> " << k;
+      cout << "-> " << k;
     }
-    cout << endl;
+    cout << "-> Null" << endl;
   }
+  cout << "\n\n";
 }
 
 int main(int argc, const char **argv) {
