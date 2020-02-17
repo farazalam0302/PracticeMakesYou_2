@@ -164,13 +164,8 @@ int No_of_components_dfs(vector<vector<int>> &adjList, int root) {
   int i = 1;
   int connectedComponent = 0;
   while (i < nodes) {
-    if (mstack.empty() && visited[i] == false) {
-      connectedComponent++;
-      i++;
-      continue;
-    }
     t = mstack.top();
-    mstack.pop();
+    //    mstack.pop();
 
     for (auto i : adjList[t]) {
       if (visited[i] == false) {
@@ -178,6 +173,11 @@ int No_of_components_dfs(vector<vector<int>> &adjList, int root) {
         visited[i] = true;
       }
     }
+    if (mstack.empty() == false) {
+      mstack.pop();
+      continue;
+    }
+    connectedComponent++;
 
     i++;
   }
