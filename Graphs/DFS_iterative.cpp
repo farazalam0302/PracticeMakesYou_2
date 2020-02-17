@@ -152,40 +152,28 @@ int dfs_iterative_adjMatrix(vector<vector<int>> &adjMatrix, int root) {
   }
   return count;
 }
+
+void dfs_recursive(vector<vector<int>> &adjList, int r, vector<bool> &visited) {
+  visited[r] = true;
+  for (auto i : adjList[r]) {
+    if (visited[i] == false) {
+      dfs_recursive(adjList, i, visited);
+    }
+  }
+}
 // TO DO:
-int No_of_components_dfs(vector<vector<int>> &adjList, int root) {
+int No_of_components_dfs(vector<vector<int>> &adjList) {
   int nodes = adjList.size();
   vector<bool> visited(nodes, false);
   visited[0] = true;  // avoid zero index; to see only 1 to N
-  stack<int> mstack;
-  mstack.push(root);
-  visited[1] = true;
-  int t;
-  int i = 1;
-  int connectedComponent = 0;
-  while (i < nodes) {
-    t = mstack.top();
-    //    mstack.pop();
-
-    for (auto i : adjList[t]) {
-      if (visited[i] == false) {
-        mstack.push(i);
-        visited[i] = true;
-      }
+  int count = 0;
+  for (int i = 0; i < nodes; ++i) {
+    if (visited[i] == false) {
+      dfs_recursive(adjList, i, visited);
+      count++;
     }
-    if (mstack.empty() == false) {
-      mstack.pop();
-      continue;
-    }
-    connectedComponent++;
-
-    i++;
   }
-  //  int count = 0;
-  //  for (auto i : visited) {
-  //    if (!i) count++;
-  //  }
-  return connectedComponent;
+  return count;
 }
 
 int main(int argc, char **argv) {
@@ -211,13 +199,13 @@ int main(int argc, char **argv) {
   printGraph(adjList);
   printGraphMatrix(adjMatrix);
 
-  int r = dfs_iterative(adjList, x);
-  cout << "\n\n" << r << endl;
+  //  int r = dfs_iterative(adjList, x);
+  //  cout << "\n\n" << r << endl;
+  //
+  //  r = dfs_iterative_adjMatrix(adjMatrix, x);
+  //  cout << "\n\n" << r << endl;
 
-  r = dfs_iterative_adjMatrix(adjMatrix, x);
-  cout << "\n\n" << r << endl;
-
-  r = No_of_components_dfs(adjList, x);
+  int r = No_of_components_dfs(adjList);
   cout << "\n\n" << r << endl;
   return 0;
 }
