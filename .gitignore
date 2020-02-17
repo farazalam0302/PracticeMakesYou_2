@@ -8,3 +8,6 @@ tempCodeRunnerFile.cpp
 .cproject
 .metadata/*
 .project
+/Debug/
+.settings/
+.settings/*

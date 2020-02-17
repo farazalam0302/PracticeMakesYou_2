@@ -21,6 +21,32 @@
  * Constraints
  * Note: It is guaranteed that atleast one node shall lie on level x
  *
+ *
+ *
+ * Input case
+        20
+        11 1
+        1 2
+        13 3
+        15 4
+        17 5
+        11 6
+        2 7
+        1 8
+        15 9
+        4 10
+        15 12
+        5 13
+        2 14
+        17 15
+        15 16
+        11 17
+        15 18
+        9 19
+        16 20
+        2
+ *
+ *
  */
 #include <bits/stdc++.h>
 using namespace std;
