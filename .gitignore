@@ -11,3 +11,7 @@ tempCodeRunnerFile.cpp
 /Debug/
 .settings/
 .settings/*
+nbproject*
+nbproject
+nbproject/*
+nbproject*
