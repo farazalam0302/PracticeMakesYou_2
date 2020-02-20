@@ -73,13 +73,13 @@ int isCycle(Graph* graph) {
   vector<int> parent(graph->Nvertices, -1);
 
   for (int i = 0; i < graph->Nedges; ++i) {
-    //    int x = find(parent, graph->edge[i].src);
-    //    int y = find(parent, graph->edge[i].dest);
-    int xx = find(parent, ((graph->EdgeSet)[i]).first);
-    int yy = find(parent, ((graph->EdgeSet)[i]).second);
+    int x = find(parent, graph->edge[i].src);
+    int y = find(parent, graph->edge[i].dest);
+    //    int xx = find(parent, ((graph->EdgeSet)[i]).first);
+    //    int yy = find(parent, ((graph->EdgeSet)[i]).second);
 
-    if (xx == yy) return 1;
-    Union_(parent, xx, yy);
+    if (x == y) return 1;
+    Union_(parent, x, y);
   }
   return 0;
 }
@@ -97,10 +97,10 @@ int main(int argc, char** argv) {
   graph->edge[0].dest = 2;
   graph->EdgeSet.push_back(make_pair(1, 2));
 
-  // add edge 0-2
-  graph->edge[0].src = 0;
+  // add edge 3-2
+  graph->edge[0].src = 3;
   graph->edge[0].dest = 2;
-  graph->EdgeSet.push_back(make_pair(0, 2));
+  graph->EdgeSet.push_back(make_pair(3, 2));
   cout << (isCycle(graph) ? "\ngraph contains cycle\n"
                           : "\ngraph contains no cycle\n")
        << endl;
