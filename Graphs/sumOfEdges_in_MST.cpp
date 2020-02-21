@@ -1,7 +1,6 @@
 /*
- *
- *
- * Minimum Spanning Tree
+
+  Minimum Spanning Tree
 Given a weighted undirected graph. Find the sum of weights of edges of a Minimum
 Spanning Tree.
 
@@ -80,35 +79,3 @@ int main(int argc, char** argv) {
 
   return 0;
 }
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
