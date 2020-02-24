@@ -2,41 +2,42 @@
  *
  *
  * Kruskal’s Algorithm
-Kruskal’s Algorithm builds the spanning tree by adding edges one by one into a
-growing spanning tree. Kruskal's algorithm follows greedy approach as in each
-iteration it finds an edge which has least weight and add it to the growing
-spanning tree.
 
-Algorithm Steps:
+        Kruskal’s Algorithm builds the spanning tree by adding edges one by one
+ into a growing spanning tree. Kruskal's algorithm follows greedy approach as in
+ each iteration it finds an edge which has least weight and add it to the
+ growing spanning tree.
 
-> Sort the graph edges with respect to their weights.
-> Start adding edges to the MST from the edge with the smallest weight until the
-edge of the largest weight.
-> Only add edges which doesn't form a cycle , edges which connect only
-disconnected components.
+        Algorithm Steps:
 
-So now the question is how to check if 2 vertices are connected or not ?
+        > Sort the graph edges with respect to their weights.
+        > Start adding edges to the MST from the edge with the smallest weight
+ until the edge of the largest weight. > Only add edges which doesn't form a
+ cycle , edges which connect only disconnected components.
 
-This could be done using DFS which starts from the first vertex, then check if
-the second vertex is visited or not. But DFS will make time complexity large as
-it has an order of O(V+E) where V is the number of vertices, E is the number of
-edges.
+        So now the question is how to check if 2 vertices are connected or not ?
 
-So the best solution is "Disjoint Sets":
-Disjoint sets are sets whose intersection is the empty set so it means that they
-don't have any element in common.
+        This could be done using DFS which starts from the first vertex, then
+ check if the second vertex is visited or not. But DFS will make time complexity
+ large as it has an order of O(V+E) where V is the number of vertices, E is the
+ number of edges.
+
+        So the best solution is "Disjoint Sets":
+        Disjoint sets are sets whose intersection is the empty set so it means
+ that they don't have any element in common.
 
 
-In Kruskal’s algorithm, at each iteration we will select the edge with the
-lowest weight. So, we will start with the lowest weighted edge first i.e., the
-edges with weight 1. After that we will select the second lowest weighted edge
-i.e., edge with weight 2. Notice these two edges are totally disjoint. Now, the
-next edge will be the third lowest weighted edge i.e., edge with weight 3, which
-connects the two disjoint pieces of the graph. Now, we are not allowed to pick
-the edge with weight 4, that will create a cycle and we can’t have any cycles.
-So we will select the fifth lowest weighted edge i.e., edge with weight 5. Now
-the other two edges will create cycles so we will ignore them. In the end, we
-end up with a minimum spanning tree with total cost 11 ( = 1 + 2 + 3 + 5).
+        In Kruskal’s algorithm, at each iteration we will select the edge with
+ the lowest weight. So, we will start with the lowest weighted edge first i.e.,
+ the edges with weight 1. After that we will select the second lowest weighted
+ edge i.e., edge with weight 2. Notice these two edges are totally disjoint.
+ Now, the next edge will be the third lowest weighted edge i.e., edge with
+ weight 3, which connects the two disjoint pieces of the graph. Now, we are not
+ allowed to pick the edge with weight 4, that will create a cycle and we can’t
+ have any cycles. So we will select the fifth lowest weighted edge i.e., edge
+ with weight 5. Now the other two edges will create cycles so we will ignore
+ them. In the end, we end up with a minimum spanning tree with total cost 11 ( =
+ 1 + 2 + 3 + 5).
 
  *
  *
