@@ -33,7 +33,7 @@ vertices with new distances and so on.
 #include <bits/stdc++.h>
 using namespace std;
 
-typedef struct {
+typedef struct Edge {
   int src, dest, weight;
 } PII;  // <weight,edge(x,y)>
 
@@ -56,12 +56,14 @@ void BellmanFord(struct Graph* graph, int src) {
   int E = graph->E;
   vector<int> dist(V + 1, INT_MAX);
 
+  dist[src] = 0;
+
   for (int i = 1; i <= V - 1; ++i) {
     for (int j = 0; j < E; ++j) {
       int u = graph->edge[j].src;
       int v = graph->edge[j].dest;
       int weight = graph->edge[j].weight;
-      if (dist[u] != INT_MAX && dist[u] + weight < dist[v]) {
+      if (dist[u] != INT_MAX && (dist[u] + weight < dist[v])) {
         dist[v] = dist[u] + weight;
       }
     }
@@ -72,7 +74,7 @@ void BellmanFord(struct Graph* graph, int src) {
     int u = graph->edge[j].src;
     int v = graph->edge[j].dest;
     int weight = graph->edge[j].weight;
-    if (dist[u] != INT_MAX && dist[u] + weight < dist[v]) {
+    if (dist[u] != INT_MAX && (dist[u] + weight < dist[v])) {
       cout << "\n\n Negative Weight Cycle Detetected \n " << endl;
       return;
       //      dist[v] = dist[u] + weight;
@@ -80,9 +82,10 @@ void BellmanFord(struct Graph* graph, int src) {
   }
 
   cout << "\nVertex Distance from Source \n" << endl;
-  for (int i = 1; i <= V; ++i) {
+  for (int i = 0; i < V; ++i) {
     cout << i << "  \t\t " << dist[i] << endl;
   }
+  cout << "\n\n" << endl;
 }
 
 int main(int argc, char** argv) {
