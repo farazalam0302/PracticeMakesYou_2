@@ -33,7 +33,7 @@ using namespace std;
 typedef pair<int, int> iPair;
 class Graph {
   int V;
-  list<iPair>* adjList;
+  vector<iPair>* adjList;
 
  public:
   Graph(int V);
@@ -43,7 +43,7 @@ class Graph {
 
 Graph::Graph(int V) {
   this->V = V;
-  adjList = new list<iPair>[V];
+  adjList = new vector<iPair>[V];
 }
 
 void Graph::addEdge(int u, int v, int weight) {
