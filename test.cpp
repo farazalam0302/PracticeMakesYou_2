@@ -2,35 +2,58 @@
 // priority_queue::emplace
 #include <bits/stdc++.h>
 using namespace std;
-void hashingUtil(vector<int> &a, map<int, int> &mp) {
-  for (auto i : a) {
-    if (mp.find(i) == mp.end()) {
-      mp[i] = 1;
-    } else
-      mp[i]++;
+// void hashingUtil(vector<int> &a, map<int, int> &mp) {
+//  for (auto i : a) {
+//    if (mp.find(i) == mp.end()) {
+//      mp[i] = 1;
+//    } else
+//      mp[i]++;
+//  }
+//}
+//
+//// bool Mycompare(int l, int r) {}
+//
+// void displayMap(map<int, pair<int, bool>> &oldMAp, bool flag, bool all) {
+//  for (auto i : oldMAp) {
+//    if ((!(i.second.second) ^ flag) || all)
+//      cout << "{" << i.first << "-->" << (bool)(i.second.second) << "} ";
+//  }
+//  cout << endl;
+//}
+
+int main(int argc, char const* argv[]) {
+  int m, n;
+  m = 20;
+
+  n = 10;
+  int** a = (int**)(malloc(sizeof(int*) * m));
+  for (int i = 0; i < m; ++i) {
+    a[i] = (int*)malloc(sizeof(int) * n);
   }
-}
 
-// bool Mycompare(int l, int r) {}
-
-void displayMap(map<int, pair<int, bool>> &oldMAp, bool flag, bool all) {
-  for (auto i : oldMAp) {
-    if ((!(i.second.second) ^ flag) || all)
-      cout << "{" << i.first << "-->" << (bool)(i.second.second) << "} ";
+  for (int i = 0; i < m; ++i) {
+    cout << endl;
+    for (int j = 0; j < n; ++j) {
+      cout << a[i][j] << " ";
+    }
   }
   cout << endl;
-}
 
-int main(int argc, char const *argv[]) {
-  vector<int> temp(4, 0);
-  vector<int> a(temp.begin(), temp.end());
-  vector<int> b = temp;
-  a[1] = 2;
-  b[2] = 3;
-  
-   b = temp;
-  temp[2] = 200;
+  for (int i = 0; i < m; ++i) {
+    for (int j = 0; j < n; ++j) {
+      a[i][j] = (i + 1) * (j + 1);
+    }
+  }
+  cout << endl;
 
+  for (int i = 0; i < m; ++i) {
+    cout << endl;
+    for (int j = 0; j < n; ++j) {
+      cout << a[i][j] << " ";
+    }
+  }
+
+  cout << endl;
   return 0;
 }
 
