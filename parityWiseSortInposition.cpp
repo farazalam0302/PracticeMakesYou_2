@@ -3,7 +3,7 @@
 using namespace std;
 
 class Solution {
-public:
+ public:
   vector<int> sortArrayByParityII(vector<int> &A) {
     int even = 0;
     int n = A.size();
@@ -20,8 +20,7 @@ public:
         even += 2;
 
       } else if (A[t] % 2 == 1) {
-        if (t % 2 == 0)
-          swap(A[t], A[odd]);
+        if (t % 2 == 0) swap(A[t], A[odd]);
         odd += 2;
         t++;
       } else
@@ -78,8 +77,8 @@ string integerVectorToString(vector<int> list, int length = -1) {
 
 int main() {
   string line;
-  // while (getline(cin, line)) {
-  vector<int> A{888, 505, 627, 846};
+  // while (getline(cin, line)) { arr[] = {10, 9, 7, 18, 12, 19, 4, 20, 6, 14}
+  vector<int> A{10, 9, 7, 18, 12, 19, 4, 20, 6, 14};
 
   vector<int> ret = Solution().sortArrayByParityII(A);
 
