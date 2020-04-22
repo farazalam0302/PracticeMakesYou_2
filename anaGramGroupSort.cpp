@@ -6,8 +6,8 @@ dog god".
 
 
 6
-qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM0123456789_
-poiuytrewqlkjhgfdsamnbvcxzPOIUYTREWQLKJHGFDSAMNBVCXZ0123456789_
+apple
+aplle
 qazwsxedcrfvtgbyhnujmikolpQAZWSXEDCRFVTGBYHNUJMIKOLP0123456789_
 qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNMpoiuytrewqlkjhgfdsamnbvcxzPOIUYTREWQLKJHGFDSAMNBVCXZ0123456789_
 0123456789poiuytrewqlkjhgfdsamnbvcxzPOIUYTREWQLKJHGFDSAMNBVCXZqazwsxedcrfvtgbyhnujmikolpQAZWSXEDCRFVTGBYHNUJMIKOLP_
@@ -32,20 +32,19 @@ void groupByAnaGrams(vector<string> &s) {
     len = i.length();
 
     for (int j = 0; j < len; j++) {
-
       if (i[j] >= 'a' && i[j] <= 'z') {
-        mask = mask | (1L << (i[j] - 'a'));
+        mask = mask ^ (1L << (i[j] - 'a'));
         continue;
       } else if (i[j] >= 'A' && i[j] <= 'Z') {
         temp = (1L << (i[j] - 'A' + 26));
-        mask = mask | temp;
+        mask = mask ^ temp;
         continue;
       } else if (i[j] >= '0' && i[j] <= '9') {
         temp = (1L << (i[j] - '0' + 26 + 26));
-        mask = mask | temp;
+        mask = mask ^ temp;
       } else if (i[j] == '_') {
         temp = (1L << (62));
-        mask = mask | temp;
+        mask = mask ^ temp;
       }
       // else if (i[j] == '-') {
       //   temp = (1L << (63));
@@ -83,10 +82,9 @@ void groupByAnaGrams(vector<string> &s) {
 }
 
 int main(int argc, char const *argv[]) {
-
   //{"cat", "dog", "tac", "god", "act"}
 
-#if 0 // its commented 
+#if 0  // its commented
   vector<string> s{"qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM",
                    "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm",
                    "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm0010"};

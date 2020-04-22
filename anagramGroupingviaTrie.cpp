@@ -1,9 +1,19 @@
-/*
-Given a sequence of words, print all anagrams together | Set 1
-Given an array of words, print all anagrams together. For example, if the given
-array is {"cat", "dog", "tac", "god", "act"}, then output may be "cat tac act
-dog god".
-*/
+#include <iostream>
 
-#include <bits/stdc++.h>
-using namespace std;
+struct A {
+  virtual int foo() = 0;
+};
+
+int A::foo() { return 100; }
+
+struct B : A {
+  int foo() override;
+};
+
+int B::foo() { return 200; }
+
+int main() {
+  B bar;
+  std::cout << bar.foo();
+  std::cout << ((A&)bar).foo();
+}

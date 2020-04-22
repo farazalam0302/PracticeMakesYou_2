@@ -1,7 +1,7 @@
 
 // priority_queue::emplace
-#include <bits/stdc++.h>
-using namespace std;
+#include <stdio.h>
+// using namespace std;
 // void hashingUtil(vector<int> &a, map<int, int> &mp) {
 //  for (auto i : a) {
 //    if (mp.find(i) == mp.end()) {
@@ -20,7 +20,7 @@ using namespace std;
 //  }
 //  cout << endl;
 //}
-
+/*
 int main(int argc, char const* argv[]) {
   int m, n;
   m = 20;
@@ -56,6 +56,7 @@ int main(int argc, char const* argv[]) {
   cout << endl;
   return 0;
 }
+*/
 
 // int main() {
 // /////////
@@ -92,3 +93,8 @@ int main(int argc, char const* argv[]) {
 
 //   return 0;
 // }
+
+int main() {
+  printf("Hi Faraz Alam!!!\n");
+  return 0;
+}
