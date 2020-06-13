@@ -33,7 +33,7 @@ mno.pqr
 using namespace std;
 
 class RevSentence {
-public:
+ public:
   string revSentenceWordWise1(string &s) {
     int sz = s.size();
     stack<string> mystack;
@@ -50,11 +50,9 @@ public:
     sz = mystack.size();
     string ret = "";
     while (mystack.empty() == false) {
-
       ret = ret + mystack.top();
       mystack.pop();
-      if (mystack.size() == 0)
-        break;
+      if (mystack.size() == 0) break;
       ret += ".";
     }
     return ret;
@@ -74,11 +72,9 @@ public:
     sz = mystack.size();
     string ret = "";
     while (mystack.empty() == false) {
-
       ret = ret + mystack.top();
       mystack.pop();
-      if (mystack.size() == 0)
-        break;
+      if (mystack.size() == 0) break;
       ret += ".";
     }
     return ret;
@@ -88,12 +84,12 @@ public:
 int main() {
   int t;
   RevSentence rs;
-  cin >> t;
+  //  cin >> t;
   t = 1;
   while (t--) {
     string s = "i.like.this.program.very.much";
     // cin >> s;
-    cout << rs.revSentenceWordWise1(s) << endl;
+    cout << rs.revSentenceWordWise2(s) << endl;
   }
 
   // string a = "i.like.this.program.very.much";
