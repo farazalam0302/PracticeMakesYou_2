@@ -11,9 +11,56 @@
 #include <bits/stdc++.h>
 #define ALPHABETS 256
 using namespace std;
+
 class TrieNode {
-public:
-  TrieNode *kids[ALPHABETS]; // 26 characters only lowercase letters
+ public:
+  TrieNode* children[ALPHABETS];
+  bool isEndOfWord;
+  TrieNode() {
+    isEndOfWord = false;
+    for (auto i : children) {
+      i = nullptr;
+    }
+  }
+};
+
+void insertInTrie(TrieNode* R, string key) {
+  TrieNode* crawler = R;
+  for (int i = 0; i < key.length(); ++i) {
+    int index = key[i];
+    if (crawler->children[index] == NULL) {
+      crawler->children[index] = new TrieNode();
+    }
+    crawler = crawler->children[index];
+  }
+  crawler->isEndOfWord = true;
+}
+
+bool searchInTrie(TrieNode* R, string key) {
+  if (!R) return false;
+  TrieNode* crawler = R;
+  for (int i = 0; i < key.length(); ++i) {
+    int index = key[i];
+    if (crawler->children[index] == NULL) return false;
+    crawler = crawler->children[index];
+  }
+  return (crawler != NULL && crawler->isEndOfWord);
+}
+
+int main() {
+  vector<string> keys{"the", "there", "their"};
+  TrieNode* Root = new TrieNode();
+  for (auto i : keys) {
+    insertInTrie(Root, i);
+  }
+  cout << searchInTrie(Root, "thr");
+  return 0;
+}
+
+#if 0
+class TrieNode {
+ public:
+  TrieNode *kids[ALPHABETS];  // 26 characters only lowercase letters
   bool wordEnd;
   TrieNode() {
     wordEnd = false;
@@ -27,7 +74,7 @@ public:
 void insert(TrieNode *R, string key) {
   TrieNode *spider = R;
   for (int i = 0; i < key.length(); i++) {
-    int index = key[i]; //- 'a';
+    int index = key[i];  //- 'a';
     if (!(spider->kids[index])) {
       spider->kids[index] = new TrieNode();
     }
@@ -40,7 +87,7 @@ bool search(TrieNode *R, string key) {
   TrieNode *spider = R;
 
   for (int i = 0; i < key.length(); i++) {
-    int index = key[i]; //- 'a';
+    int index = key[i];  //- 'a';
     if (!(spider->kids[index])) {
       return false;
     }
@@ -50,7 +97,6 @@ bool search(TrieNode *R, string key) {
 }
 
 int main() {
-
   vector<string> keys{"the", "a",  "there", "answer",
                       "any", "by", "bye",   "their"};
   TrieNode *Root = new TrieNode();
@@ -66,6 +112,8 @@ int main() {
 
   return 0;
 }
+#endif
+
 /*
 // C++ program for a Trie based O(n) solution to find max
 // subarray XOR
