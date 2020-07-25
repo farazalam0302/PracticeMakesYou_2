@@ -49,13 +49,14 @@ int mergeSort(vector<int> &a, int l, int r) {
 
 int main() {
   int n;
-  cin >> n;
+  //  cin >> n;
   int x;
-  vector<int> a;
-  for (int i = 0; i < n; i++) {
-    cin >> x;
-    a.push_back(x);
-  }
+  //  vector<int> a;
+  vector<int> a{1, 20, 6, 4, 5};
+  //  for (int i = 0; i < n; i++) {
+  //    cin >> x;
+  //    a.push_back(x);
+  //  }
   int nn = a.size() - 1;
   cout << "unsorted array = ";
   for (auto i : a) {
@@ -63,7 +64,7 @@ int main() {
   }
   cout << endl;
   int inversionCount = mergeSort(a, 0, nn);
-  nn = a.size() - 2;
+  //  nn = a.size() - 2;
   cout << "sorted array = ";
   for (auto i : a) {
     cout << i << " ";

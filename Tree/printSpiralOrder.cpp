@@ -1,8 +1,8 @@
-#include "BinaryTree.h"
 #include <deque>
+
+#include "BinaryTree.h"
 void printLeftViewofTree(Node *R, int level, int *maxlevel) {
-  if (!R)
-    return;
+  if (!R) return;
   if (*maxlevel < level) {
     cout << R->data << " ";
     *maxlevel = level;
@@ -12,15 +12,13 @@ void printLeftViewofTree(Node *R, int level, int *maxlevel) {
 }
 
 void printLeftViewofTreeUtility(Node *R) {
-  if (!R)
-    return;
+  if (!R) return;
   int maxlevel = 0;
   printLeftViewofTree(R, 1, &maxlevel);
 }
 
 void printRightViewofTree(Node *R, int level, int *maxlevel) {
-  if (!R)
-    return;
+  if (!R) return;
   if (*maxlevel < level) {
     cout << R->data << " ";
     *maxlevel = level;
@@ -30,15 +28,13 @@ void printRightViewofTree(Node *R, int level, int *maxlevel) {
 }
 
 void printRightViewofTreeUtility(Node *R) {
-  if (!R)
-    return;
+  if (!R) return;
   int maxlevel = 0;
   printRightViewofTree(R, 1, &maxlevel);
 }
 
 void printVerticalOrder_levelOrderway(Node *R) {
-  if (!R)
-    return;
+  if (!R) return;
   pair<int, Node *> mp = make_pair(0, R);
   map<int, vector<int>> mmap;
   queue<pair<int, Node *>> Q;
@@ -66,11 +62,9 @@ void printVerticalOrder_levelOrderway(Node *R) {
 
 void printSpiralLevelOrder_recursive_utility(Node *R, int level,
                                              bool direction) {
-  if (!R || (level <= 0))
-    return;
+  if (!R || (level <= 0)) return;
 
-  if (level == 1)
-    cout << R->data << " ";
+  if (level == 1) cout << R->data << " ";
   if (direction) {
     printSpiralLevelOrder_recursive_utility(R->left, level - 1, direction);
     printSpiralLevelOrder_recursive_utility(R->right, level - 1, direction);
@@ -80,8 +74,7 @@ void printSpiralLevelOrder_recursive_utility(Node *R, int level,
   }
 }
 void printSpiralLevelOrder_recursive(Node *R) {
-  if (!R)
-    return;
+  if (!R) return;
   int depth = height_depth(R);
   bool direction = false;
   for (int level = 1; level <= depth; level++) {
@@ -91,53 +84,31 @@ void printSpiralLevelOrder_recursive(Node *R) {
 }
 
 void printSpiralLevelOrder_iterative_usingStack(Node *R) {
-  if (!R)
-    return;
+  if (!R) return;
   stack<Node *> L2R;
   stack<Node *> R2L;
   L2R.push(R);
   Node *tmp = NULL;
   while (L2R.empty() == false || R2L.empty() == false) {
-
     while (!L2R.empty()) {
       tmp = L2R.top();
       L2R.pop();
       cout << tmp->data << " ";
-      if (tmp->right)
-        R2L.push(tmp->right);
-      if (tmp->left)
-        R2L.push(tmp->left);
+      if (tmp->right) R2L.push(tmp->right);
+      if (tmp->left) R2L.push(tmp->left);
     }
     while (!R2L.empty()) {
       tmp = R2L.top();
       R2L.pop();
       cout << tmp->data << " ";
-      if (tmp->left)
-        L2R.push(tmp->left);
-      if (tmp->right)
-        L2R.push(tmp->right);
+      if (tmp->left) L2R.push(tmp->left);
+      if (tmp->right) L2R.push(tmp->right);
     }
   }
   cout << endl;
 }
 
-void printSpiralLevelOrder_iterative_usingDeQueue(Node *R) {
-  if (!R)
-    return;
-  deque<Node *> L2R;
-  // deque<Node *> R2L;
-  L2R.push_front(R);
-  Node *tmp = NULL;
-  bool direction = true;
-  while (L2R.empty() == false) {
-    tmp = L2R.front()
-    
-  }
-  cout << endl;
-}
-
 int main() {
-
   Node *R1;
   Node *R2;
   Node *R3;
@@ -159,8 +130,5 @@ int main() {
   printSpiralLevelOrder_iterative_usingStack(R2);
   cout << endl;
 
-  cout << "printSpiralLevelOrder_iterative using Queue = ";
-  printSpiralLevelOrder_iterative_usingQueue(R2);
-  cout << endl;
   return 0;
 }
