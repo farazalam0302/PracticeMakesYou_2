@@ -182,13 +182,155 @@ Otherwise, the value of table[i][j] is made false.
   return s;
 }
 
+string BetterSpaceAndTimeSolution(string& s) {
+  /*
+   * Approach: Dynamic programming solution is already discussed here previous
+post. The time complexity of the Dynamic Programming based solution is O(n^2)
+and it requires O(n^2) extra space. We can find the longest palindrome substring
+in (n^2) time with O(1) extra space. The idea is to generate all even length and
+odd length palindromes and keep track of the longest palindrome seen so far.
+
+                The idea is to generate all even length and odd length
+palindromes and keep track of the longest palindrome seen so far. To generate
+odd length palindrome,
+                                Fix a centre and expand in both directions for
+longer palindromes, i.e. fix i (index) as center and two indices as i1 = i+1 and
+i2 = i-1 Compare i1 and i2 if equal then decrease i2 and increase i1 and find
+the maximum length.
+
+                Use a similar technique to find the even length palindrome. Take
+two indices i1 = i and i2 = i-1 and compare characters at i1 and i2 and find the
+maximum length till all pair of compared characters are equal and store the
+maximum length.
+
+                Print the maximum length.
+   */
+
+  int len = s.length();
+  int low, high, maxlength = 1;
+  int start;
+  // even length palindrome
+  for (int i = 1; i < len; ++i) {
+    low = i - 1;
+    high = i;
+    while (low >= 0 && high < len && s[low] == s[high]) {
+      if ((high - low + 1) > maxlength) {
+        maxlength = high - low + 1;
+        start = low;
+      }
+      low--;
+      high++;
+    }
+
+    low = i - 1;
+    high = i + 1;
+    while (low >= 0 && high < len && s[low] == s[high]) {
+      if (high - low + 1 > maxlength) {
+        maxlength = high - low + 1;
+        start = low;
+      }
+      low--;
+      high++;
+    }
+  }
+
+  string ret = "";
+  for (int i = start; i < start + maxlength; ++i) {
+    //    cout << s[i];
+    ret = ret + s[i];
+  }
+  cout << endl;
+  return ret;
+}
+
+#if 0
+// A O(n^2) time and O(1) space program to
+// find the longest palindromic substring
+#include <bits/stdc++.h>
+using namespace std;
+
+// A utility function to print
+// a substring str[low..high]
+void printSubStr(char* str, int low, int high)
+{
+	for (int i = low; i <= high; ++i)
+		cout << str[i];
+}
+
+// This function prints the
+// longest palindrome substring (LPS)
+// of str[]. It also returns the
+// length of the longest palindrome
+int longestPalSubstr(char* str)
+{
+	// The result (length of LPS)
+	int maxLength = 1;
+
+	int start = 0;
+	int len = strlen(str);
+
+	int low, high;
+
+	// One by one consider every
+	// character as center point of
+	// even and length palindromes
+	for (int i = 1; i < len; ++i) {
+		// Find the longest even length palindrome
+		// with center points as i-1 and i.
+		low = i - 1;
+		high = i;
+		while (low >= 0 && high < len
+			&& str[low] == str[high]) {
+			if (high - low + 1 > maxLength) {
+				start = low;
+				maxLength = high - low + 1;
+			}
+			--low;
+			++high;
+		}
+
+		// Find the longest odd length
+		// palindrome with center point as i
+		low = i - 1;
+		high = i + 1;
+		while (low >= 0 && high < len
+			&& str[low] == str[high]) {
+			if (high - low + 1 > maxLength) {
+				start = low;
+				maxLength = high - low + 1;
+			}
+			--low;
+			++high;
+		}
+	}
+
+	cout << "Longest palindrome substring is: ";
+	printSubStr(str, start, start + maxLength - 1);
+
+	return maxLength;
+}
+
+// Driver program to test above functions
+int main()
+{
+	char str[] = "forgeeksskeegfor";
+	cout << "\nLength is: "
+		<< longestPalSubstr(str)
+		<< endl;
+	return 0;
+}
+
+// This is code is contributed by rathbhupendra
+
+#endif
 int main() {
   string input = "abcaabbaaabc";
-  cout << (bruteForceLCSubstring(input)) << endl;
+  //  cout << (bruteForceLCSubstring(input)) << endl;
+  //
+  //  cout << "Dynamic Programming " << endl;
+  //  dynamicProgrammedLCSubstring(input);
 
-  cout << "Dynamic Programming " << endl;
-  dynamicProgrammedLCSubstring(input);
-
+  cout << BetterSpaceAndTimeSolution(input) << endl;
   return 0;
 }
 
