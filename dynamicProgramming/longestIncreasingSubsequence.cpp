@@ -6,7 +6,7 @@ https://practice.geeksforgeeks.org/problems/longest-increasing-subsequence/0
 Longest Increasing SubsequenceSubmissions: 87621   Accuracy: 28.09%  
 Difficulty: Medium   Marks: 4 Associated Course(s):   Must Do Interview
 Preparation
-             
+
 
 
 Problems
@@ -53,6 +53,14 @@ many subsequence, but listing one of them): 5 7 9.
 #include <bits/stdc++.h>
 using namespace std;
 
+void printArray(vector<int> &a, string arrayName) {
+  cout << ("\nArray " + arrayName) << endl;
+  for (auto i : a) {
+    cout << i << ", ";
+  }
+  cout << "\n\n" << endl;
+}
+
 int main(int argc, char const *argv[]) {
   int t;
   // cin >> t;
@@ -84,11 +92,34 @@ int main(int argc, char const *argv[]) {
       }
     }
     int maxLength = lenArray[0];
-    for (auto i : lenArray) {
-      maxLength = max(maxLength, i);
+    //    for (auto i : lenArray) {
+    //      maxLength = max(maxLength, i);
+    //    }
+    int trackpoint;
+    for (int i = 0; i < lenArray.size(); ++i) {
+      if (maxLength < lenArray[i]) {
+        maxLength = lenArray[i];
+        trackpoint = i;
+      }
     }
+    cout << "trackpoint = " << trackpoint << endl;
 
+    stack<int> mstack;
+    mstack.push(a[trackpoint]);
+    for (int i = 0; i < maxLength - 1; ++i) {
+      trackpoint = trackingArray[trackpoint];
+      mstack.push(a[trackpoint]);
+    }
+    cout << "LIS Series  = " << endl;
+    while (!(mstack.empty())) {
+      cout << mstack.top() << ", ";
+      mstack.pop();
+    }
     cout << " LIS length = " << maxLength << endl;
+    printArray(a, "input a");
+    printArray(trackingArray, "trackingArray");
+    printArray(index, "index");
+    printArray(lenArray, "lenArray");
   }
 
   return 0;
