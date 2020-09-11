@@ -8,6 +8,7 @@ class LRUAlgo {
 
  public:
   LRUAlgo(int c) : capacity(c) {}
+
   bool access(int n) {
     if (deque.size() == capacity) {
       if (hmap.find(n) == hmap.end()) {
@@ -37,14 +38,23 @@ class LRUAlgo {
     }
     return true;
   }
+
+  int getCapacity() const { return capacity; }
 };
 
 int main() {
-  LRUAlgo* lru = new LRUAlgo(3);
+  LRUAlgo* lru = new LRUAlgo(5);
   int page = 1;
+  //  cout << "F   R\n";
   while (page) {
+    cout << "\nF";
+    for (int i = 0; i < (lru->getCapacity() + lru->getCapacity() - 3); ++i) {
+      cout << " ";
+    }
+    cout << "R\n";
     lru->access(page);
-    cout << "    REQUEST nonZero/zero to stop ";
+
+    cout << "\nREQUEST nonZero/(zero to stop!!) ";
     cin >> page;
   }
   //
