@@ -81,76 +81,185 @@ balanced,
 *
 *
 */
+#if 0
+// C++ program to find med in
+// stream of running integers
+#include <bits/stdc++.h>
+using namespace std;
+
+// function to calculate med of stream
+void printMedians(double arr[], int n) {
+  // max heap to store the smaller half elements
+  priority_queue<double> s;
+
+  // min heap to store the greater half elements
+  priority_queue<double, vector<double>, greater<double> > g;
+
+  double med = arr[0];
+  s.push(arr[0]);
+
+  cout << med << endl;
+
+  // reading elements of stream one by one
+  /* At any time we try to make heaps balanced and
+          their sizes differ by at-most 1. If heaps are
+          balanced,then we declare median as average of
+          min_heap_right.top() and max_heap_left.top()
+          If heaps are unbalanced,then median is defined
+          as the top element of heap of larger size */
+  for (int i = 1; i < n; i++) {
+    double x = arr[i];
+
+    // case1(left side heap has more elements)
+    if (s.size() > g.size()) {
+      if (x < med) {
+        g.push(s.top());
+        s.pop();
+        s.push(x);
+      } else
+        g.push(x);
+
+      med = (s.top() + g.top()) / 2.0;
+    }
+
+    // case2(both heaps are balanced)
+    else if (s.size() == g.size()) {
+      if (x < med) {
+        s.push(x);
+        med = (double)s.top();
+      } else {
+        g.push(x);
+        med = (double)g.top();
+      }
+    }
+
+    // case3(right side heap has more elements)
+    else {
+      if (x > med) {
+        s.push(g.top());
+        g.pop();
+        g.push(x);
+      } else
+        s.push(x);
+
+      med = (s.top() + g.top()) / 2.0;
+    }
+
+    cout << med << endl;
+  }
+
+  cout << "\nLeftMAxHeap \n";
+  vector<double> leftMax;
+  while (!s.empty()) {
+    leftMax.push_back(s.top());
+    s.pop();
+  }
+  for (auto i : leftMax) {
+    cout << i << " ";
+  }
+  cout << "\nRightMinHeap \n";
+  vector<double> rightMin;
+  while (!g.empty()) {
+    rightMin.push_back(g.top());
+    g.pop();
+  }
+  for (auto i : rightMin) {
+    cout << i << " ";
+  }
+}
+
+// Driver program to test above functions
+int main() {
+  // stream of integers
+  double arr[] = {3, 2, 1, 5, 6, 8, 4};  //{5, 15, 10, 20, 3};
+  int n = sizeof(arr) / sizeof(arr[0]);
+  printMedians(arr, n);
+  return 0;
+}
+
+#endif
+
+#if 1
 
 #include <bits/stdc++.h>
 using namespace std;
 
-class MedianInStream {
- public:
-  void medianInStream(vector<int> &a) {
-    int sz = a.size();
-    if (sz == 0) return;
-    if (sz == 1) {
-      cout << "median = " << a[0] << endl;
-      return;
-    }
+double medianInStreamOfIntegers(vector<double>& a) {
+  int aSize = a.size();
+  if (aSize == 0) return -1.0;
+  if (aSize == 1) return a[0];
+  priority_queue<double> leftMaxHeap;
+  priority_queue<double, vector<double>, greater<double>> rightMinHeap;
+  double median = a[0];
+  leftMaxHeap.push(a[0]);
+  cout << median << '\n';
+  for (int i = 1; i < a.size(); ++i) {
+    double incomingNo = a[i];
+    if (leftMaxHeap.size() > rightMinHeap.size()) {
+      if (incomingNo < median) {
+        rightMinHeap.push(leftMaxHeap.top());
+        leftMaxHeap.pop();
+        leftMaxHeap.push(incomingNo);
 
-    priority_queue<int> leftQ;                              // maxHeap
-    priority_queue<int, vector<int>, greater<int>> rightQ;  // minHeap
-
-    leftQ.push(a[0]);
-    int median = a[0];
-    cout << median << endl;
-    int l = 1;
-    int r = 0;
-    int x;
-
-    for (int i = 1; i < sz; i++) {
-      l = leftQ.size();
-      r = rightQ.size();
-      x = a[i];
-
-      if (l > r) {
-        if (x < median) {
-          rightQ.push(leftQ.top());
-          leftQ.pop();
-          leftQ.push(x);
-        } else {
-          rightQ.push(x);
-        }
-        median = (leftQ.top() + rightQ.top()) / 2.0;
-      } else if (l == r) {
-        if (x < median) {
-          leftQ.push(x);
-          median = leftQ.top();
-        } else {
-          rightQ.push(x);
-          median = rightQ.top();
-        }
       } else {
-        if (x > median) {
-          leftQ.push(rightQ.top());
-          rightQ.pop();
-          rightQ.push(x);
-        } else {
-          leftQ.push(x);
-        }
-        median = (leftQ.top() + rightQ.top()) / 2.0;
+        rightMinHeap.push(incomingNo);
       }
-      cout << median << endl;
+      median = 0.5 * (leftMaxHeap.top() + rightMinHeap.top());
+    } else if (leftMaxHeap.size() == rightMinHeap.size()) {
+      if (incomingNo < median) {
+        leftMaxHeap.push(incomingNo);
+        median = leftMaxHeap.top();
+      } else {
+        rightMinHeap.push(incomingNo);
+        median = rightMinHeap.top();
+      }
+    } else {
+      if (incomingNo < median) {
+        leftMaxHeap.push(incomingNo);
+
+      } else {
+        leftMaxHeap.push(rightMinHeap.top());
+        rightMinHeap.pop();
+        rightMinHeap.push(incomingNo);
+      }
+      median = 0.5 * (leftMaxHeap.top() + rightMinHeap.top());
     }
+    cout << median << '\n';
   }
-};
+#if 0
+
+
+  cout << "\nLeftQ\n";
+  vector<double> leftMax;
+  while (!leftMaxHeap.empty()) {
+    leftMax.push_back(leftMaxHeap.top());
+    leftMaxHeap.pop();
+  }
+  for (int i = leftMax.size() - 1; i >= 0; --i) {
+    cout << leftMax[i] << " ";
+  }
+  cout << "\nRightMinHeap \n";
+  vector<double> rightMin;
+  while (!rightMinHeap.empty()) {
+    rightMin.push_back(rightMinHeap.top());
+    rightMinHeap.pop();
+  }
+  for (int i = 0; i < rightMin.size(); ++i) {
+    cout << rightMin[i] << " ";
+  }
+#endif
+  return median;
+}
 
 int main() {
   int n;
-  cin >> n;
-  vector<int> a(n, 0);
+  //  cin >> n;
+  vector<double> a{3, 2, 1, 5, 6, 8, 4};  //(n, 0);
 
-  for (int i = 0; i < n; i++) {
-    cin >> a[i];
-    //       a.push_back(x);
-  }
+  //  for (int i = 0; i < n; i++) {
+  //    cin >> a[i];
+  //    //       a.push_back(x);
+  //  }
 
   //   priority_queue<int> pq1(a.begin(), a.end());
   //   for (int i = 0; i < a.size(); i++) {
@@ -165,8 +274,9 @@ int main() {
   //     pq2.pop();
   //   }
 
-  MedianInStream bb;
-  bb.medianInStream(a);
-
+  //  bb.medianInStream(a);
+  double x = medianInStreamOfIntegers(a);
+  cout << "\nMedian = " << x << '\n';
   return 0;
 }
+#endif
