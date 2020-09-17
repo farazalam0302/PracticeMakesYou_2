@@ -3,6 +3,7 @@ a.out
 vscode*
 *.out
 .vscode/*
+.vs/*
 temp*.cpp
 tempCodeRunnerFile.cpp
 .cproject

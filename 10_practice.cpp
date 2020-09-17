@@ -26,7 +26,7 @@ int main() {
 }
 #endif
 
-#if 1
+#if 0
 int main() {
   int a[] = {1, 2, 3, 4, 5};
   int len = *(&a + 1) - a;
@@ -67,3 +67,35 @@ int main() {
   std::cout << &arr << " " << &arr + 1;
 }
 #endif
+
+#if 1
+
+int main()
+{
+    int aa[4] = { 10,20,30,40};
+    int* p = aa;
+    int* q = aa + 2;
+    cout << "\np = " << *p << endl;
+    cout << "\nq = " << *q << endl;
+    cout <<"\n *p++ =  " <<*p++ << endl;
+    cout <<"\n *++q = " <<*++q << endl;
+    cout << "\np = " << *p << endl;
+    cout << "\nq = " << *q << endl;
+    //(*p)++;
+    //++(*q); cout << "\np = " << *p << endl;
+   // cout << "\nq = " << *q << endl;
+    int a = 10;
+    int b = 20;
+    int res = a++ + a++; 
+    cout << "\n a = " << a << endl;
+    cout <<"\n res = " <<res << endl;
+
+    res = ++a + ++a;
+    cout << "\n a = " << a << endl;
+    cout << "\n res = " << res << endl;
+
+    
+}
+
+#endif
+
