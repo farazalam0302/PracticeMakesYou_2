@@ -66,7 +66,62 @@ void printVector(vector<int>& a) {
   }
   cout << "\n";
 }
+/*
+ * KAHNs algorithm for topological sort
+ *
+ * Solution: In this article we will see another way to find the linear ordering
+of vertices in a directed acyclic graph (DAG). The approach is based on the
+below fact:
+
+A DAG G has at least one vertex with in-degree 0 and one vertex with out-degree
+0. Proof: There’s a simple proof to the above fact is that a DAG does not
+contain a cycle which means that all paths will be of finite length. Now let S
+be the longest path from u(source) to v(destination). Since S is the longest
+path there can be no incoming edge to u and no outgoing edge from v, if this
+situation had occurred then S would not have been the longest path
+=> indegree(u) = 0 and outdegree(v) = 0
+
+Algorithm: Steps involved in finding the topological ordering of a DAG:
+Step-1: Compute in-degree (number of incoming edges) for each of the vertex
+present in the DAG and initialize the count of visited nodes as 0.
+
+Step-2: Pick all the vertices with in-degree as 0 and add them into a queue
+(Enqueue operation)
+
+Step-3: Remove a vertex from the queue (Dequeue operation) and then.
+
+Increment count of visited nodes by 1.
+Decrease in-degree by 1 for all its neighboring nodes.
+If in-degree of a neighboring nodes is reduced to zero, then add it to the
+queue. Step 5: Repeat Step 3 until the queue is empty.
+
+
+
+Step 5: If count of visited nodes is not equal to the number of nodes in the
+graph then the topological sort is not possible for the given graph.
+
+How to find in-degree of each node?
+There are 2 ways to calculate in-degree of every vertex:
+
+Take an in-degree array which will keep track of
+Traverse the array of edges and simply increase the counter of the destination
+node by 1. for each node in Nodes indegree[node] = 0; for each edge(src, dest)
+in Edges indegree[dest]++ Time Complexity: O(V+E)
+
+Traverse the list for every node and then increment the in-degree of all the
+nodes connected to it by 1. for each node in Nodes If (list[node].size()!=0)
+then for each dest in list indegree[dest]++; Time Complexity: The outer for loop
+will be executed V number of times and the inner for loop will be executed E
+number of times, Thus overall time complexity is O(V+E).
+
+The overall time complexity of the algorithm is O(V+E)
+
+Below is C++ implementation of above algorithm. The implementation uses method 2
+discussed above for finding indegrees.
+ */
 void topologicalSOrt_BFS(Graph& g) {
+  /// Kahn’s algorithm
+  // https://www.geeksforgeeks.org/topological-sorting-indegree-based-solution/
   vector<bool> visited(g.V, false);
   vector<int> T;
   vector<int> indegree(g.V, 0);
@@ -123,25 +178,26 @@ for the same graph shown above.
  */
 
 void topologicalSortUtility_DFS(int currentVertex, Graph& g,
-                                vector<bool>& visited, list<int>& T) {
+                                vector<bool>& visited, stack<int>& T) {
   visited[currentVertex] = true;
   for (auto i : g.adjList[currentVertex]) {
     if (visited[i] == false) {
       topologicalSortUtility_DFS(i, g, visited, T);
     }
-    T.push_front(currentVertex);
   }
+  T.push(currentVertex);
 }
 
 void topologicalSort_DFS(Graph& g) {
   vector<bool> visited(g.V, false);
-  list<int> T;
+  stack<int> T;
   for (int i = 0; i < g.V; ++i) {
-    topologicalSortUtility_DFS(i, g, visited, T);
+    if (visited[i] == false) topologicalSortUtility_DFS(i, g, visited, T);
   }
 
-  for (auto j : T) {
-    cout << j << " ";
+  while (!T.empty()) {
+    cout << T.top() << " ";
+    T.pop();
   }
   cout << '\n';
 }
@@ -167,14 +223,22 @@ int main(int argc, char** argv) {
   g1.addEdge(3, 5);
   g1.addEdge(4, 5);
 
-  topologicalSOrt_BFS(g1);
+  Graph g2(6, false);
+  g2.addEdge(5, 2);
+  g2.addEdge(5, 0);
+  g2.addEdge(4, 0);
+  g2.addEdge(4, 1);
+  g2.addEdge(2, 3);
+  g2.addEdge(3, 1);
+
+  topologicalSOrt_BFS(g2);
   cout << "\n\n\n DFS based Topoogical Sorting\n";
   cout << "\n Graph 1\n\n";
-  topologicalSort_DFS(g);
+  topologicalSort_DFS(g1);
   cout << "\n Graph 1\n\n";
 
   cout << "\n Graph 2\n\n";
-  topologicalSort_DFS(g1);
+  topologicalSort_DFS(g2);
   cout << "\n Graph 2\n\n";
 
   return 0;
