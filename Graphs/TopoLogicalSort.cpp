@@ -102,6 +102,49 @@ void topologicalSOrt_BFS(Graph& g) {
   cout << "\nTopoSort =\n";
   printVector(T);
 }
+
+/*
+ * Solution using a DFS traversal, unlike the one using BFS, does not need any
+special  array. Following is the pseudo code of the DFS solution:
+
+T = []
+visited = []
+
+topological_sort( cur_vert, N, adj[][] ){
+    visited[cur_vert] = true
+    for i = 0 to N
+        if adj[cur_vert][i] is true and visited[i] is false
+        topological_sort(i)
+    T.insert_in_beginning(cur_vert)
+}
+The following image of shows the state of stack and of array  in the above code
+for the same graph shown above.
+ *
+ */
+
+void topologicalSortUtility_DFS(int currentVertex, Graph& g,
+                                vector<bool>& visited, list<int>& T) {
+  visited[currentVertex] = true;
+  for (auto i : g.adjList[currentVertex]) {
+    if (visited[i] == false) {
+      topologicalSortUtility_DFS(i, g, visited, T);
+    }
+    T.push_front(currentVertex);
+  }
+}
+
+void topologicalSort_DFS(Graph& g) {
+  vector<bool> visited(g.V, false);
+  list<int> T;
+  for (int i = 0; i < g.V; ++i) {
+    topologicalSortUtility_DFS(i, g, visited, T);
+  }
+
+  for (auto j : T) {
+    cout << j << " ";
+  }
+  cout << '\n';
+}
 int main(int argc, char** argv) {
   Graph g(5, false);
   g.addEdge(0, 1);
@@ -125,6 +168,14 @@ int main(int argc, char** argv) {
   g1.addEdge(4, 5);
 
   topologicalSOrt_BFS(g1);
+  cout << "\n\n\n DFS based Topoogical Sorting\n";
+  cout << "\n Graph 1\n\n";
+  topologicalSort_DFS(g);
+  cout << "\n Graph 1\n\n";
+
+  cout << "\n Graph 2\n\n";
+  topologicalSort_DFS(g1);
+  cout << "\n Graph 2\n\n";
 
   return 0;
 }
