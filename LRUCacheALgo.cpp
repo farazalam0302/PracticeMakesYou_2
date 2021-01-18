@@ -6,7 +6,7 @@ class LRUAlgo {
   list<int> deque;
   unordered_map<int, list<int>::iterator> hmap;
 
- public:
+public:
   LRUAlgo(int c) : capacity(c) {}
 
   bool access(int n) {
@@ -43,7 +43,7 @@ class LRUAlgo {
 };
 
 int main() {
-  LRUAlgo* lru = new LRUAlgo(5);
+  LRUAlgo *lru = new LRUAlgo(5);
   int page = 1;
   //  cout << "F   R\n";
   while (page) {

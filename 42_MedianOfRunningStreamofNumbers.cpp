@@ -184,10 +184,12 @@ int main() {
 #include <bits/stdc++.h>
 using namespace std;
 
-double medianInStreamOfIntegers(vector<double>& a) {
+double medianInStreamOfIntegers(vector<double> &a) {
   int aSize = a.size();
-  if (aSize == 0) return -1.0;
-  if (aSize == 1) return a[0];
+  if (aSize == 0)
+    return -1.0;
+  if (aSize == 1)
+    return a[0];
   priority_queue<double> leftMaxHeap;
   priority_queue<double, vector<double>, greater<double>> rightMinHeap;
   double median = a[0];
@@ -254,7 +256,7 @@ double medianInStreamOfIntegers(vector<double>& a) {
 int main() {
   int n;
   //  cin >> n;
-  vector<double> a{3, 2, 1, 5, 6, 8, 4};  //(n, 0);
+  vector<double> a{3, 2, 1, 5, 6, 8, 4}; //(n, 0);
 
   //  for (int i = 0; i < n; i++) {
   //    cin >> a[i];
