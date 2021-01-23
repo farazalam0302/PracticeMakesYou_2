@@ -3,8 +3,7 @@ void reverseLinkeList(Node **head) {
   if (!(*head)) {
     exit(0);
   }
-  if (!(*head)->next)
-    return;
+  if (!(*head)->next) return;
   Node *prev = nullptr;
   Node *current = *head;
   Node *nextt = nullptr;
@@ -38,6 +37,7 @@ void reverseLLviaStack(Node **head) {
 int main(int argc, const char **argv) {
   Node *head = nullptr;
   createLinkedList(&head);
+  displayList(head);
 
   reverseLinkeList(&head);
   displayList(head);
