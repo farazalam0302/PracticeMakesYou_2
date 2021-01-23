@@ -133,7 +133,8 @@ void topologicalSOrt_BFS(Graph& g) {
   printVector(indegree);
 
   queue<int> Q;
-  for (int i = 0; i < g.V; ++i) {
+  for (int i = 0; i < g.V;
+       ++i) {  // SEARCHING SOURCE WITH ONLY OUTGOING EDGES NO INCOMING EDGES
     if (indegree[i] == 0) {
       Q.push(i);
       visited[i] = true;
