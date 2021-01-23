@@ -11,7 +11,8 @@ Easy
 Favorite
 
 Share
-Given a column title as appear in an Excel sheet, return its corresponding column number.
+Given a column title as appear in an Excel sheet, return its corresponding
+column number.
 
 For example:
 
@@ -21,7 +22,7 @@ For example:
     ...
     Z -> 26
     AA -> 27
-    AB -> 28 
+    AB -> 28
     ...
 Example 1:
 
@@ -42,26 +43,18 @@ Submissions
 
 */
 
-
-
 class Solution {
 public:
-    int titleToNumber(string s) 
-    {
-        int lent =  s.size();
-        int ret  = 0 ;
-        for (auto i : s)
-        {
-            int p =1;
-            for (int j =0 ; j < lent-1; j++)
-                p= p*26;
-            lent--;
-            ret = ret + p * (i -'A' + 1);
-            
-            
-        }
-        return ret;
-        
-        
+  int titleToNumber(string s) {
+    int lent = s.size();
+    int ret = 0;
+    for (auto i : s) {
+      int p = 1;
+      for (int j = 0; j < lent - 1; j++)
+        p = p * 26;
+      lent--;
+      ret = ret + p * (i - 'A' + 1);
     }
+    return ret;
+  }
 };
