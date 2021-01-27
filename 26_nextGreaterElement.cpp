@@ -48,8 +48,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 class NextGreater {
-public:
-  void nextGreater(vector<int> &a) {
+ public:
+  void nextGreater(vector<int>& a) {
     vector<int> ret;
     stack<int> mystack;
     int n = a.size();
@@ -60,11 +60,7 @@ public:
         mystack.push(a[i]);
         continue;
       }
-      while (
-          (mystack.empty() == false) &&
-          a[i] >
-              mystack
-                  .top()) { ////////////////////////////////////////////////////hoioihighdddhiogdioodfj
+      while ((mystack.empty() == false) && a[i] > mystack.top()) {
         // ret.push_back(a[i]);
         cout << a[i] << " ";
         mystack.pop();
@@ -83,22 +79,77 @@ public:
     return;
   }
 };
+/*
+ * Method 2 (Using Stack)
+
+Push the first element to stack.
+Pick rest of the elements one by one and follow the following steps in loop.
+Mark the current element as next.
+If stack is not empty, compare top element of stack with next.
+If next is greater than the top element,Pop element from stack. next is the next
+greater element for the popped element. Keep popping from the stack while the
+popped element is smaller than next. next becomes the next greater element for
+all such popped elements Finally, push the next in the stack. After the loop in
+step 2 is over, pop all the elements from stack and print -1 as next element for
+them.
+ */
+void nextGreaterElement(vector<int>& a) {
+  int sz = a.size();
+  if (sz == 0) return;
+
+  stack<int> mstack;
+  mstack.push(0);
+  unordered_map<int, int> nextGreat;
+  vector<int> result(sz, -1);
+  int k = 0;
+  for (int i = 1; i < sz; ++i) {
+    if (mstack.empty()) {
+      mstack.push(i);
+      continue;
+    }
+    while (mstack.empty() == false && a[i] > a[mstack.top()]) {
+      nextGreat[a[mstack.top()]] = a[i];
+      result[mstack.top()] = a[i];
+      mstack.pop();
+    }
+
+    mstack.push(i);
+  }
+
+  while (mstack.empty() == false) {
+    nextGreat[a[mstack.top()]] = -1;
+
+    mstack.pop();
+  }
+  for (auto i : nextGreat) {
+    cout << i.first << " --> " << i.second << endl;
+  }
+  cout << "\n\n\n##########################\n\n";
+  for (int i = 0; i < sz; ++i) {
+    cout << a[i] << " -> " << result[i] << endl;
+  }
+}
 
 int main() {
   int t;
-  cin >> t;
-  // t = 1;
+  //  cin >> t;
+  t = 1;
   while (t--) {
     int n, tmp;
-    cin >> n;
-    // n = 4;
-    vector<int> a; //{1, 3, 2, 4};
-    for (int i = 0; i < n; i++) {
-      cin >> tmp;
-      a.push_back(tmp);
+    //    cin >> n;
+    n = 4;
+    vector<int> a{13, 7, 6, 12};
+    //    for (int i = 0; i < n; i++) {
+    //      cin >> tmp;
+    //      a.push_back(tmp);
+    //    }
+    //    NextGreater ng;
+    //    ng.nextGreater(a);
+    for (auto i : a) {
+      cout << i << ", ";
     }
-    NextGreater ng;
-    ng.nextGreater(a);
+    cout << endl;
+    nextGreaterElement(a);
     // for (auto i : ret) {
     //   cout << i << " ";
     // }
