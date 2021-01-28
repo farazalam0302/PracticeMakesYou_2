@@ -65,16 +65,46 @@ bool isShuffleInterleaved_dp(string s1, string s2, string s3, auto& dp) {
     return dp[key];
 }
 
+bool isShuffleInterleaved_dp_bottomUp(string s1, string s2, string s3) {
+  int L1 = s1.length();
+  int L2 = s2.length();
+  int L3 = s3.length();
+  if (!(L1 || L2 || L3)) return true;
+  if ((L1 + L2) != L3) return false;
+
+  //	bool T[L1+1][L2+1] ;
+  vector<vector<bool>> T(L1 + 1, vector<bool>(L2 + 1, false));
+
+  for (int i = 0; i <= L1; ++i) {
+    for (int j = 0; j <= L2; ++j) {
+      if (i == 0 && j == 0) {
+        T[i][j] = true;
+      } else if (i && j && s1[i - 1] == s3[i + j - 1] &&
+                 s2[j - 1] == s3[i + j - 1]) {
+        T[i][j] = T[i - 1][j] || T[i][j - 1];
+      } else if (i && s1[i - 1] == s3[i + j - 1]) {
+        T[i][j] = T[i - 1][j];
+      } else if (j && s2[j - 1] == s3[i + j - 1]) {
+        T[i][j] = T[i][j - 1];
+      }
+    }
+  }
+  return T[L1][L2];
+}
+
 int main() {
   string s1, s2, s3;
   s1 = "abc";
   s2 = "acd";
-  s3 = "acdabc";
+  s3 = "acdbac";
 
   unordered_map<string, bool> dp;
 
-  isShuffleInterleaved_dp(s1, s2, s3, dp) ? cout << "\n\nYes it is\n\n"
-                                          : cout << "\n\n NOooo!!!\n\n";
+  isShuffleInterleaved_dp_bottomUp(s1, s2, s3) ? cout << "\n\nYes it is\n\n"
+                                               : cout << "\n\n NOooo!!!\n\n";
+
+  //  isShuffleInterleaved_dp(s1, s2, s3, dp) ? cout << "\n\nYes it is\n\n"
+  //                                          : cout << "\n\n NOooo!!!\n\n";
 
   //  isShuffle(s1, s2, s3) ? cout << "\n\nYes it is\n\n"
   //                        : cout << "\n\n NOooo!!!\n\n";
