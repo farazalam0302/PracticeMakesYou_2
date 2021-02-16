@@ -30,7 +30,7 @@ https://www.geeksforgeeks.org/coin-change-dp-7/
 
 Coin ChangeSubmissions: 36813   Accuracy: 46.07%   Difficulty: Medium   Marks: 4
 Associated Course(s):   Must Do Interview Preparation
-                    
+
 
 Problems
 Given a value N, find the number of ways to make change for N cents, if we have
@@ -78,15 +78,15 @@ Testcase 1: The possiblities are as such: {1, 1, 1, 1}, {1, 1, 2}, {1, 3}, {2,
 */
 
 #include <bits/stdc++.h>
-#define printMat(x)                                                            \
-  for (int i = 0; i < m; i++) {                                                \
-    for (int j = 0; j <= n; j++) {                                             \
-      cout << x[i][j] << " ";                                                  \
-    }                                                                          \
-    cout << endl;                                                              \
+#define printMat(x)                \
+  for (int i = 0; i < m; i++) {    \
+    for (int j = 0; j <= n; j++) { \
+      cout << x[i][j] << " ";      \
+    }                              \
+    cout << endl;                  \
   }
 using namespace std;
-
+#if 0
 int minimumCoinChangeProblem(vector<int> &coins, int n) {
   int m = coins.size();
   int CP[m][n + 1];
@@ -175,6 +175,81 @@ int main() {
 
     cout << "answer = " << CP[m][n] << endl;
   }
+
+  return 0;
+}
+
+#endif
+
+int getNumberOfWaysToMakeDesiredSum(vector<int>& coins, int N) {
+  int rows = coins.size();
+  sort(coins.begin(), coins.end());
+  vector<vector<int>> dp(rows, vector<int>(N + 1));
+  for (int i = 0; i < rows; ++i) {
+    dp[i][0] = 1;
+  }
+  int x, y;
+  for (int i = 0; i < rows; ++i) {
+    for (int j = 1; j <= N; ++j) {
+      x = (i >= 1) ? dp[i - 1][j] : 0;
+
+      y = (j >= coins[i]) ? dp[i][j - coins[i]] : 0;
+
+      dp[i][j] = x + y;
+    }
+  }
+  return dp[rows - 1][N];
+}
+
+int getMinimumNumberofWaystoGetDesiredSum(vector<int>& coins, int N) {
+  int rows = coins.size();
+  sort(coins.begin(), coins.end());
+  vector<vector<int>> dp(rows + 1, vector<int>(N + 1));
+  int x, y;
+  for (int i = 0; i <= rows; ++i) {
+    dp[i][0] = 0;
+  }
+  for (int i = 1; i <= N; ++i) {
+    dp[0][i] = i;
+  }
+
+  for (auto i : dp) {
+    for (auto j : i) {
+      cout << j << " ";
+    }
+    cout << "\n";
+  }
+  cout << "\n\n\n\n";
+  for (int i = 1; i <= rows; ++i) {
+    for (int j = 1; j <= N; ++j) {
+      if (coins[i - 1] > j)
+        dp[i][j] = dp[i - 1][j];
+      else
+        dp[i][j] = min(dp[i - 1][j], (1 + dp[i][j - coins[i - 1]]));
+    }
+  }
+
+  //
+
+  for (auto i : dp) {
+    for (auto j : i) {
+      cout << j << " ";
+    }
+    cout << "\n";
+  }
+
+  return dp[rows][N];
+}
+
+int main() {
+  vector<int> coins{2, 5, 3, 6};
+  int N = 10;
+  // finding number of ways part 1
+  int res;
+  //  res = getNumberOfWaysToMakeDesiredSum(coins, N);
+  //  cout << "\n\nres = " << res << endl;
+  res = getMinimumNumberofWaystoGetDesiredSum(coins, N);
+  cout << "\n\nres = " << res << endl;
 
   return 0;
 }
