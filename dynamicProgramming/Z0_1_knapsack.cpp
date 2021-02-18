@@ -2,7 +2,7 @@
 
 0 - 1 Knapsack ProblemSubmissions: 68847   Accuracy: 35.71%   Difficulty: Easy  
 Marks: 2 Associated Course(s):   Must Do Interview Preparation
-                              
+
 
 Problems
 You are given weights and values of N items, put these items in a knapsack of
@@ -51,20 +51,42 @@ Output:
 */
 
 #include <bits/stdc++.h>
-#define printMat(x)                                                            \
-  for (int i = 0; i < m; i++) {                                                \
-    for (int j = 0; j <= n; j++) {                                             \
-      cout << x[i][j] << " ";                                                  \
-    }                                                                          \
-    cout << endl;                                                              \
+#define printMat(x)               \
+  for (int i = 0; i < m; i++) {   \
+    for (int j = 0; j < n; j++) { \
+      cout << x[i][j] << " ";     \
+    }                             \
+    cout << endl;                 \
   }
 using namespace std;
 
-int main() {
+int z0_1_Knapsack(vector<int>& V, vector<int>& W, int C) {
+  int m = V.size() + 1;
+  int n = C + 1;
+  vector<vector<int>> dp(m, vector<int>(n, 0));
 
+  //  printMat(dp);
+
+  for (int i = 1; i < m; ++i) {
+    for (int j = 1; j < n; ++j) {
+      if (j < W[i - 1])
+        dp[i][j] = dp[i - 1][j];
+      else {
+        dp[i][j] = max(dp[i - 1][j], (V[i - 1] + dp[i - 1][j - W[i - 1]]));
+      }
+    }
+  }
+
+  return dp[m - 1][n - 1];
+  //  return 0;
+}
+
+int main() {
   int t;
   //   cin >> t;
+
   t = 1;
+#if 0
   while (t--) {
     int nItems;
     int wCapacity;
@@ -110,6 +132,17 @@ int main() {
       cout << endl;
     }
   }
+#endif
+  /*
+   * values[] = {1,2,3}
+ weight[] = {4,5,1}
+   */
+  vector<int> V{1, 2, 3};
+  vector<int> W{4, 5, 1};
 
+  int C = 4;
+
+  int res = z0_1_Knapsack(V, W, C);
+  cout << "\n\n\n res = " << res << endl;
   return 0;
 }
