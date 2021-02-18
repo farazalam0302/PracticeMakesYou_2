@@ -18,7 +18,7 @@ Output: 52 (7 + 6 + 5 - 4 - 1 - 1 + 40)
 #include <bits/stdc++.h>
 using namespace std;
 class Kadane {
-public:
+ public:
   int maxSumKadane(vector<int> &a) {
     int n = a.size();
     int localMax = 0;
@@ -53,28 +53,48 @@ public:
   }
 };
 
-int main(int argc, char const *argv[]) {
-
-  int n;
-  cin >> n;
-  vector<int> a(n, 0);
-  for (int i = 0; i < n; i++) {
-    cin >> a[i];
-  }
+int antiKadaneCsum(vector<int> &a) {
   Kadane kd;
-
   int normalMaxKadaneSum = kd.maxSumKadane(a);
   int arraySum = 0;
+  int n = a.size();
+  vector<int> b(n);
   for (int i = 0; i < n; i++) {
     arraySum += a[i];
-    a[i] = -1 * a[i];
+    b[i] = -1 * a[i];
   }
 
-  int InvKadaneSum = kd.maxSumKadane(a);
+  int InvKadaneSum = kd.maxSumKadane(b);
 
   int answer = max(arraySum + InvKadaneSum, normalMaxKadaneSum);
 
-  cout << "answer = " << answer << endl;
+  return answer;
+}
+
+int circularKadaneReplicationTrick(vector<int> &a) {
+  vector<int> temp(a.begin(), a.end());
+  for (auto i : a) {
+    temp.push_back(i);
+  }
+  cout << "\n\n\n";
+  for (auto i : temp) {
+    cout << i << " ";
+  }
+  cout << "\n\n\n";
+  Kadane kd;
+  return (kd.maxSumKadane(temp));
+}
+
+int main(int argc, char const *argv[]) {
+  vector<int> a{11, 10, -20, 5, -3, -5, 8, -13, 10};
+  //  for (int i = 0; i < n; i++) {
+  //    cin >> a[i];
+  //  }
+
+  int circularSum = circularKadaneReplicationTrick(a);
+  cout << "\n\n Csum = " << circularSum << endl;
+
+  cout << "\n\n CsumUsingAntikadane = " << (antiKadaneCsum(a)) << endl;
 
   return 0;
 }
