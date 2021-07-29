@@ -29,7 +29,7 @@ void insertNodeatLast(Node **head, int x) {
 }
 
 void displayList(Node *head) {
-  while (head && head->data != 0) {
+  while (head /*&& head->data != 0*/) {
     cout << head->data << " -> ";
     head = head->next;
   }
@@ -52,8 +52,10 @@ void deleteGivenNodeInSLL(Node **toBeDeleted) {
   Node *t = *toBeDeleted;
   if (t->next == nullptr)  //  if its a last node just delete the node
   {
-    delete (t);
-
+    //    delete (t);
+    //    t = nullptr;
+    delete (*toBeDeleted);
+    //    *toBeDeleted = nullptr;
     return;
   }
   /*
@@ -79,7 +81,7 @@ int main() {
   //  }
 
   displayList(head);       // display List Before Deletion
-  Node *d = mapOfPtrs[9];  // fetching pointer to desired node to be deleted
+  Node *d = mapOfPtrs[4];  // fetching pointer to desired node to be deleted
   deleteGivenNodeInSLL(&d);
   displayList(head);
 
