@@ -91,3 +91,15 @@ int main() {
   inorder(R2);
   return 0;
 }
+
+
+load rx ry ra
+
+r1 = a*(-1)
+r1 = add r1 , C[1]
+r1 = mul r1, rx
+r2 = mul ry, ra
+r1 =  add r1 r2
+
+
+r1  = rx

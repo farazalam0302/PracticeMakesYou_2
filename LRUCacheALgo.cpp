@@ -11,7 +11,7 @@ public:
 
   bool access(int n) {
     if (deque.size() == capacity) {
-      if (hmap.find(n) == hmap.end()) {
+      if (hmap.find(n) == hmap.end())   {
         int x = deque.back();
         deque.erase(hmap[x]);
         deque.push_front(n);
