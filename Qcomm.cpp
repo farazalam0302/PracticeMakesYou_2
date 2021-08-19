@@ -77,8 +77,8 @@ void merge(Queue* r1, Queue* r2) {
 int main() {
   Queue* r1 = new Queue();
   Queue* r2 = new Queue();
-  r1->pData = new int(2);
-  r2->pData = new int(3);
+  r1->pData = new int[2];
+  r2->pData = new int[3];
 
   r1->pData[0] = 1;
   r1->pData[1] = 5;
