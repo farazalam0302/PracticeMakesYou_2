@@ -13,7 +13,7 @@
 
 int main() {
   char* p =
-      "name=aa;name                   =   bb; city=Agra; name = ccccc; "
+      "name=aa;namee                   =   bb; city=Agra; name = ccccc; "
       "name=2222";
   int charCount = 0;
   char* j = p;

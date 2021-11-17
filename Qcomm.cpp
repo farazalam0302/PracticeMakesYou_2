@@ -81,12 +81,12 @@ int main() {
   r2->pData = new int[3];
 
   r1->pData[0] = 1;
-  r1->pData[1] = 5;
+  r1->pData[1] = 4;
   r1->nLen = 2;
 
   r2->pData[0] = 2;
   r2->pData[1] = 3;
-  r2->pData[2] = 6;
+  r2->pData[2] = 5;
   r2->nLen = 3;
 
   merge(r1, r2);
