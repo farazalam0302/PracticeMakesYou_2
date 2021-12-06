@@ -1,30 +1,44 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int main() {
-  int rgba[8] = {0x44332211, 0x44332211, 0x44332211, 0x44332211,
-                 0x44332211, 0x44332211, 0x44332211, 0x44332211};
-  int rgb[6] = {0};
-  int* o = (int*)malloc(sizeof(int) * 6);
+int* removeAlpha(int a[], int N) {
+  unsigned int M = N * 0.75;
+
+  int* o = (int*)malloc(sizeof(int) * M);
   char* pO = (char*)o;
 
   int bC;
-  for (int i = 8 - 1; i >= 0; --i) {
-    char* p = (char*)(rgba + i);
+  for (int i = N - 1; i >= 0; --i) {
+    char* p = (char*)(a + i);
     bC = 1;
-    while (*p != 0x44) {
-      //      cout << hex << (short)(*p);
+    while (bC % 4 != 0) {
       *pO = *p;
       pO++;
       p++;
-      //      bC++;
+      bC++;
     }
-    //    if (bC == 4) cout << endl;
   }
+
   cout << endl;
-  for (int i = 0; i < 6; ++i) {
+  return o;
+}
+
+void printBytes(int* o, int M) {
+  //	 int M = N * 0.75;
+  for (int i = 0; i < M; ++i) {
     cout << hex << (int)(*(o + i)) << " ";
   }
   cout << endl;
+}
+
+int main() {
+  unsigned int N = 4;
+  int rgba[N] = {0x44332211, 0x44332211, 0x44332211, 0x44332211};
+  int rgb[6] = {0};
+
+  int* o = removeAlpha(rgba, N);
+  int M = N * 0.75;
+  printBytes(o, M);
+  delete (o);
   return 0;
 }
