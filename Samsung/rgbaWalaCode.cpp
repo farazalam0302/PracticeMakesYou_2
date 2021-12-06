@@ -1,6 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+void printBytes(int* o, int M);
+
 int* removeAlpha(int a[], int N) {
   unsigned int M = N * 0.75;
 
@@ -11,7 +13,7 @@ int* removeAlpha(int a[], int N) {
   for (int i = N - 1; i >= 0; --i) {
     char* p = (char*)(a + i);
     bC = 1;
-    while (bC % 4 != 0) {
+    while (bC < 4) {
       *pO = *p;
       pO++;
       p++;
@@ -24,7 +26,6 @@ int* removeAlpha(int a[], int N) {
 }
 
 void printBytes(int* o, int M) {
-  //	 int M = N * 0.75;
   for (int i = 0; i < M; ++i) {
     cout << hex << (int)(*(o + i)) << " ";
   }
