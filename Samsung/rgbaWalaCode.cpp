@@ -1,12 +1,12 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void printBytes(int* o, int M);
+void printBytes(unsigned int* o, int M);
 
-int* removeAlpha(int a[], int N) {
+unsigned int* removeAlpha(unsigned int a[], int N) {
   unsigned int M = N * 0.75;
 
-  int* o = (int*)malloc(sizeof(int) * M);
+  unsigned int* o = (unsigned int*)malloc(sizeof(int) * M);
   char* pO = (char*)o;
 
   int bC;
@@ -25,7 +25,7 @@ int* removeAlpha(int a[], int N) {
   return o;
 }
 
-void printBytes(int* o, int M) {
+void printBytes(unsigned int* o, int M) {
   for (int i = 0; i < M; ++i) {
     cout << hex << (int)(*(o + i)) << " ";
   }
@@ -33,11 +33,12 @@ void printBytes(int* o, int M) {
 }
 
 int main() {
-  unsigned int N = 4;
-  int rgba[N] = {0x44332211, 0x44332211, 0x44332211, 0x44332211};
-  int rgb[6] = {0};
+  unsigned int N = 8;
+  unsigned int rgba[N] = {0xAA332211, 0xAA332211, 0xAA332211, 0xAA332211,
+                          0x44332211, 0x44332211, 0x44332211, 0x44332211};
+  //  int rgb[6] = {0};
 
-  int* o = removeAlpha(rgba, N);
+  unsigned int* o = removeAlpha(rgba, N);
   int M = N * 0.75;
   printBytes(o, M);
   delete (o);
