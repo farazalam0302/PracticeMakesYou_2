@@ -15,7 +15,7 @@ list.
 #include <bits/stdc++.h>
 using namespace std;
 class Node {
-public:
+ public:
   int data;
   Node *next;
   Node() {
@@ -54,8 +54,7 @@ void insertNodeatHead(Node **head, int x) {
 }
 
 Node *getLastNode(Node *head) {
-  if (!head || !(head->next))
-    return head;
+  if (!head || !(head->next)) return head;
   while (head->next) {
     head = head->next;
   }
@@ -70,9 +69,8 @@ void displayList(Node *head) {
   cout << "NULL\n";
 }
 
-void createLinkedList(Node **head) {
-
-  for (int i = 1; i < 10; i++) {
-    insertNodeatLast(head, i);
+void createLinkedList(Node **head, int n) {
+  for (int i = n; i >= 1; i--) {
+    insertNodeatHead(head, i);
   }
 }
