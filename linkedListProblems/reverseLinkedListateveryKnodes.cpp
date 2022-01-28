@@ -81,8 +81,8 @@ int main() {
 
   cout << "\n##############################\n " << endl;
 
-  //  displayList(reverseLLafterKnodes(head, 3));
-  displayList(reverseLLafterKnodes_usingStack(head, 3));
+  displayList(reverseLLafterKnodes(head, 3));
+  //  displayList(reverseLLafterKnodes_usingStack(head, 3));
 
   return 0;
 }
