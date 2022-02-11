@@ -22,9 +22,10 @@ void removeAlpha(vector<unsigned int>& a) {
   }
   cout << endl;
 
-  for (auto i : out) {
-    cout << hex << i << ", ";
+  for (int i = m - 1; i >= 0; --i) {
+    cout << hex << out[i] << ", ";
   }
+
   cout << endl;
 }
 
