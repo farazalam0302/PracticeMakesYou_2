@@ -1,1 +1,1 @@
-/usr/bin/c++     CMakeFiles/MATRIX_MULT.dir/matMul.cpp.o  -o MATRIX_MULT  Adder/libadder.a 
+/usr/bin/c++     CMakeFiles/MATRIX_MULT.dir/matMul.cpp.o  -o MATRIX_MULT   -L/mnt/c/Users/faraz/PracticeMakesYou/cmakeTute/Adder  -Wl,-rpath,/mnt/c/Users/faraz/PracticeMakesYou/cmakeTute/Adder Adder/libadder.a 
