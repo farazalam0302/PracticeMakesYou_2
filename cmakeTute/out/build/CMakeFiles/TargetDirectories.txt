@@ -1,0 +1,6 @@
+/mnt/c/Users/faraz/PracticeMakesYou/cmakeTute/out/build/CMakeFiles/rebuild_cache.dir
+/mnt/c/Users/faraz/PracticeMakesYou/cmakeTute/out/build/CMakeFiles/edit_cache.dir
+/mnt/c/Users/faraz/PracticeMakesYou/cmakeTute/out/build/CMakeFiles/MATRIX_MULT.dir
+/mnt/c/Users/faraz/PracticeMakesYou/cmakeTute/out/build/Adder/CMakeFiles/rebuild_cache.dir
+/mnt/c/Users/faraz/PracticeMakesYou/cmakeTute/out/build/Adder/CMakeFiles/edit_cache.dir
+/mnt/c/Users/faraz/PracticeMakesYou/cmakeTute/out/build/Adder/CMakeFiles/adder.dir

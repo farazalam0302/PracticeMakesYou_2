@@ -1,5 +1,3 @@
-
-
 #include <bits/stdc++.h>
 using namespace std;
 bool isValidMove(vector<string>& b, int x, int y) {
@@ -105,21 +103,23 @@ int main() {
 		      	  };
 
  //   clang-format on
-//  cout << " example i1 " << endl;
-//   R = solution(i1);
-//  printVector(R);
-//  cout << " example i2 " << endl;
-//  R = solution(i2);
-//  printVector(R);
-//  cout << " example i3 " << endl;
-//  R = solution(i3);
-//  printVector(R);
-//  cout << " example i4 " << endl;
-//  R = solution(i4);
-//  printVector(R);
-//  cout << " example i5 " << endl;
-//  R = solution(i5);
-//  printVector(R);
+
+
+  cout << " example i1 " << endl;
+  R = solution(i1);
+  printVector(R);
+  cout << " example i2 " << endl;
+  R = solution(i2);
+  printVector(R);
+  cout << " example i3 " << endl;
+  R = solution(i3);
+  printVector(R);
+  cout << " example i4 " << endl;
+  R = solution(i4);
+  printVector(R);
+  cout << " example i5 " << endl;
+  R = solution(i5);
+  printVector(R);
 
   cout << " example i6 " << endl;
     R = solution(i6);
