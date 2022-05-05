@@ -16,7 +16,7 @@ void dfs(vector<string>& b, int x, int y, vector<vector<bool>>& visited,
     //    visited[x][y] = true;
     return;
   }
-  if (visited[x][y]) return;
+  if (visited[x][y] || *count == 3) return;
 
   //  if (b[x][y] == '#')
   (*count) = (*count) + 1;
@@ -99,7 +99,8 @@ int main() {
   vector<string> i6 {
     	  ".#.#.",
     	  "#####",
-		  ".#.#."
+		  ".#.#.",
+    	  "#####"
 		      	  };
 
  //   clang-format on

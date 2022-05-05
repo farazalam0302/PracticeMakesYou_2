@@ -78,10 +78,10 @@ anywhere.
 We can summarize the different access types according to which functions can
 access them in the following way:
 
-Access	public	protected	private
-members of the same class	yes	yes	yes
-members of derived class	yes	yes	no
-not members	yes	no	no
+Access	                 public	protected	private
+members of the same class	 yes	yes	    yes
+members of derived class	yes	   yes	    no
+not members	                yes	    no	    no
 
 Where "not members" represents any access from outside the class, such as from
 main, from another class or from a function.

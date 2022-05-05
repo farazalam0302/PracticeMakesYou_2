@@ -24,4 +24,47 @@ three connected components.
 #include <bits/stdc++.h>
 using namespace std;
 
-int main(int argc, char **argv) { return 0; }
+bool isValidMove(vector<vector<int>>& a, int x, int y) {}
+
+void dfs(vector<vector<int>>& a, int x, int y) {
+  int m = a.size();
+  int n = a[0].size();
+  if (!(x < m && x >= 0 && y < n && y >= 0 && a[x][y] == 1)) return;
+  a[x][y] = 2;
+  dfs(a, x + 1, y);
+  dfs(a, x - 1, y);
+  dfs(a, x, y + 1);
+  dfs(a, x, y - 1);
+  dfs(a, x + 1, y + 1);
+  dfs(a, x - 1, y - 1);
+  dfs(a, x + 1, y - 1);
+  dfs(a, x - 1, y + 1);
+}
+
+int main(int argc, char** argv) {
+  // clang-format off
+	vector<vector<int>> a {
+						   {1, 1, 0, 0, 0},
+                           {0, 1, 0, 0, 1},
+						   {1, 0, 0, 1, 1},
+						   {0, 0, 0, 0, 0},
+						   {1, 0, 1, 0, 1}
+							};
+  // clang-format on
+
+  int count = 0;
+  int m = a.size();
+  int n = a[0].size();
+  for (int i = 0; i < m; ++i) {
+    for (int j = 0; j < n; ++j) {
+      if ((i < m && i >= 0 && j < n && j >= 0 && a[i][j] == 1)) {
+        dfs(a, i, j);
+        count++;
+      }
+    }
+  }
+
+  cout << "\nResult = " << count << endl;
+
+  return 0;
+}

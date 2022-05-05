@@ -1,0 +1,6 @@
+/mnt/c/Users/faraz/PracticeMakesYou/CmakeAndCPackTutorials/build/CMakeFiles/rebuild_cache.dir
+/mnt/c/Users/faraz/PracticeMakesYou/CmakeAndCPackTutorials/build/CMakeFiles/edit_cache.dir
+/mnt/c/Users/faraz/PracticeMakesYou/CmakeAndCPackTutorials/build/CMakeFiles/hello.dir
+/mnt/c/Users/faraz/PracticeMakesYou/CmakeAndCPackTutorials/build/blah/CMakeFiles/rebuild_cache.dir
+/mnt/c/Users/faraz/PracticeMakesYou/CmakeAndCPackTutorials/build/blah/CMakeFiles/edit_cache.dir
+/mnt/c/Users/faraz/PracticeMakesYou/CmakeAndCPackTutorials/build/blah/CMakeFiles/blah.dir
