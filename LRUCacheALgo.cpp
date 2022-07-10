@@ -18,6 +18,7 @@ public:
         hmap.erase(x);
         hmap[n] = deque.begin();
       }
+      else
       {
         deque.erase(hmap[n]);
         deque.push_front(n);

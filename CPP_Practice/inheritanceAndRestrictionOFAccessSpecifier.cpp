@@ -79,7 +79,7 @@ We can summarize the different access types according to which functions can
 access them in the following way:
 
 Access	                 public	protected	private
-members of the same class	 yes	yes	    yes
+members of the same class	yes	  yes	    yes
 members of derived class	yes	   yes	    no
 not members	                yes	    no	    no
 
