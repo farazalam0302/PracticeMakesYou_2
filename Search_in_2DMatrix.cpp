@@ -2,7 +2,7 @@
 
 Given a sorted matrix mat[n][m] and an element ‘x’. Find the position of x in the matrix if it is present, else print -1. Matrix is sorted in a way such that all elements in a row are sorted in increasing order and for row ‘i’, where 1 <= i <= n-1, the first element of row ‘i’ is greater than or equal to the last element of row ‘i-1’. The approach should have O(log n + log m) time complexity.
 
-Examples: 
+Examples:
 
 Input : mat[][] = { {1, 5, 9},
                     {14, 20, 21},
@@ -21,98 +21,107 @@ Output : -1
 #include <bits/stdc++.h>
 using namespace std;
 
-
-bool binarySearch(vector<vector<int>>& A,int target,int row,int lowCol,int highCol){
-    
- int m = A.size();
- int n = A[0].size();    
- int midc;
- while (lowCol <= highCol){
-     midc=lowCol+ (lowCol+highCol)/2;
-     if (A[row][midc] == target)
-     {
-         cout << "TARGET FOUND AT (" << row << ", "<<midc << ")\n" ;
+bool binarySearch(vector<vector<int>> &A, int row, int lowC, int highC, int target)
+{
+    int midC;
+    while (lowC <= highC)
+    {
+        midC = (lowC + highC) / 2;
+        if (A[row][midC] == target)
+        {
+            cout << "FOUND AT (" << row << ", " << midC << ")\n";
             return true;
-     }
-     else if (A[row][midc] > target){
-         highCol = midc-1;
-     }
-     else{
-         lowCol = midc+1;
-     }
-         
- }
+        }
+        else if (A[row][midC] < target)
+        {
+            lowC = midC + 1;
+        }
+        else
+        {
+            highC = midC - 1;
+        }
+    }
     return false;
-
 }
 
-
-bool searchIn2DMatrix(vector<vector<int>>& A,int target)
+bool searchIn2DMatrix(vector<vector<int>> &A, int target)
 {
+    // A is mxn matrix
     int m = A.size();
     int n = A[0].size();
-    int lr,hr,lc,hc;
-    int midc,midr;
-    
-    lr = 0; hr = m-1;
-    lc = 0; hc = n-1;
-    midc = lc + (hc-lc)/2;
-    while((lr+1)<hr)
+    int lowR, highR, lowC, highC, midC, midR;
+    lowR = 0;
+    lowC = 0;
+    highR = m - 1;
+    highC = n - 1;
+    midC = lowC + (highC - lowC) / 2;
+    while ((lowR + 1) < highR)
     {
-        midr = lr+(hr-lr)/2;
-        if (A[midr][midc] == target){
-            cout << "TARGET FOUND AT (" << midr << ", "<<midc << ")\n" ;
-            return true;
-        }
-        else if(A[midr][midc] > target)
+        midR = lowR + (highR - lowR) / 2;
+        if (A[midR][midC] == target)
         {
-            hr=midr;
-        }
-        else {
-           lr=midr;
-        }
-    }
-    if (A[lr][midc] ==  target){
-        cout << "TARGET FOUND AT (" << lr << ", "<<midc << ")\n" ;
+            cout << "FOUND AT (" << midR << ", " << midC << ")\n";
             return true;
+        }
+        else if (A[midR][midC] > target)
+        {
+            highR = midR;
+        }
+        else
+        {
+            lowR = midR;
+        }
     }
-    else if (A[lr+1][midc] ==  target){
-        cout << "TARGET FOUND AT (" << (lr+1) << ", "<<midc << ")\n" ;
-            return true;
-    }
-    else if ( target < A[lr][midc-1] ){
-        binarySearch(A,target,lr,0,midc-1);
-    }
-    else if ( target >= A[lr][midc+1] &&  target <= A[lr][hc] ){
-        binarySearch(A,target,lr,midc+1,hc);
-    }
-    else if ( target <= A[lr+1][midc-1]){
-        binarySearch(A,target,lr+1,0,midc-1);
-        // binarySearch(vector<vector<int>>& A,int target,int row,int lowCol,int highCol){
 
+    lowC = 0;
+    highC = n - 1;
+
+    cout << "lowR = " << lowR << endl;
+
+    bool r = binarySearch(A, lowR, 0, n - 1, target);
+    if (r)
+        return true;
+    else
+    {
+        r = binarySearch(A, lowR + 1, 0, n - 1, target);
     }
-    else if ( target > A[lr+1][midc-1]){
-        binarySearch(A,target,lr+1,midc-1,hc);
-    }
-    
-       
+    if (r)
+        return true;
+
     return false;
-    
 }
 
+void printMatrix(vector<vector<int>> &A)
+{
 
+    for (auto i : A)
+    {
+        for (auto j : i)
+        {
+            cout << j << " ";
+        }
+        cout << endl;
+    }
+}
 
 int main()
 {
-    //int m, n ;
-    //cin >> m >> n;
-    int target = 21;
-    vector<vector<int>>A { {1, 5, 9, 11},
-                           {14, 20, 21, 26},
-                           {30, 34, 43, 50}
-                         }; 
-    
-    bool r  = searchIn2DMatrix(A,target);
-    r?cout << "found\n\n" : cout << "not found\n\n";
+    // int m, n ;
+    // cin >> m >> n;
+    int target = -15;
+    vector<vector<int>> A{{-11, -9, -5, -1},
+                          {1, 5, 9, 11},
+                          {14, 20, 21, 26},
+                          {30, 34, 43, 50}};
+
+    // while (target){
+    // cin >> target;
+
+    printMatrix(A);
+    cout << "target = " << target << "\n\n\n"
+         << endl;
+    bool r = searchIn2DMatrix(A, target);
+    r ? cout << " \n\n" : cout << "NOT FOUND\n\n";
+    // }
     return 0;
 }
