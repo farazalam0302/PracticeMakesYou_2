@@ -114,6 +114,8 @@ int main()
                           {14, 20, 21, 26},
                           {30, 34, 43, 50}};
 
+   
+    
     // while (target){
     // cin >> target;
 
@@ -125,3 +127,44 @@ int main()
     // }
     return 0;
 }
+
+#if 0
+
+int main()
+{
+   
+    int B[4][4]  =  {{-11, -9, -5, -1},
+                          {1, 5, 9, 11},
+                          {14, 20, 21, 26},
+                          {30, 34, 43, 50}};
+    
+    int m = 4; int n =4;
+    int h=m*n-1;
+    int l=0;
+    int mid;
+    int *ptr = (int*)(&(B[0]));
+        int target = 50;
+
+    while(l<=h)
+    {
+        mid = l+(h-l)/2;
+        if (*(ptr+mid) == target) 
+        {
+            int row = mid/m;
+            int col = (mid/(float)m - row) * n;
+cout << "FOUND AT (" << row << ", " << col << ")\n";            return 0;
+        }
+        else if (*(ptr+mid) > target) 
+        {
+            h=mid-1;
+        }
+        else{
+            l=mid+1;
+        }
+
+    }
+cout << "NOT FOUND\n\n";
+      return 0;
+}
+
+#endif
