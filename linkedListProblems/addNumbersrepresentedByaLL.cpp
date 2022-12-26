@@ -32,17 +32,66 @@ Node *add2LL(Node *first, Node *second) {
   return result;
 }
 
+Node *addLL(Node *l1, Node *l2) {
+
+  if (l1 == NULL)
+    return l2;
+  if (l2 == NULL)
+    return l1;
+
+  Node *result = new Node(0);
+  Node *ptrR = result;
+  int sum, carry;
+  carry = 0;
+  while (l1 != NULL && l2 != NULL) {
+    sum = (l1->data) + (l2->data) + carry;
+
+    carry = sum / 10;
+    sum = sum % 10;
+    // ptrR->data=sum;
+    ptrR->next = new Node(sum);
+    ptrR = ptrR->next;
+    l1 = l1->next;
+    l2 = l2->next;
+  }
+  while (l1 != NULL) {
+    sum = l1->data + carry;
+    carry = sum / 10;
+    sum = sum % 10;
+    ptrR->next = new Node(sum);
+    ptrR = ptrR->next;
+    l1 = l1->next;
+  }
+
+  while (l2 != NULL) {
+    sum = l2->data + carry;
+    carry = sum / 10;
+    sum = sum % 10;
+    ptrR->next = new Node(sum);
+    ptrR = ptrR->next;
+    l2 = l2->next;
+  }
+
+  if (carry) {
+    ptrR->next = new Node(carry);
+  }
+
+  //  ptrR->data = ptrR->data + carry;
+
+  return result->next;
+}
+
 int main(int argc, char const *argv[]) {
   Node *h1 = nullptr;
   Node *h2 = nullptr;
   Node *h3 = nullptr;
   //   createLinkedList(&h1); // 365
-  int a[3] = {9, 9, 9};
-  for (int i = 0; i < 3; i += 1) {
+  int a[7] = {9, 9, 9, 9, 9, 9, 9};
+  for (int i = 0; i < 7; i += 1) {
     insertNodeatLast(&h2, a[i]);
   }
-  int b[3] = {8, 4, 1}; // 248
-  for (int i = 0; i < 3; i += 1) {
+  int b[4] = {9, 9, 9, 9}; // 248
+  for (int i = 0; i < 4; i += 1) {
     insertNodeatLast(&h3, b[i]);
   }
 
@@ -54,7 +103,7 @@ int main(int argc, char const *argv[]) {
 
   cout << "\n====================================\n" << endl;
 
-  Node *sum_LL = add2LL(h2, h3);
+  Node *sum_LL = addLL(h2, h3);
   cout << "sum_LL -> ";
   displayList(sum_LL);
 
