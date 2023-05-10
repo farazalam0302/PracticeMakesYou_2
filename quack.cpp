@@ -51,7 +51,7 @@ public:
       return;
     }
     for (auto i : quack) {
-      cout << i << ", ";
+      cout << i << ",   ";
     }
     cout << endl;
   }
