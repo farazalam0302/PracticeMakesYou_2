@@ -3,38 +3,36 @@ using namespace std;
 
 class LRUAlgo {
   int capacity;
-  list<int> deque;
+  list<int> DQ;
   unordered_map<int, list<int>::iterator> hmap;
 
 public:
   LRUAlgo(int c) : capacity(c) {}
 
   bool access(int n) {
-    if (deque.size() == capacity) {
-      if (hmap.find(n) == hmap.end())   {
-        int x = deque.back();
-        deque.erase(hmap[x]);
-        deque.push_front(n);
+    if (DQ.size() == capacity) {
+      if (hmap.find(n) == hmap.end()) {
+        int x = DQ.back();
+        DQ.erase(hmap[x]);
+        DQ.push_front(n);
         hmap.erase(x);
-        hmap[n] = deque.begin();
-      }
-      else
-      {
-        deque.erase(hmap[n]);
-        deque.push_front(n);
-        hmap[n] = deque.begin();
+        hmap[n] = DQ.begin();
+      } else {
+        DQ.erase(hmap[n]);
+        DQ.push_front(n);
+        hmap[n] = DQ.begin();
       }
     } else {
       if (hmap.find(n) == hmap.end()) {
-        deque.push_front(n);
-        hmap[n] = deque.begin();
+        DQ.push_front(n);
+        hmap[n] = DQ.begin();
       } else {
-        deque.erase(hmap[n]);
-        deque.push_front(n);
-        hmap[n] = deque.begin();
+        DQ.erase(hmap[n]);
+        DQ.push_front(n);
+        hmap[n] = DQ.begin();
       }
     }
-    for (auto i : deque) {
+    for (auto i : DQ) {
       cout << i << " ";
     }
     return true;
