@@ -174,7 +174,56 @@ public:
   }
 };
 
+class Quack_Pro {
+public:
+  stack<int> *left;
+  stack<int> *right;
+  stack<int> *aux;
+  stack<int> t;
+
+  Quack_Pro() {
+    left = new stack<int>();
+    right = new stack<int>();
+    aux = new stack<int>();
+  }
+  ~Quack_Pro() {
+    delete left;
+    delete right;
+    delete aux;
+  }
+
+  void display(stack<int> *s, string msg) {
+    cout << msg << endl;
+    if (s->empty()) {
+      cout << "---------empty----" << endl;
+      return;
+    }
+    int tmp;
+    while (s->empty() == false) {
+      tmp = s->top();
+      cout << "|" << (tmp) << "|" << endl;
+      t.push(tmp);
+      s->pop();
+    }
+    while (t.empty() == false) {
+      tmp = t.top();
+      //          cout << (tmp) << endl;
+      s->push(tmp);
+      t.pop();
+    }
+
+    cout << "----------------------------" << endl;
+  }
+};
+
 int main(int argc, char const *argv[]) {
+
+#if 1
+
+#endif
+
+#if 0 // Naive solution with 2 stacks put 1 to enable
+
   Quack_3Stacks q3s1;
   for (size_t i = 0; i < 9; i++) {
     q3s1.push(i + 1);
@@ -227,26 +276,27 @@ int main(int argc, char const *argv[]) {
   q3s1.display(q3s1.s3, "s3");
 
   cout << "quack capacity = " << q3s1.capacity << endl;
+#endif
+#if 0
+    Quack_naiveSoln qstack(5);
+    for (size_t i = 0; i < 5; i++) {
+      qstack.push(i + 1);
+    }
+    qstack.display();
+    qstack.push(20);
 
-  //  Quack_naiveSoln qstack(5);
-  //  for (size_t i = 0; i < 5; i++) {
-  //    qstack.push(i + 1);
-  //  }
-  //  qstack.display();
-  //  qstack.push(20);
-  //
-  //  qstack.pop();
-  //  qstack.display();
-  //
-  //  cout << (qstack.pull()) << endl;
-  //  qstack.display();
-  //  cout << (qstack.pull()) << endl;
-  //  qstack.display();
-  //  cout << (qstack.pull()) << endl;
-  //  qstack.display();
-  //  cout << (qstack.pull()) << endl;
-  //  qstack.display();
-  //  cout << (qstack.pull()) << endl;
+    qstack.pop();
+    qstack.display();
 
+    cout << (qstack.pull()) << endl;
+    qstack.display();
+    cout << (qstack.pull()) << endl;
+    qstack.display();
+    cout << (qstack.pull()) << endl;
+    qstack.display();
+    cout << (qstack.pull()) << endl;
+    qstack.display();
+    cout << (qstack.pull()) << endl;
+#endif
   return 0;
 }
