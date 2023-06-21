@@ -35,28 +35,91 @@
 
 // stl map <string -> structure (int a1, int *a2)>
 // m1 and m2
+//
+//#include <bits/stdc++.h>
+//using namespace std;
+//
+//class X {
+//public:
+//  int a1;
+//  int *a2;
+//  X() {
+//    a1 = 0;
+//    a2 = nullptr;
+//  }
+//};
+//
+//int main(int argc, char **argv) {
+//
+//  map<string, X> m1, m2_exist;
+//
+//  for (auto i : m2_exist) {
+//    m1[i.first].a1 = m2_exist[i.first].a1;
+//    m1[i.first].a2 = m2_exist[i.first].a2;
+//  }
+//
+//  return 0;
+//}
+
+// deciaml to binary
 
 #include <bits/stdc++.h>
 using namespace std;
 
-class X {
-public:
-  int a1;
-  int *a2;
-  X() {
-    a1 = 0;
-    a2 = nullptr;
-  }
-};
 
-int main(int argc, char **argv) {
+int d2b(int x)
+    {
 
-  map<string, &X> m1, m2_exist;
+    stack<int> s;
+    int rem;
 
-  for (auto i : m2_exist) {
-    m1[i.first].a1 = m2_exist[i.first].a1;
-    m1[i.first].a2 = m2_exist[i.first].a2;
-  }
+    while (x >=1)
+	{
+	rem = x%2;
+	x=x/2;
+	s.push(rem);
 
-  return 0;
-}
+	}
+    s.push(x);
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
