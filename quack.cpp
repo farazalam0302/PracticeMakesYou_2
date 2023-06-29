@@ -214,11 +214,119 @@ public:
 
     cout << "----------------------------" << endl;
   }
+
+  void push(int x) { left->push(x); }
+
+  int pop() {
+    if (left->size() == 0 && right->size() == 0) {
+      cout << "QUACK UNDERFLOWN\n";
+      return -1;
+    }
+
+    if (left->size() == 0) {
+      for (size_t i = 0; i < right->size() / 2; i++) {
+        aux->push(right->top());
+        right->pop();
+      }
+
+      while (right->size() > 0) {
+        left->push(right->top());
+        right->pop();
+      }
+
+      while (aux->size() > 0) {
+        right->push(aux->top());
+        aux->pop();
+      }
+    }
+    int ret = left->top();
+    left->pop();
+    return ret;
+  }
+
+  int pull() {
+    if (left->size() == 0 && right->size() == 0) {
+      cout << "QUACK UNDERFLOWN\n";
+      return -1;
+    }
+
+    if (right->size() == 0) {
+      for (size_t i = 0; i < left->size() / 2; i++) {
+        aux->push(left->top());
+        left->pop();
+      }
+
+      while (left->size() > 0) {
+        right->push(left->top());
+        left->pop();
+      }
+
+      while (aux->size() > 0) {
+        left->push(aux->top());
+        aux->pop();
+      }
+    }
+    int ret = right->top();
+    right->pop();
+    return ret;
+  }
 };
 
 int main(int argc, char const *argv[]) {
 
 #if 1
+  Quack_Pro qPro;
+  for (size_t i = 0; i < 9; i++) {
+    qPro.push(i + 1);
+  }
+  cout << "STACK 1" << endl;
+  qPro.display(qPro.left, "leftStack");
+  qPro.display(qPro.right, "rightStack");
+  qPro.display(qPro.aux, "Aux Stack");
+
+  ////////////////////////////
+  cout << "popping elements\n";
+  for (int i = 0; i < 4; ++i) {
+    cout << qPro.pop() << endl;
+  }
+  ////////////////////////////
+
+  qPro.display(qPro.left, "leftStack");
+  qPro.display(qPro.right, "rightStack");
+  qPro.display(qPro.aux, "Aux Stack");
+  cout << "Pulling elements \n";
+  for (int i = 0; i < 3; ++i) {
+    cout << qPro.pull() << endl;
+  }
+  ////////////////////////////
+
+  qPro.display(qPro.left, "leftStack");
+  qPro.display(qPro.right, "rightStack");
+  qPro.display(qPro.aux, "Aux Stack");
+
+  cout << "Pupping element \n";
+  cout << qPro.pop() << endl;
+  qPro.display(qPro.left, "leftStack");
+  qPro.display(qPro.right, "rightStack");
+  qPro.display(qPro.aux, "Aux Stack");
+
+  ////////////////////////////
+
+  cout << "Pulling element \n";
+  cout << qPro.pull() << endl;
+  qPro.display(qPro.left, "leftStack");
+  qPro.display(qPro.right, "rightStack");
+  qPro.display(qPro.aux, "Aux Stack");
+
+  ////////////////////////////
+
+  cout << "Pulling element \n";
+  cout << qPro.pull() << endl;
+  qPro.display(qPro.left, "leftStack");
+  qPro.display(qPro.right, "rightStack");
+  qPro.display(qPro.aux, "Aux Stack");
+
+  ////////////////////////////
 
 #endif
 

@@ -256,7 +256,7 @@ double medianInStreamOfIntegers(vector<double> &a) {
 int main() {
   int n;
   //  cin >> n;
-  vector<double> a{3, 2, 1, 5, 6, 8, 4}; //(n, 0);
+  vector<double> a{2, 1, 5, 7, 2, 0, 5}; //{3, 2, 1, 5, 6, 8, 4}; //(n, 0);
 
   //  for (int i = 0; i < n; i++) {
   //    cin >> a[i];
