@@ -8,6 +8,7 @@ struct myPair {
 
 int maxSwaps(string &a) {
   int n = a.size();
+  cout << "a.size = " << n << endl;
   int cA = 0;
   int cB = 0;
   vector<pair<char, int>> pairs;
@@ -44,7 +45,6 @@ int maxSwaps2(string &a) {
   int cA = 0;
   int cB = 0;
   int swaps = 0;
-  // vector<pair<char, int>> pairs;
   for (int i = 0; i < (n); ++i) {
     if (a[i] == 'a') {
       cA = 1;
@@ -52,7 +52,6 @@ int maxSwaps2(string &a) {
         cA++;
         i++;
       }
-      // pairs.push_back({'a', cA});
       swaps += (cA / 3);
     }
     if (a[i] == 'b') {
@@ -61,20 +60,40 @@ int maxSwaps2(string &a) {
         cB++;
         i++;
       }
-      // pairs.push_back({'b', cB});
       swaps += (cB / 3);
     }
   }
   return swaps;
 }
 
+int maxSwaps3(string &a) {
+  int n = a.size();
+  cout << "a.size = " << n << endl;
+  int c = 1;
+  int swaps = 0;
+  for (int i = 1; i < (n); ++i) {
+    if (a[i] == a[i - 1]) {
+      c++;
+      continue;
+    } else {
+      swaps = swaps + c / 3;
+      c = 1;
+    }
+  }
+  swaps = swaps + c / 3;
+  return swaps;
+}
+
 int main(int argc, char **argv) {
-  string a = "abbabbabbabbaaabbabbbabbbabb";
+  string a = "aababaabaabaa";
   int swaps1 = maxSwaps(a);
   cout << "swaps1 = " << swaps1 << endl;
 
   swaps1 = maxSwaps2(a);
   cout << "swaps2 = " << swaps1 << endl;
+
+  swaps1 = maxSwaps3(a);
+  cout << "swaps3 = " << swaps1 << endl;
 
   return 0;
 }
