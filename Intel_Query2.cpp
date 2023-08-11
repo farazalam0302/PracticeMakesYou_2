@@ -60,8 +60,8 @@ bool checkBalance(string & a){
 int main(int argc, char const *argv[])
 {
     string inp = "***{{{}}";
-    bool f = checkBalance(inp);
-    f?cout << "\n\nYes Balanced!!!\n\n" : cout << "\n\nNo Balanced!!!\n\n" ; 
+    bool Decision = checkBalance(inp);
+    Decision?cout << "\n\nYes Balanced!!!\n\n" : cout << "\n\nNo Balanced!!!\n\n" ; 
     
     return 0;
 }
