@@ -14,7 +14,7 @@ public:
   Node(int x) : data(x), next(nullptr) {}
 
   Node(Node &c) {
-    cout << "I ma in copy cnstr\n ";
+    cout << "I am in copy cnstr\n ";
     data = c.data;
     cout << "data = " << data << " ";
     if (c.next) {
