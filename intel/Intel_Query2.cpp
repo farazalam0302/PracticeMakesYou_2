@@ -20,6 +20,7 @@ bool checkBalance(string &a) {
         if (!starStack.empty()) {
           starStack.pop();
         } else {
+          cout << "\n1. Reason No #Stars left for }\n" << endl;
           return false;
         }
       }
@@ -30,19 +31,25 @@ bool checkBalance(string &a) {
       if (openStack.top() < starStack.top()) {
         openStack.pop();
         starStack.pop();
-      } else
+      } else {
+        cout << "\nReason Stars Position is beyond } position \n" << endl;
         return false;
-    } else
+      }
+    } else {
+      cout << "\n2. Reason No #Stars left for }\n" << endl;
       return false;
+    }
   }
-  if (starStack.size() & 0x1)
+  if (starStack.size() & 0x1) {
+    cout << "\nReason #Stars left is odd\n" << endl;
     return false;
+  }
   return true;
 }
 int main(int argc, char const *argv[]) {
-  string inp = "***{{{}}";
+  string inp = "{***}}}}}";
   bool Decision = checkBalance(inp);
   Decision ? cout << "\n\nYes Balanced!!!\n\n"
-           : cout << "\n\nNo Balanced!!!\n\n";
+           : cout << "\n\nNot Balanced!!!\n\n";
   return 0;
 }
