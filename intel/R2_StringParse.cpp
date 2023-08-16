@@ -19,6 +19,7 @@ int evaluate(string &in) {
   }
   string s = removeSpaces(in);
   cout << s << endl;
+  stack<int> vStack;
   stack<string> opStack;
   string tr = "true";
   string ntr = "!true";
@@ -33,12 +34,28 @@ int evaluate(string &in) {
       i++;
     }
     // cout << tok << endl;
+
     opStack.push(tok);
+    cout << "tok = " << tok << endl;
+    cout << "(tok.compare(true)) --> " << (tok == tr) << endl;
+    cout << "(tok.compare(\"!false\")) --> " << (tok == nfa) << endl;
+    cout << "(tok.compare(!true)) --> " << (tok == ntr) << endl;
+    cout << "(tok.compare(\"false\")) --> " << (tok == fa) << endl;
+
+    if (tok.compare("true") == 0 || tok.compare("!false") == 0) {
+      vStack.push(1);
+    } else if (tok.compare("!true") == 0 || tok.compare("false") == 0) {
+      vStack.push(0);
+    } else {
+      cout << "\n100. invalid tokens\n";
+      return -1;
+    }
     // cout << s[i] << endl;
     if (i < n) {
       op = "";
       op = op + s[i];
       opStack.push(op);
+      vStack.push(s[i]);
     }
   }
   int op1, op2;
@@ -48,6 +65,12 @@ int evaluate(string &in) {
   //   opStack.pop();
   //   cout << "\n topp =" << topp << endl;
   // }
+
+  while (vStack.size() > 0) {
+    int tp = vStack.top();
+    vStack.pop();
+    cout << "\n topp =" << tp << endl;
+  }
 
   topp = opStack.top();
   opStack.pop();
@@ -101,7 +124,7 @@ int evaluate(string &in) {
 }
 
 int main(int argc, char const *argv[]) {
-  string s = "true | false & true | !false";
+  string s = "!true | false & true | !false";
   int val = evaluate(s);
   cout << "\nval = " << val << endl;
   return 0;
