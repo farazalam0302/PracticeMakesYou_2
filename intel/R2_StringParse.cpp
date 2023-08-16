@@ -38,7 +38,7 @@ int evaluate(string &in) {
     opStack.push(tok);
     cout << "tok = " << tok << endl;
     cout << "(tok.compare(true)) --> " << (tok == tr) << endl;
-    cout << "(tok.compare(\"!false\")) --> " << (tok == nfa) << endl;
+    cout << "(tok.compare(\"!false\")) --> " << (tok == "!false") << endl;
     cout << "(tok.compare(!true)) --> " << (tok == ntr) << endl;
     cout << "(tok.compare(\"false\")) --> " << (tok == fa) << endl;
 
