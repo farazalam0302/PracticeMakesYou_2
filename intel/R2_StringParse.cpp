@@ -1,131 +1,90 @@
 #include <bits/stdc++.h>
 using namespace std;
-
-string removeSpaces(string &input) {
+string removeSpaces(string &s) {
   string ret = "";
-  for (auto &i : input) {
-    if (i == ' ')
+  int n = s.size();
+  for (int i = 0; i < n; i++) {
+    if (s[i] == ' ')
       continue;
-    ret = ret + i;
+    ret = ret + s[i];
   }
+  ret = ret + '\0';
   return ret;
 }
-
-int evaluate(string &in) {
-  int n = in.length();
+int evaluate(string &s) {
+  int n = s.length();
   if (n == 0) {
     cout << "\nEmpty Command\n";
     return -1;
   }
-  string s = removeSpaces(in);
+  // s = removeSpaces(s);
   cout << s << endl;
   stack<int> vStack;
-  stack<string> opStack;
-  string tr = "true";
-  string ntr = "!true";
-  string fa = "false";
-  string nfa = "!false";
-
+  bool isNot = false;
   string op = "";
   for (int i = 0; i < n; i++) {
     string tok = "";
+    if (s[i] == '!') {
+      isNot = true;
+      continue;
+    }
     while (s[i] != '|' && s[i] != '&' && i < n) {
       tok = tok + s[i];
       i++;
     }
-    // cout << tok << endl;
-
-    opStack.push(tok);
-    cout << "tok = " << tok << endl;
-    cout << "(tok.compare(true)) --> " << (tok == tr) << endl;
-    cout << "(tok.compare(\"!false\")) --> " << (tok == "!false") << endl;
-    cout << "(tok.compare(!true)) --> " << (tok == ntr) << endl;
-    cout << "(tok.compare(\"false\")) --> " << (tok == fa) << endl;
-
-    if (tok.compare("true") == 0 || tok.compare("!false") == 0) {
-      vStack.push(1);
-    } else if (tok.compare("!true") == 0 || tok.compare("false") == 0) {
-      vStack.push(0);
+    // cout << "tk = " << tok<< endl;
+    if (isNot) {
+      if (tok.compare("true") == 0) {
+        vStack.push(0);
+      } else if (tok.compare("false") == 0) {
+        vStack.push(1);
+      } else {
+        cout << "\n1000 Invalid Tokens\n";
+        return -1;
+      }
+      isNot = false;
     } else {
-      cout << "\n100. invalid tokens\n";
-      return -1;
+      if (tok.compare("true") == 0) {
+        vStack.push(1);
+      } else if (tok.compare("false") == 0) {
+        vStack.push(0);
+      } else {
+        cout << "1001 Invalid Tokens\n";
+        return -1;
+      }
     }
-    // cout << s[i] << endl;
-    if (i < n) {
-      op = "";
-      op = op + s[i];
-      opStack.push(op);
+    if (s[i] == '|' || s[i] == '&') {
       vStack.push(s[i]);
+      continue;
     }
   }
   int op1, op2;
-  string topp;
-  // while (opStack.size() > 0) {
-  //   topp = opStack.top();
-  //   opStack.pop();
-  //   cout << "\n topp =" << topp << endl;
-  // }
-
-  while (vStack.size() > 0) {
-    int tp = vStack.top();
+  int opr;
+  int tmp;
+  while (vStack.size() > 2) {
+    op1 = vStack.top();
     vStack.pop();
-    cout << "\n topp =" << tp << endl;
-  }
-
-  topp = opStack.top();
-  opStack.pop();
-  cout << "\n topp=" << topp << endl;
-  cout << "\n nfa=" << nfa << endl;
-  cout << "\n\n\nequals = " << (topp.compare("!false")) << endl;
-#if 0
-  while (opStack.size() > 1) {
-    topp = opStack.top();
-    opStack.pop();
-    cout << "\n topp = " << topp << endl;
-    cout << "\n topp.compare(nfa) == 0 =" << (topp.compare(nfa)) << endl;
-    if (topp.compare(ntr) == 0 || topp.compare(fa) == 0)
-      op1 = 0;
-    else if (topp.compare("!false") == 0 || topp.compare(tr) == 0)
-      op1 = 1;
-    else {
-      cout << "\n1. invalid tokens\n";
-      return -1;
-    }
-    string op = opStack.top();
-    opStack.pop();
-    topp = opStack.top();
-    opStack.pop();
-    if (topp.compare(ntr) == 0 || topp.compare(fa) == 0)
-      op2 = 0;
-    else if (topp.compare(nfa) == 0 || topp.compare(tr) == 0)
-      op2 = 1;
-    else {
-      cout << "\n2. invalid tokens\n";
-      return -1;
-    }
-    int res;
-    if (op.compare("|") == 0) {
-      res = op1 | op2;
-    } else if (op.compare("&") == 0) {
-      res = op1 & op2;
-    } else {
-      cout << "\nerrored ops\n";
-      return -1;
-    }
-    if (res == 0) {
-      opStack.push(fa);
-    } else if (res == 1) {
-      opStack.push(tr);
+    opr = vStack.top();
+    vStack.pop();
+    op2 = vStack.top();
+    vStack.pop();
+    if (opr == (int)'|') {
+      tmp = op1 | op2;
+      vStack.push(tmp);
+    } else if (opr == (int)'&') {
+      tmp = op1 & op2;
+      vStack.push(tmp);
     }
   }
-  cout << opStack.top() << endl;
-#endif
-  return 0;
+  return vStack.top();
 }
-
 int main(int argc, char const *argv[]) {
-  string s = "!true | false & true | !false";
+  string s = "true|false&true|!false";
+  string s2 = " false & true | !  false";
+
   int val = evaluate(s);
   cout << "\nval = " << val << endl;
+  cout << removeSpaces(s2) << endl;
+
   return 0;
 }
