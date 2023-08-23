@@ -31,7 +31,7 @@ struct Research // HLL
 {
   Research(RelationshipBrowser &browser) {
     for (auto &child : browser.findAllChildrenOf("John")) {
-      cout << "John has a child Called " << second.name << endl;
+      cout << "John has a child Called " << child.name << endl;
     }
   }
   // Research(Relationships &relationships) {
