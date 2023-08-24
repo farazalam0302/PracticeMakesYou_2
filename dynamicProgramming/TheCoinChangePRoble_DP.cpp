@@ -24,6 +24,71 @@ https://practice.geeksforgeeks.org/problems/coin-change/0
 https://www.geeksforgeeks.org/coin-change-dp-7/
 
 
+
+Recursive Solution
+For each coin, there are 2 options.
+
+Include the current coin: Subtract the current coin’s denomination from the
+target sum and call the count function recursively with the updated sum and the
+same set of coins i.e., count(coins, n, sum – coins[n-1] ) Exclude the current
+coin: Call the count function recursively with the same sum and the remaining
+coins. i.e., count(coins, n-1,sum ). The final result will be the sum of both
+cases.
+
+Base case:
+
+If the target sum (sum) is 0, there is only one way to make the sum, which is by
+not selecting any coin. So, count(0, coins, n) = 1. If the target sum (sum) is
+negative or no coins are left to consider (n == 0), then there are no ways to
+make the sum, so count(sum, coins, 0) = 0.
+
+// Recursive C++ program for
+// coin change problem.
+#include <bits/stdc++.h>
+using namespace std;
+
+// Returns the count of ways we can
+// sum coins[0...n-1] coins to get sum "sum"
+int count(int coins[], int n, int sum)
+{
+
+        // If sum is 0 then there is 1 solution
+        // (do not include any coin)
+        if (sum == 0)
+                return 1;
+
+        // If sum is less than 0 then no
+        // solution exists
+        if (sum < 0)
+                return 0;
+
+        // If there are no coins and sum
+        // is greater than 0, then no
+        // solution exist
+        if (n <= 0)
+                return 0;
+
+        // count is sum of solutions (i)
+        // including coins[n-1] (ii) excluding coins[n-1]
+        return count(coins, n, sum - coins[n - 1])
+                + count(coins, n - 1, sum);
+}
+
+// Driver code
+int main()
+{
+        int i, j;
+        int coins[] = { 1, 2, 3 };
+        int n = sizeof(coins) / sizeof(coins[0]);
+        int sum = 5;
+
+        cout << " " << count(coins, n, sum);
+
+        return 0;
+}
+
+
+
 ============================================================================
 ============================================================================
 ============================================================================
@@ -78,12 +143,12 @@ Testcase 1: The possiblities are as such: {1, 1, 1, 1}, {1, 1, 2}, {1, 3}, {2,
 */
 
 #include <bits/stdc++.h>
-#define printMat(x)                \
-  for (int i = 0; i < m; i++) {    \
-    for (int j = 0; j <= n; j++) { \
-      cout << x[i][j] << " ";      \
-    }                              \
-    cout << endl;                  \
+#define printMat(x)                                                            \
+  for (int i = 0; i < m; i++) {                                                \
+    for (int j = 0; j <= n; j++) {                                             \
+      cout << x[i][j] << " ";                                                  \
+    }                                                                          \
+    cout << endl;                                                              \
   }
 using namespace std;
 #if 0
@@ -181,7 +246,7 @@ int main() {
 
 #endif
 
-int getNumberOfWaysToMakeDesiredSum(vector<int>& coins, int N) {
+int getNumberOfWaysToMakeDesiredSum(vector<int> &coins, int N) {
   int rows = coins.size();
   sort(coins.begin(), coins.end());
   vector<vector<int>> dp(rows, vector<int>(N + 1));
@@ -201,7 +266,7 @@ int getNumberOfWaysToMakeDesiredSum(vector<int>& coins, int N) {
   return dp[rows - 1][N];
 }
 
-int getMinimumNumberofWaystoGetDesiredSum(vector<int>& coins, int N) {
+int getMinimumNumberofWaystoGetDesiredSum(vector<int> &coins, int N) {
   int rows = coins.size();
   sort(coins.begin(), coins.end());
   vector<vector<int>> dp(rows + 1, vector<int>(N + 1));
@@ -228,9 +293,6 @@ int getMinimumNumberofWaystoGetDesiredSum(vector<int>& coins, int N) {
         dp[i][j] = min(dp[i - 1][j], (1 + dp[i][j - coins[i - 1]]));
     }
   }
-
-  //
-
   for (auto i : dp) {
     for (auto j : i) {
       cout << j << " ";
