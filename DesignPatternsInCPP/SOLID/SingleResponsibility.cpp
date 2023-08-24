@@ -13,7 +13,8 @@ struct Journal {
     entries.push_back(ec);
     count++;
   }
-  void save(const string &filename) {
+  void save(const string &filename) { /* This is for Saving it to HDD but this
+                                         must be separate class */
     ofstream ofs(filename);
     for (auto &e : entries) {
       ofs << e << endl;
