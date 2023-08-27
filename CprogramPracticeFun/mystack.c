@@ -7,14 +7,13 @@ struct Stack *createStack(int capacity) {
   mStack->stk = (int *)malloc(capacity * sizeof(int));
   return mStack;
 }
-
 void displayStack(struct Stack *mstack) {
   if (isEmpty(mstack)) {
     printf("%s\n", "Stack is Empty!!");
     return;
   }
   printf("\n");
-  for (int i = 0; i < mstack->capacity; i++) {
+  for (int i = 0; i <= mstack->top; i++) {
     printf("%d, ", mstack->stk[i]);
   }
   printf("\n");
@@ -73,6 +72,8 @@ int main(int argc, char const *argv[]) {
     pop(stack);
   }
   printf("\n\n");
+
+  displayStack(stack);
 
   return 0;
 }
