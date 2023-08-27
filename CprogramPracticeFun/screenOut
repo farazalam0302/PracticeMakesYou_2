@@ -1,0 +1,15 @@
+1 item pushed to stack
+2 item pushed to stack
+3 item pushed to stack
+4 item pushed to stack
+5 item pushed to stack
+
+top = 4
+capacity = 7
+1, 2, 3, 4, 5, 0, 0, 
+
+
+5
+4
+3
+2
