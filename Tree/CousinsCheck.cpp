@@ -28,7 +28,8 @@ using namespace std;
 bool isSibling(Node *root, int a, int b) {
   if (root == NULL)
     return false;
-  return ((root->left->data == a && root->right->data == b) ||
+  return (root->left != NULL && root->right != NULL) &&
+         ((root->left->data == a && root->right->data == b) ||
           (root->left->data == b && root->right->data == a) ||
           isSibling(root->left, a, b) || isSibling(root->left, b, a));
 }
@@ -41,7 +42,7 @@ int atlevel(Node *root, int a, int level) {
   int l = atlevel(root->left, a, level + 1);
   if (l != 0)
     return l;
-  atlevel(root->right, a, level + 1);
+  return atlevel(root->right, a, level + 1);
 }
 
 bool isCousin(Node *root, int c1, int c2) {
@@ -52,10 +53,10 @@ bool isCousin(Node *root, int c1, int c2) {
 int main(int argc, const char **argv) {
 
   Node *R;
-  makeR4(&R);
+  makeR1(&R);
 
-  isCousin(R, 5, 6) ? cout << "\nYES, Cousin!!\n"
-                    : cout << "\nNo is also am answer!!\n";
+  isCousin(R, 4, 5) ? cout << "\nYES, Cousin!!\n"
+                    : cout << "\nNo is also an answer!!\n";
 
   return 0;
 }
