@@ -85,8 +85,8 @@ int main() {
   auto builder2 = HtmlElement::build("ul")
                       ->add_child_2("li", "hello")
                       ->add_child_2("li", "world");
-  cout << builder2 << endl;
+  // cout << builder2 << endl;
 
-  getchar();
+  // getchar();
   return 0;
 }
