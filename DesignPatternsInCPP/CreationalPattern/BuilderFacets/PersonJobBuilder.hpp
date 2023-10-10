@@ -1,7 +1,7 @@
+#pragma once
 #include "PersonBuilder.hpp"
-#include <string>
 
-class PersonJobBuilder : PersonBuilderBase {
+class PersonJobBuilder : public PersonBuilderBase {
   typedef PersonJobBuilder Self;
 
 public:

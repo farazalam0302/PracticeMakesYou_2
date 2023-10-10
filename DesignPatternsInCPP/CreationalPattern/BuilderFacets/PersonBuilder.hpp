@@ -1,3 +1,4 @@
+#pragma once
 #include "Person.hpp"
 
 class PersonAddressBuilder;
@@ -6,20 +7,20 @@ class PersonJobBuilder;
 class PersonBuilderBase {
 protected:
   Person &person;
+  explicit PersonBuilderBase(Person &person) : person{person} {}
 
 public:
-  PersonBuilderBase(Person &person) : person{person} {}
-
   operator Person() const { return std::move(person); }
+
+  // builder facets
 
   PersonAddressBuilder lives() const;
   PersonJobBuilder works() const;
 };
 
 class PersonBuilder : public PersonBuilderBase {
-private:
   Person p;
 
 public:
-  PersonBuilder() : PersonBuilderBase{p} {};
+  PersonBuilder() : PersonBuilderBase{p} {}
 };

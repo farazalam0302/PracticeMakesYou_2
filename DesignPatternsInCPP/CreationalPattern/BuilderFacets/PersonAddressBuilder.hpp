@@ -1,11 +1,12 @@
+#pragma once
 #include "PersonBuilder.hpp"
 #include <string>
-class PersonAddressBuilder : PersonBuilderBase {
 
+class PersonAddressBuilder : public PersonBuilderBase {
   typedef PersonAddressBuilder Self;
 
 public:
-  PersonAddressBuilder(Person &person) : PersonBuilderBase(person) {}
+  explicit PersonAddressBuilder(Person &person) : PersonBuilderBase{person} {}
 
   Self &at(std::string street_address) {
     person.street_address = street_address;
