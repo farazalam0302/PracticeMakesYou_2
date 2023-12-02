@@ -31,7 +31,7 @@ bool isSibling(Node *root, int a, int b) {
   return (root->left != NULL && root->right != NULL) &&
          ((root->left->data == a && root->right->data == b) ||
           (root->left->data == b && root->right->data == a) ||
-          isSibling(root->left, a, b) || isSibling(root->left, b, a));
+          isSibling(root->left, a, b) || isSibling(root->right, a, b));
 }
 
 int atlevel(Node *root, int a, int level) {
