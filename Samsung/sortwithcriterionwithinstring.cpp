@@ -31,18 +31,27 @@ int main(int argc, char const *argv[]) {
   for (int i = 0; i < l; i++) {
     patternOrder[(int)orderingPattern[i]] = i;
   }
-  string in = "abcdefghijklmnopqrstwxyz";
-  int k = 26;
+  string in = "abcdefghijklmnopqrstuvwxyz";
+  int k = 24;
   l = in.length();
   int c = 0;
   char *ptr = (char *)in.c_str();
+  char *endString = ptr + l;
   int direction = 0;
+  char *endd;
   while (ptr != NULL && c < l) {
+
+    if (c + k >= l) {
+      endd = endString;
+    } else {
+      endd = ptr + k;
+    }
+
     if (direction == 0) {
-      sort(ptr, ptr + k, myCompare);
+      sort(ptr, endd, myCompare);
       direction = 1;
     } else if (direction == 1) {
-      sort(ptr, ptr + k, myCompare2);
+      sort(ptr, endd, myCompare2);
       direction = 0;
     }
     ptr = ptr + k;
