@@ -48,6 +48,12 @@ greater than 5.
 using namespace std;
 class MidSlope {
 public:
+  void printArray(vector<int> &a) {
+    for (auto &i : a) {
+      cout << i << " ";
+    }
+    cout << endl;
+  }
   int midSlope(vector<int> &a) {
     int sz = a.size();
     vector<int> leftMaxs(a.begin(), a.end());
@@ -63,6 +69,14 @@ public:
       //   leftMaxs[i] = min(a[i], leftMaxs[i]);
       rightMins[i] = min(a[i + 1], rightMins[i + 1]);
     }
+    cout << "originalArray\n";
+    printArray(a);
+
+    cout << "LeftMax Array\n";
+    printArray(leftMaxs);
+
+    cout << "RightMins Array\n";
+    printArray(rightMins);
 
     for (int i = 0; i < sz; i++) {
       if (a[i] > leftMaxs[i] && a[i] < rightMins[i]) {
