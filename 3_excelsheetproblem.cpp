@@ -43,18 +43,26 @@ Submissions
 
 */
 
+#include <bits/stdc++.h>
+using namespace std;
+
 class Solution {
 public:
   int titleToNumber(string s) {
     int lent = s.size();
     int ret = 0;
     for (auto i : s) {
-      int p = 1;
-      for (int j = 0; j < lent - 1; j++)
-        p = p * 26;
-      lent--;
-      ret = ret + p * (i - 'A' + 1);
+      ret = ret * 26;
+      ret = ret + (i - 'A' + 1);
     }
     return ret;
   }
 };
+
+int main(int argc, char const *argv[]) {
+  Solution s;
+  string in = "ZAC";
+  cout << s.titleToNumber(in) << endl;
+
+  return 0;
+}
