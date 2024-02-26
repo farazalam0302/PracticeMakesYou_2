@@ -1,4 +1,82 @@
 
+#include <bits/stdc++.h>
+using namespace std;
+
+void display(vector<int> &a) {
+  for (auto &i : a) {
+    cout << i << ", ";
+  }
+  cout << endl;
+}
+int minimumJumps(vector<int> &a, int start, int end) {
+  if (a.size() <= 0)
+    return -1;
+  if (start >= end)
+    return 0;
+  int minJumps = INT_MAX;
+  int jumps;
+  for (int i = 1; i < end && i <= a[start]; i++) {
+    jumps = 1 + minimumJumps(a, start + i, end);
+    if (jumps + 1 <= minJumps)
+      minJumps = jumps;
+  }
+
+  return minJumps;
+}
+
+int minimumJumps_memo(vector<int> &a, int start, int end, vector<int> &dp) {
+  if (a.size() <= 0)
+    return -1;
+  if (start >= end)
+    return 0;
+  if (dp[start] != 0)
+    return dp[start];
+  int minJumps = INT_MAX;
+  int jumps;
+  for (int i = 1; i < end && i <= a[start]; i++) {
+    jumps = 1 + minimumJumps(a, start + i, end);
+    if (jumps != INT_MAX && jumps + 1 <= minJumps)
+      minJumps = jumps;
+  }
+  dp[start] = minJumps;
+  return minJumps;
+}
+
+int minimumJumps_Tabular(vector<int> &a, int start, int end,
+                         vector<int> &jump) {
+  jump[0] = 0;
+  for (int j = 1; j < jump.size(); j++) {
+    jump[j] = INT_MAX;
+  }
+
+  for (size_t i = 1; i < a.size(); i++) {
+    for (size_t j = 0; j <= i; j++) {
+      if (i <= j + a[i] && jump[i] != INT_MAX) {
+        jump[i] = min(jump[i], jump[j] + 1);
+      }
+    }
+  }
+
+  return jump[a.size() - 1];
+}
+
+int main(int argc, char const *argv[]) {
+  vector<int> a{1, 3, 5, 8, 10, 2, 6, 7, 6, 8, 9};
+  vector<int> dp(a.size(), 0); //{3, 4, 5, 1, 2, 7};
+
+  int n = a.size();
+  cout << "minimum jumps recursive= " << minimumJumps(a, 0, n - 1) << endl;
+
+  cout << "minimum jumps Memoization= " << minimumJumps_memo(a, 0, n - 1, dp)
+       << endl;
+  display(dp);
+  cout << "minimum jumps Tabulation= " << minimumJumps_Tabular(a, 0, n - 1, dp)
+       << endl;
+  display(dp);
+  return 0;
+}
+
+#if 0
 /*
 a = {3 4 5 1 2 7}
 Number of steps/jumps
@@ -392,80 +470,4 @@ Another solution using a single loop: Time = O(n), Space = O(1).
 
 
 */
-
-#include <bits/stdc++.h>
-using namespace std;
-
-void display(vector<int> &a) {
-  for (auto &i : a) {
-    cout << i << ", ";
-  }
-  cout << endl;
-}
-int minimumJumps(vector<int> &a, int start, int end) {
-  if (a.size() <= 0)
-    return -1;
-  if (start >= end)
-    return 0;
-  int minJumps = INT_MAX;
-  int jumps;
-  for (int i = 1; i < end && i <= a[start]; i++) {
-    jumps = 1 + minimumJumps(a, start + i, end);
-    if (jumps + 1 <= minJumps)
-      minJumps = jumps;
-  }
-
-  return minJumps;
-}
-
-int minimumJumps_memo(vector<int> &a, int start, int end, vector<int> &dp) {
-  if (a.size() <= 0)
-    return -1;
-  if (start >= end)
-    return 0;
-  if (dp[start] != 0)
-    return dp[start];
-  int minJumps = INT_MAX;
-  int jumps;
-  for (int i = 1; i < end && i <= a[start]; i++) {
-    jumps = 1 + minimumJumps(a, start + i, end);
-    if (jumps != INT_MAX && jumps + 1 <= minJumps)
-      minJumps = jumps;
-  }
-  dp[start] = minJumps;
-  return minJumps;
-}
-
-int minimumJumps_Tabular(vector<int> &a, int start, int end,
-                         vector<int> &jump) {
-  jump[0] = 0;
-  for (int j = 1; j < jump.size(); j++) {
-    jump[j] = INT_MAX;
-  }
-
-  for (size_t i = 1; i < a.size(); i++) {
-    for (size_t j = 0; j <= i; j++) {
-      if (i <= j + a[i] && jump[i] != INT_MAX) {
-        jump[i] = min(jump[i], jump[j] + 1);
-      }
-    }
-  }
-
-  return jump[a.size() - 1];
-}
-
-int main(int argc, char const *argv[]) {
-  vector<int> a{1, 3, 5, 8, 10, 2, 6, 7, 6, 8, 9};
-  vector<int> dp(a.size(), 0); //{3, 4, 5, 1, 2, 7};
-
-  int n = a.size();
-  cout << "minimum jumps recursive= " << minimumJumps(a, 0, n - 1) << endl;
-
-  cout << "minimum jumps Memoization= " << minimumJumps_memo(a, 0, n - 1, dp)
-       << endl;
-  display(dp);
-  cout << "minimum jumps Tabulation= " << minimumJumps_Tabular(a, 0, n - 1, dp)
-       << endl;
-  display(dp);
-  return 0;
-}
+#endif

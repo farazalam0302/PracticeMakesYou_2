@@ -2,11 +2,12 @@
 
 // Node* reverseLLafterEachKnodes(Node* head, int k) {}
 
-Node* reverseFullList(Node* head) {
-  if (!head || !(head->next)) return head;
-  Node* prev = nullptr;
-  Node* curr = head;
-  Node* nextt = nullptr;
+Node *reverseFullList(Node *head) {
+  if (!head || !(head->next))
+    return head;
+  Node *prev = nullptr;
+  Node *curr = head;
+  Node *nextt = nullptr;
   while (curr) {
     nextt = curr->next;
     curr->next = prev;
@@ -17,11 +18,12 @@ Node* reverseFullList(Node* head) {
   return prev;
 }
 
-Node* reverseLLafterKnodes(Node* head, int k) {
-  if (!head || !(head->next)) return head;
-  Node* prev = nullptr;
-  Node* curr = head;
-  Node* nextt = nullptr;
+Node *reverseLLafterKnodes(Node *head, int k) {
+  if (!head || !(head->next))
+    return head;
+  Node *prev = nullptr;
+  Node *curr = head;
+  Node *nextt = nullptr;
   int i = 0;
   while (curr && i < k) {
     nextt = curr->next;
@@ -38,13 +40,14 @@ Node* reverseLLafterKnodes(Node* head, int k) {
   return prev;
 }
 
-Node* reverseLLafterKnodes_usingStack(Node* head, int k) {
-  if (!head || !(head->next)) return head;
-  stack<Node*> mstack;
-  Node* prev = nullptr;
-  Node* curr = head;
-  Node* nextt = nullptr;
-  int i;  // = 0;
+Node *reverseLLafterKnodes_usingStack(Node *head, int k) {
+  if (!head || !(head->next))
+    return head;
+  stack<Node *> mstack;
+  Node *prev = nullptr;
+  Node *curr = head;
+  Node *nextt = nullptr;
+  int i; // = 0;
   while (curr) {
     i = 0;
     while (curr && i < k) {
@@ -54,7 +57,7 @@ Node* reverseLLafterKnodes_usingStack(Node* head, int k) {
     }
 
     while (!mstack.empty()) {
-      if (prev == nullptr) {  // first time ussage to lock head of resultant
+      if (prev == nullptr) { // first time ussage to lock head of resultant
         prev = mstack.top();
         mstack.pop();
         head = prev;
@@ -70,8 +73,8 @@ Node* reverseLLafterKnodes_usingStack(Node* head, int k) {
 }
 
 int main() {
-  Node* head = nullptr;
-  for (int i = 8; i > 0; i--) {
+  Node *head = nullptr;
+  for (int i = 15; i > 0; i--) {
     insertNodeatHead(&head, i);
   }
 
@@ -81,8 +84,8 @@ int main() {
 
   cout << "\n##############################\n " << endl;
 
-  displayList(reverseLLafterKnodes(head, 3));
-  //  displayList(reverseLLafterKnodes_usingStack(head, 3));
+  displayList(reverseLLafterKnodes(head, 6));
+  // displayList(reverseLLafterKnodes_usingStack(head, 3));
 
   return 0;
 }
