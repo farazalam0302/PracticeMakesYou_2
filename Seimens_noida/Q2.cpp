@@ -24,13 +24,11 @@ bool isValid(vector<vector<int>> &a, int x, int y,
 }
 
 int dfs_height(vector<vector<int>> &a, int x, int y, int &minX,
-               vector<vector<bool>> &visited) {
-				
-			   }
+               vector<vector<bool>> &visited) {}
 
 int dfs_helper()
 
-int main(int argc, char const *argv[]) {
+    int main(int argc, char const *argv[]) {
 
   vector<vector<int>> a{
       {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 1, 0},
