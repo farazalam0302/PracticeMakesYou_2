@@ -1,13 +1,9 @@
 class A {
-public :
-int x;
+public:
+  int x;
 
 }
 
-main{
-	
-	
-	 
-	
-	
-	 A* = new A() [m]; 
+main {
+
+  A * = new A()[m];
