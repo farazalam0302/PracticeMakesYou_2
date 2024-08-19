@@ -39,16 +39,12 @@ char *cocncatWithoutVowels(char *s1, char *s2) {
 
   return r;
 }
-
 int main(int argc, char const *argv[]) {
 
   char *s1 = "bengaluru";
   char *s2 = "mumbai";
-
   char *r = cocncatWithoutVowels(s1, s2);
-
   printf("%s\n", r);
-
   free(r);
   return 0;
 }
