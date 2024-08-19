@@ -25,9 +25,7 @@ int main(int argc, char const *argv[]) {
   int t = a;
   a = (a & 0xf0) | (b & 0xf);
   b = (b & 0xf0) | (t & 0xf);
-  
   printf("a = %x\n", a);
   printf("b = %x\n", b);
-
   return 0;
 }
