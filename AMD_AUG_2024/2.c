@@ -22,9 +22,14 @@ int main(int argc, char const *argv[]) {
 
   int a = 0x13;
   int b = 0x24;
+  printf("Before\n");
+  printf("a = %x\n", a);
+  printf("b = %x\n", b);
   int t = a;
   a = (a & 0xf0) | (b & 0xf);
   b = (b & 0xf0) | (t & 0xf);
+  printf("-------------------------------------------------------------------"
+         "-\nAfter\n");
   printf("a = %x\n", a);
   printf("b = %x\n", b);
   return 0;
