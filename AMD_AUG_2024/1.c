@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-int isvowel(char a) {
+int isVowel(char a) {
   if ((a == 'a' || a == 'e' || a == 'i' || a == 'o' || a == 'u') ||
       (a == 'A' || a == 'E' || a == 'I' || a == 'O' || a == 'U'))
     return 1;
@@ -12,16 +12,12 @@ int isvowel(char a) {
 char *cocncatWithoutVowels(char *s1, char *s2) {
   int l1 = strlen(s1);
   int l2 = strlen(s2);
-
-  printf("%s\n", s1);
-  printf("%s\n", s2);
   char *r = (char *)malloc((l1 + l2) * sizeof(char));
-
   int i = 0;
   int j = 0;
   int ri = 0;
   while (i < l1 && s1[i] != '\0') {
-    if (isvowel(s1[i])) {
+    if (isVowel(s1[i])) {
       i++;
       continue;
     }
@@ -31,26 +27,16 @@ char *cocncatWithoutVowels(char *s1, char *s2) {
     i++;
   }
 
-  // for (int i = 0; i < ri; i++) {
-  //   printf("%c", r[i]);
-  // }
-  j = 0;
-  //   //   ri--;
   while (j < l2 && s2[j] != '\0') {
-    if (isvowel(s2[j])) {
+    if (isVowel(s2[j])) {
       j++;
       continue;
     }
-    if (s2[j] != '\0')
-      r[ri] = s2[j];
+    r[ri] = s2[j];
     ri++;
     j++;
   }
-  r[ri] = '\0';
 
-  // for (int i = 0; i < ri; i++) {
-  //   printf("%c", r[i]);
-  // }
   return r;
 }
 
