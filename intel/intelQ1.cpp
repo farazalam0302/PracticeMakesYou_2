@@ -6,26 +6,24 @@ public:
   int data;
   Node *next;
   Node() : data(0), next(nullptr) {
-    cout << "\nDefault Constructor for data = "<< data << "\n";
+    cout << "\nDefault Constructor for data = " << data << "\n";
   }
   Node(int x) : data(x), next(nullptr) {
-    cout << "\nParems Constructor for data = "<< data << "\n";
+    cout << "\nParems Constructor for data = " << data << "\n";
   }
-   Node(const Node &cp) : data(cp.data) {
-  
-     if (cp.next) {
-       next = new Node(*(cp.next));
-     }
-     cout << "\nCopy Constructor for data = "<< data << "\n";
-   }
-  Node(Node &&cp)  {
-    if (&cp != this)
-    {
-      data= cp.data;
-      next=cp.next;
-      
+  Node(const Node &cp) : data(cp.data) {
+
+    if (cp.next) {
+      next = new Node(*(cp.next));
     }
-    cout << "\nIn Move Constructor for data = "<< data << "\n";
+    cout << "\nCopy Constructor for data = " << data << "\n";
+  }
+  Node(Node &&cp) {
+    if (&cp != this) {
+      data = cp.data;
+      next = cp.next;
+    }
+    cout << "\nIn Move Constructor for data = " << data << "\n";
   }
 };
 
@@ -50,7 +48,7 @@ public:
       cout << "\nNo list to copy\n";
       return NULL;
     }
-    Node retNode (*head);
+    Node retNode(*head);
     return retNode;
   }
 
@@ -67,7 +65,7 @@ public:
       cout << hex << curr << " -> ";
       curr = curr->next;
     }
-    cout <<dec<<endl;
+    cout << dec << endl;
   }
 };
 

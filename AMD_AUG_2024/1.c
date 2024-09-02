@@ -16,18 +16,16 @@ char *cocncatWithoutVowels(char *s1, char *s2) {
   int i = 0;
   int j = 0;
   int ri = 0;
-  while (i < l1 && s1[i] != '\0') {
+  while (i <= l1 - 1) {
     if (isVowel(s1[i])) {
       i++;
       continue;
     }
-    if (s1[i] != '\0')
-      r[ri] = s1[i];
+    r[ri] = s1[i];
     ri++;
     i++;
   }
-
-  while (j < l2 && s2[j] != '\0') {
+  while (j < l2) {
     if (isVowel(s2[j])) {
       j++;
       continue;
