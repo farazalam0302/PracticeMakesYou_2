@@ -1,17 +1,10 @@
 /*
 
 a=0x13
-
 b=0x24
-
-
 after swapping
-
 a=0x14
-
 b=0x23
-
-
 */
 
 #include <stdio.h>
