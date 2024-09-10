@@ -2,6 +2,7 @@ a.out
 *.out
 vscode*
 *.out
+.vscode
 .vscode/*
 .vs/*
 temp*.cpp

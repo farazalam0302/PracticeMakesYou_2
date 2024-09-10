@@ -13,9 +13,16 @@ int main(int argc, char const *argv[]) {
   stringstream strStream(s);
   strStream >> x;
 
-  cout << "\nHello World\n"; //<< endl;
-  cout << "\n x+ 1 =" << (x + 1) << endl;
-  cout << format("\n str s = {}\n", s); // endl;
-
+  // cout << "\nHello World\n"; //<< endl;
+  // cout << "\n x+ 1 =" << (x + 1) << endl;
+  // cout << format("\nHi Faraz Alam Lucky number is {}\n", 30);
+  x = 1;
+  cout << format("\ncheckresult = {}\n", x++ + ++x);
+  x = 1;
+  cout << format("\ncheckresult = {}\n", x++ + x++);
+  x = 1;
+  cout << format("\ncheckresult = {}\n", ++x + ++x);
+  x = 1;
+  cout << format("\ncheckresult = {}\n", ++x + x++);
   return 0;
 }
