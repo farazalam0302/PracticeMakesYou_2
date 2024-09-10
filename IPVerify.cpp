@@ -55,12 +55,14 @@ bool isValidIP(string &ip_str) {
 
 int main(int argc, char const *argv[]) {
   string ip1 = "128.0.0.1";
-  string ip2 = "125.16.100.1";
+  string ip2 = "125.A.100.1";
   string ip3 = "125.512.100.1";
   string ip4 = "125.254.100.001";
-  isValidIP(ip1) ? cout << "\nValid IP\n" : cout << "Invalid IP\n";
-  isValidIP(ip2) ? cout << "\nValid IP\n" : cout << "Invalid IP\n";
-  isValidIP(ip3) ? cout << "\nValid IP\n" : cout << "Invalid IP\n";
-  isValidIP(ip4) ? cout << "\nValid IP\n" : cout << "Invalid IP\n";
+  cout << "\n--------------------------\n";
+  isValidIP(ip1) ? cout << "Valid IP\n" : cout << "Invalid IP\n";
+  isValidIP(ip2) ? cout << "Valid IP\n" : cout << "Invalid IP\n";
+  isValidIP(ip3) ? cout << "Valid IP\n" : cout << "Invalid IP\n";
+  isValidIP(ip4) ? cout << "Valid IP\n" : cout << "Invalid IP\n";
+  cout << "\n--------------------------\n";
   return 0;
 }
