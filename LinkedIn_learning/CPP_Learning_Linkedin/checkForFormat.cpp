@@ -15,7 +15,7 @@ int main(int argc, char const *argv[]) {
 
   cout << "\nHello World\n"; //<< endl;
   cout << "\n x+ 1 =" << (x + 1) << endl;
-  cout << "\n str s = " << s << endl;
+  cout << format("\n str s = {}\n", s); // endl;
 
   return 0;
 }
