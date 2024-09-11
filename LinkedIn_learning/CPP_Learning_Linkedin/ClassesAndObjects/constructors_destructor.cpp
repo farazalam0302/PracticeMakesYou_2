@@ -17,6 +17,7 @@ public:
          const string &asound); // params const
   Animal(const Animal &);       // copy constr
   ~Animal();
+  Animal &operator=(const Animal &);
   void print() const {
     cout << format("\n {} the {} says {} \n", a_name, a_type, a_sound);
   }
@@ -42,6 +43,16 @@ Animal::~Animal() {
   cout << format("\nDestructor. CALLED {} the {}\n", a_name, a_type);
 }
 
+Animal &Animal::operator=(const Animal &o) {
+  cout << "Copy assignment operator\n";
+  if (this != &o) {
+    a_name = clone_prefix + o.a_name;
+    a_type = o.a_type;
+    a_sound = o.a_sound;
+  }
+  return *this;
+}
+
 int main(int argc, char const *argv[]) {
   const Animal a{};
   a.print();
@@ -49,8 +60,11 @@ int main(int argc, char const *argv[]) {
   const Animal b("goat", "bob", "mmmaaaaaahh");
   b.print();
 
-  const Animal c = b;
+  const Animal d{b};
+  d.print();
+
+  const Animal c = d;
   c.print();
 
-    return 0;
+  return 0;
 }
