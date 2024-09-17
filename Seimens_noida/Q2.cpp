@@ -86,11 +86,18 @@ void printArray(vector<int> &a) {
 }
 
 int main(int argc, char const *argv[]) {
-
+  // clang-format off
   vector<vector<int>> a{
-      {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 1, 0},
-      {1, 0, 1, 0}, {1, 1, 1, 0}, {1, 1, 1, 1}, {1, 1, 1, 1},
+      {0, 0, 0, 0},
+      {0, 0, 0, 0},
+      {0, 0, 0, 0},
+      {0, 0, 1, 0},
+      {1, 0, 1, 0},
+      {1, 1, 1, 0},
+      {1, 1, 1, 1},
+      {1, 1, 1, 1},
   };
+  // clang-format on
   // vector<int> ret = naiveSolution(a);
   vector<int> ret = DFS_helper(a);
   printArray((ret));
