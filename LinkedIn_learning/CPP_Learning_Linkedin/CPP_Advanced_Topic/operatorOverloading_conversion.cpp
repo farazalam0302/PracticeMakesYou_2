@@ -22,7 +22,7 @@ public:
   Rational reduce() const; // reduce fraction
   string str() const;      // return a formatted STL string
   string raw_str() const;  // return a non-reduced STL string
-  operator string() { return str(); }
+  operator auto() { return str(); }
 
   Rational &operator=(const Rational &); // assignment
 };
