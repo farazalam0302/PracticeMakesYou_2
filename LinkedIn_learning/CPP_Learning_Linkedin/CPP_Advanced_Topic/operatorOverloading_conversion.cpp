@@ -1,7 +1,6 @@
 // rational.cpp by Bill Weinman [bw.org]
-
+// updated 2022-06-18
 #include <bits/stdc++.h>
-
 #include <fmt/format.h>
 using namespace std;
 
@@ -20,14 +19,12 @@ public:
   ~Rational();
   int numerator() const { return n; };
   int denominator() const { return d; };
-  Rational reduce() const;               // reduce fraction
-  string str() const;                    // return a formatted STL string
-  string raw_str() const;                // return a non-reduced STL string
+  Rational reduce() const; // reduce fraction
+  string str() const;      // return a formatted STL string
+  string raw_str() const;  // return a non-reduced STL string
+  operator string() { return str(); }
+
   Rational &operator=(const Rational &); // assignment
-  Rational operator+(const Rational &) const;
-  Rational operator-(const Rational &) const;
-  Rational operator*(const Rational &) const;
-  Rational operator/(const Rational &) const;
 };
 
 Rational Rational::reduce() const {
@@ -73,26 +70,33 @@ Rational &Rational::operator=(const Rational &rhs) {
   return *this;
 }
 
-Rational Rational::operator+(const Rational &rhs) const {
-  return Rational((n * rhs.d) + (d * rhs.n), d * rhs.d);
+Rational operator+(const Rational &lhs, const Rational &rhs) {
+  return Rational((lhs.numerator() * rhs.denominator()) +
+                      (lhs.denominator() * rhs.numerator()),
+                  lhs.denominator() * rhs.denominator());
 }
 
-Rational Rational::operator-(const Rational &rhs) const {
-  return Rational((n * rhs.d) - (d * rhs.n), d * rhs.d);
+Rational operator-(const Rational &lhs, const Rational &rhs) {
+  return Rational((lhs.numerator() * rhs.denominator()) -
+                      (lhs.denominator() * rhs.numerator()),
+                  lhs.denominator() * rhs.denominator());
+}
+Rational operator*(const Rational &lhs, const Rational &rhs) {
+  return Rational(lhs.numerator() * rhs.numerator(),
+                  lhs.denominator() * rhs.denominator());
 }
 
-Rational Rational::operator*(const Rational &rhs) const {
-  return Rational(n * rhs.n, d * rhs.d);
-}
-
-Rational Rational::operator/(const Rational &rhs) const {
-  return Rational(n * rhs.d, d * rhs.n);
+Rational operator/(const Rational &lhs, const Rational &rhs) {
+  return Rational(lhs.numerator() * rhs.denominator(),
+                  lhs.denominator() * rhs.numerator());
 }
 
 Rational::~Rational() {
   n = 0;
   d = 1;
 }
+
+void p(const string &s) { cout << format("The string is {}\n", s); }
 
 int main() {
 
@@ -117,10 +121,15 @@ int main() {
   cout << format("d is: {} = {}\n", d.raw_str(), d.str());
 
   cout << '\n';
-  cout << format("a + 10 = {}\n", (a + 10).str());
-  // cout << format("10 + a = {}\n", (10 + a).str()); // this will not work
-  // because here 10 is not impicitly create a Rational object
+  cout << format("a + b = {}\n", (a + b).str());
   cout << format("a - b = {}\n", (a - b).str());
   cout << format("a * b = {}\n", (a * b).str());
   cout << format("a / b = {}\n", (a / b).str());
+
+  string msg{"Rational no is "};
+  msg += a;
+  cout << msg << endl;
+
+  p(a);
+  return 0;
 }
