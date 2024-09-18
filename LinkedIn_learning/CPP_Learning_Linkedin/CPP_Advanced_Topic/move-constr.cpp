@@ -13,7 +13,6 @@ public:
 
   ~CustomVector();
   CustomVector<T> &operator=(const CustomVector &rhs);
-  CustomVector<T> &operator=(CustomVector &&rhs) noexcept;
 
   void reset();
 
@@ -40,15 +39,6 @@ CustomVector<T> &CustomVector<T>::operator=(const CustomVector &rhs) {
   return *this;
 }
 // move assignment operator
-
-template <typename T>
-CustomVector<T> &CustomVector<T>::operator=(CustomVector &&rhs) noexcept {
-  std::cout << "move assignment c'tor\n";
-  if (this != &rhs) {
-    items = move(rhs.items);
-  }
-  return *this;
-}
 
 // move constr
 
