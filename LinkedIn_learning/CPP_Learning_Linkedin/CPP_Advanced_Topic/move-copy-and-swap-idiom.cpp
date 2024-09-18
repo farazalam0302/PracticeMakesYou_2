@@ -13,7 +13,7 @@ public:
 
   ~CustomVector();
   CustomVector<T> &operator=(CustomVector rhs); // copy/swap opr
-  CustomVector<T> &operator=(CustomVector &&rhs) noexcept;
+  // CustomVector<T> &operator=(CustomVector &&rhs) noexcept;
 
   void reset();
 
@@ -39,14 +39,14 @@ CustomVector<T> &CustomVector<T>::operator=(CustomVector rhs) {
 }
 // move assignment operator
 
-template <typename T>
-CustomVector<T> &CustomVector<T>::operator=(CustomVector &&rhs) noexcept {
-  std::cout << "move assignment c'tor\n";
-  if (this != &rhs) {
-    items = move(rhs.items);
-  }
-  return *this;
-}
+// template <typename T>
+// CustomVector<T> &CustomVector<T>::operator=(CustomVector &&rhs) noexcept {
+//   std::cout << "move assignment c'tor\n";
+//   if (this != &rhs) {
+//     items = move(rhs.items);
+//   }
+//   return *this;
+// }
 
 // move constr
 
@@ -85,9 +85,9 @@ int main(int argc, char const *argv[]) {
   std::cout << "a : " << a.str() << endl;
   std::cout << "b : " << b.str() << endl;
 
-  b = a;
+  b = std::move(a);
   std::cout << "a : " << a.str() << endl;
-  std::cout << "c : " << c.str() << endl;
+  std::cout << "c : " << b.str() << endl;
 
   return 0;
 }
