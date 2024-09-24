@@ -131,7 +131,7 @@ fi
 
 export PATH="$PATH:/home/faraz/.local/bin:/snap/bin"
 
-alias gittyup='flatpak run com.github.Murmele.Gittyup &'
+#alias gittyup='flatpak run com.github.Murmele.Gittyup &'
 alias fho='cd  ~'
 alias clr='bash /home/faraz/skillup/clean.sh'
 alias customPython="source /home/faraz/myCustomPythonEnv/bin/activate"
@@ -145,5 +145,5 @@ alias gpm=/home/faraz/skillup/PracticeMakesYou/gpm.sh
 alias gpp=/home/faraz/skillup/PracticeMakesYou/gpp.sh
 alias gts=/home/faraz/skillup/PracticeMakesYou/gts.sh
 alias cc=/home/faraz/skillup/PracticeMakesYou/C.sh
-PATH="/home/faraz/Downloads/p4v/p4v-2024.3.2649657/bin:$PATH"
+#PATH="/home/faraz/Downloads/p4v/p4v-2024.3.2649657/bin:$PATH"
 
