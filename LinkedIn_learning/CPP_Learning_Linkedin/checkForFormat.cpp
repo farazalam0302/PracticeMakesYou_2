@@ -1,5 +1,5 @@
 #include <bits/stdc++.h>
-#include <fmt/format.h>
+#include <format>
 #include <iostream>
 using namespace std;
 using namespace std;
