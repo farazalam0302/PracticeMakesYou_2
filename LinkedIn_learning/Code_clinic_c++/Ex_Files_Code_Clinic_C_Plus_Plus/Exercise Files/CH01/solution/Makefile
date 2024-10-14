@@ -4,8 +4,11 @@ TARGET	= WeatherStatistics
 SRC		= WeatherStatisticsMain.cpp WeatherStatistics.cpp
 
 $(TARGET): $(SRC)
-	$(CC) -o $(TARGET) $(SRC)
+	$(CC) -o $(TARGET) $(SRC) -g
+
+verbose:
+	$(CC) -DVERBOSE -o $(TARGET) $(SRC) -g
 
 .PHONY: clean
 clean:
-	rm -f $(TARGET)
+	rm -f $(TARGET) *.exe

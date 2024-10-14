@@ -14,7 +14,7 @@ WeatherStatistics::WeatherStatistics()
 bool WeatherStatistics::isValidDateTime(string date, string time)
 {
     time_t dateTime = convertDateTime(date, time);
-    
+
     if (dateTime < 0)
     {
         return false; // failure to parse date/time
@@ -55,38 +55,54 @@ double WeatherStatistics::computeCoeff(string startDate, string startTime,
     return (pressureDiff) / (timeDiff);
 }
 
-void WeatherStatistics::loadData() 
-{
-    for (int year = 2012; year <= 2015; year++)
-    {
-        ostringstream fileNameStream;
-        fileNameStream << RESOURCE_PATH << "Environmental_Data_Deep_Moor_" << year << ".txt";
-        string fileName = fileNameStream.str();
-        cout << "Loading " << fileName << endl;
+void WeatherStatistics::loadData() {
+  for (int year = 2012; year <= 2015; year++) {
+    ostringstream fileNameStream;
+    fileNameStream << RESOURCE_PATH << "Environmental_Data_Deep_Moor_" << year
+                   << ".txt";
+    string fileName = fileNameStream.str();
+    cout << "Loading " << fileName << endl;
 
-        fstream dataFileStream;
-        dataFileStream.open(fileName);
+    fstream dataFileStream;
+    dataFileStream.open(fileName);
 
-        string line;
-        getline(dataFileStream, line); // discard top line with headers
-        while (getline(dataFileStream, line))
-        {
-            string date, time;
-            double Air_Temp, Barometric_Press, Dew_Point, Relative_Humidity,Wind_Dir, Wind_Gust, Wind_Speed;
-            istringstream buffer(line);
+    string line;
+    getline(dataFileStream, line); // discard top line with headers
+#ifdef VERBOSE
+    int flag = 0;
+#endif // VERBOSE
 
-            buffer >> date >> time >> Air_Temp >> Barometric_Press >> Dew_Point >> Relative_Humidity >> Wind_Dir >> Wind_Gust >> Wind_Speed;
-            time_t dateTime = convertDateTime(date, time);
-            timeToPressure_[dateTime] = Barometric_Press;
-        }
+    while (getline(dataFileStream, line)) {
+      string date, time;
+      double Air_Temp, Barometric_Press, Dew_Point, Relative_Humidity, Wind_Dir,
+          Wind_Gust, Wind_Speed;
+      istringstream buffer(line);
+      // date       time    	Air_Temp	Barometric_Press
+      // Dew_Point	Relative_Humidity	Wind_Dir	Wind_Gust
+      // Wind_Speed
 
-        dataFileStream.close();
+      buffer >> date >> time >> Air_Temp >> Barometric_Press >> Dew_Point >>
+          Relative_Humidity >> Wind_Dir >> Wind_Gust >> Wind_Speed;
+#ifdef VERBOSE
+      if (flag <= 2) {
+        cout << date << " | " << time << " | " << Air_Temp << " | "
+             << Barometric_Press << " | " << Dew_Point << " | "
+             << Relative_Humidity << " | " << Wind_Dir << " | " << Wind_Gust
+             << " | " << Wind_Speed << endl;
+      }
+      flag++;
+#endif
+      time_t dateTime = convertDateTime(date, time);
+      timeToPressure_[dateTime] = Barometric_Press;
     }
+
+    dataFileStream.close();
+  }
 }
 
 time_t WeatherStatistics::getFirstDateTime()
 {
-    return timeToPressure_.begin()->first; 
+  return timeToPressure_.begin()->first;
 }
 
 time_t WeatherStatistics::getLastDateTime()
@@ -111,7 +127,7 @@ time_t WeatherStatistics::convertDateTime(string date, string time)
         cerr << "ERROR: Failed to parse time string " << date << endl;
         return -2;
     }
-    
+
     struct tm dateTime = {};
     dateTime.tm_year = yyyy - 1900; // years since 1900
     dateTime.tm_mon = mon - 1;      // months since January
