@@ -18,13 +18,16 @@ class Node {
 public:
   int data;
   Node *next;
+  Node *random;
   Node() {
     data = 0;
     next = nullptr;
+    random = nullptr;
   }
   Node(int n) {
     data = n;
     next = nullptr;
+    random = nullptr;
   }
 };
 
@@ -68,6 +71,18 @@ void displayList(Node *head) {
     head = head->next;
   }
   cout << "NULL\n";
+}
+
+void displayRandomList(Node *head) {
+  while (head) {
+    if (head->random) {
+      cout << head->data << " 's random -> " << head->random->data << endl;
+    } else {
+      cout << head->data << " 's random -> NULL\n";
+    }
+    head = head->next;
+  }
+  cout << "\n";
 }
 
 void createLinkedList(Node **head) {
