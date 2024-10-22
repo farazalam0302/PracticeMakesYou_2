@@ -2,8 +2,8 @@
 // // 158 digits  9.332622e+157
 #include <bits/stdc++.h>
 using namespace std;
-#define DIGITS 500
-void factorial(int n) {
+#define DIGITS 200
+void factorialUsingArray(int n) {
   int answer[DIGITS]; // = {0};
   answer[0] = 1;
   int answer_size = 1;
@@ -20,14 +20,42 @@ void factorial(int n) {
       answer_size++;
     }
   }
-  cout << "\nFactorial(" << n << ") = ";
+  // cout << "\nfactorialUsingArray(" << n << ") = \n";
   for (int i = answer_size - 1; i >= 0; i--) {
     cout << answer[i];
   }
   cout << "\n";
 }
+
+void factorialUsingVector(int n) {
+  vector<int> answer;
+  answer.push_back(1);
+  // int answer_size = 1;
+  for (int x = 2; x <= n; x++) {
+    int carry = 0;
+    for (int i = 0; i < answer.size(); i++) {
+      int prod = answer[i] * x + carry;
+      int psum = prod % 10;
+      answer[i] = psum;
+      carry = prod / 10;
+    }
+    while (carry) {
+      int psum = carry % 10;
+      answer.push_back(psum);
+      carry = carry / 10;
+      // answer_size++;
+    }
+  }
+  // cout << "\nfactorialUsingVector(" << n << ") = \n";
+  for (int i = answer.size() - 1; i >= 0; i--) {
+    cout << answer[i];
+  }
+  cout << "\n";
+}
+
 int main(int argc, char const *argv[]) {
-  factorial(100);
+  factorialUsingArray(100);
+  factorialUsingVector(600);
   // cout << "result = " << r << endl;
   return 0;
 }
