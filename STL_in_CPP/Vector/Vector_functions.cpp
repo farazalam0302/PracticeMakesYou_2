@@ -16,7 +16,8 @@ void myFunction(int i) {
 
 int main(int argc, char const *argv[]) {
 
-  vector<int> a{1, 2, 3, 4, 5, 6, 7, 8, 9};
+  vector<int> a{1, 2, 3, 4, 5, 6, 7, 8, 8, 8, 9};
+  //            0, 1, 2, 3, 4, 5, 6, 7, 8, 9, b
   vector<int> b{9, 8, 7, 6, 5, 4, 3, 2, 1};
   vector<int> c{1, 2, 3, 4, 9, 8, 7, 6, 5};
   vector<int> odd{1, 3, 9, 7, 5};
@@ -48,6 +49,18 @@ int main(int argc, char const *argv[]) {
   cout << "\n forEach example \n";
   for_each(b.begin(), b.end(), myFunction);
   cout << "\n";
+
+  // lower_bound example
+  cout << "\n lower_bound at position "
+       << (lower_bound(a.begin(), a.end(), 8) - a.begin()) << endl;
+  cout << "\n lower_bound element = " << *lower_bound(a.begin(), a.end(), 8)
+       << endl;
+
+  // upper_bound example
+  cout << "\n upper_bound at position "
+       << (upper_bound(a.begin(), a.end(), 8) - a.begin()) << endl;
+  cout << "\n upper_bound element = " << *upper_bound(a.begin(), a.end(), 8)
+       << endl;
 
   return 0;
 }
