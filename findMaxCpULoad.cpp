@@ -350,25 +350,26 @@ public:
 
 int main(int argc, char const *argv[]) {
 
-  vector<Job> input = {{1, 10, 100}, {1, 4, 3}, {7, 9, 6}, {2, 5, 4}};
+  vector<Job> input = {{1, 4, 3}, {7, 9, 6}, {2, 5, 4}}; // {1, 10, 100},
 
-  auto endCompare = [](const Job &left, const Job &right) {
-    return left.end > right.end;
-  };
-  priority_queue<Job, vector<Job>, decltype(endCompare)> minHeap(endCompare);
+  //   auto endCompare = [](const Job &left, const Job &right) {
+  //     return left.end > right.end;
+  //   };
+  //   priority_queue<Job, vector<Job>, decltype(endCompare)>
+  //   minHeap(endCompare);
 
-  for (auto &i : input) {
-    minHeap.push(i);
-  }
+  //   for (auto &i : input) {
+  //     minHeap.push(i);
+  //   }
 
-  while (!minHeap.empty()) {
-    auto topp = minHeap.top();
-    topp.printjob();
-    minHeap.pop();
-  }
+  //   while (!minHeap.empty()) {
+  //     auto topp = minHeap.top();
+  //     topp.printjob();
+  //     minHeap.pop();
+  //   }
 
-  //   MaximumCPULoad mcl;
-  //   cout << "\n max CPU LOAD = " << (mcl.findMaxCPULoad(input)) << endl;
+  MaximumCPULoad mcl;
+  cout << "\n max CPU LOAD = " << (mcl.findMaxCPULoad(input)) << endl;
 
   return 0;
 }
