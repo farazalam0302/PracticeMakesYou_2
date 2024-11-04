@@ -348,6 +348,170 @@ public:
   }
 };
 
+/*
+Approach 2:
+
+The idea is simple. We have supposed n intervals, so we have 2n endpoints ( here
+endpoint is the end of an interval and its value is the time associated with
+it). We can take an endpoint and combine it with its load value associated with
+it and with a flag which states whether it is a starting point or ending point
+of an interval. Then we can just sort the endpoints in increasing order(if there
+is a tie in value of endpoints then we will break the tie by putting the
+endpoint which is starting at first place as compared to the endpoint which is
+ending; if both the endpoints are starting or ending then we will break the tie
+arbitrarily).
+
+After sorting, we will proceed through the endpoints using for loop. And if we
+have an endpoint that is the starting point of an interval then we will add the
+load value associated with it in a variable say, count. We will also take the
+maximum of the count values and store it in a variable called result.
+
+But when we get an endpoint that is ending then we will decrease the load value
+associated with it from the count.
+
+At the end, we will return the result.
+
+Lets take an example: suppose the jobs are {1, 4, 3}, {2, 5, 4}, {7, 9, 6}.
+
+our sorted endpoints will be 1(start), 2(start), 4(end), 5(end), 7(start),
+9(end) .
+
+and the corresponding loads will be 3, 4, 3, 4, 6, 6.
+
+start traversing the endpoints:
+
+so after traversing first endpoint which is 1(start) we have count+=3 (here 3 is
+the load associated with it) so count =3. Since the 1 is starting point so we
+will update the result. So result=max(result,count) so, result=3.
+
+After traversing 2(start) we have count+=4, so count=7,
+result=max(result,count)=7.
+
+After traversing 4(end) we have count-=3(we have subtracted because it is ending
+point) so count=4. result will not be updated since we are decreasing the count.
+
+After traversing 5(end) we have count-=4 so count=0.
+
+After traversing 7(start) we have count+=6 so count=6,
+result=max(result,count)=7.
+
+After traversing 9(end) we have count-=6 so count=0.
+
+Our result will be 7.
+
+
+
+
+// C++ implementation to find the
+// maximum CPU Load from the given array of jobs
+
+#include <bits/stdc++.h>
+using namespace std;
+
+// the job struct will have s(starting time) , e(ending time) , load(cpu load)
+struct Job {
+    int s, e, load;
+};
+
+// endpoint struct will have val(the time associated with the endpoint),
+// load(cpu load associated with the endpoint),
+// a flag isStart which will tell if the endpoint is starting or ending point of
+// an interval
+struct Endpoint {
+    int val, load;
+    bool isStart;
+};
+
+// custom comparator function which is used by the c++ sort stl
+bool comp(const Endpoint& a, const Endpoint& b) {
+    if (a.val != b.val)
+        return a.val < b.val;
+    return a.isStart == true && b.isStart == false;
+}
+//function to find maximum cpu load
+int maxCpuLoad(vector<Job> v)
+{
+    int count = 0; // count will contain the count of current loads
+      int result = 0; // result will contain maximum of all counts
+
+      // this data array will contain all the endpoints combined with their load
+values
+      // and flags telling whether they are starting or ending point
+    vector<Endpoint> data;
+
+    for (int i = 0; i < v.size(); i++) {
+        data.emplace_back(Endpoint{ v[i].s, v[i].load, true});
+        data.emplace_back(Endpoint{ v[i].e, v[i].load, false});
+    }
+
+    sort(data.begin(), data.end(), comp);
+
+    for (int i = 0; i < data.size(); i++) {
+        if (data[i].isStart == true) {
+            count += data[i].load;
+            result = max(result, count);
+        }
+        else
+            count -= data[i].load;
+
+    }
+
+    return result;
+}
+//Driver code to test maxCpuLoad function
+int main() {
+    vector<Job> v = {
+        {6, 7, 10},
+          {2, 4, 11},
+          {8, 12, 15}
+    };
+    cout << maxCpuLoad(v);
+    return 0;
+}
+// this code is contributed by Mohit Puri
+Output
+15
+Time Complexity: O(nlogn) for sorting the data array.
+Auxiliary Space: O(n) which is the size of the data array
+
+*/
+class EndPoint {
+public:
+  int val;
+  int load;
+  bool isStart;
+  EndPoint(int v, int lod, bool st) : val{v}, load{lod}, isStart{st} {}
+};
+
+bool mycompare(const EndPoint &left, const EndPoint &right) {
+  if (left.val != right.val) {
+    return left.val < right.val;
+  }
+  return left.isStart == true && right.isStart == false;
+}
+
+int maxCpuLoad_approach2(vector<Job> &jobs) {
+  int count = 0;
+  int result = 0;
+  vector<EndPoint> endPoints;
+  for (auto &job : jobs) {
+    endPoints.push_back(EndPoint(job.start, job.cpuLoad, true));
+    endPoints.push_back(EndPoint(job.end, job.cpuLoad, false));
+  }
+
+  sort(endPoints.begin(), endPoints.end(), mycompare);
+
+  for (auto &endpoint : endPoints) {
+    if (endpoint.isStart) {
+      count += endpoint.load;
+      result = max(result, count);
+    } else {
+      count = count - endpoint.load;
+    }
+  }
+  return result;
+}
+
 int main(int argc, char const *argv[]) {
 
   vector<Job> input = {{1, 4, 3}, {7, 9, 6}, {2, 5, 4}}; // {1, 10, 100},
@@ -367,9 +531,17 @@ int main(int argc, char const *argv[]) {
   //     topp.printjob();
   //     minHeap.pop();
   //   }
-
+#ifdef METHOD
   MaximumCPULoad mcl;
-  cout << "\n max CPU LOAD = " << (mcl.findMaxCPULoad(input)) << endl;
+  cout << "\n max CPU LOAD (using Method of PQ minHeap)= "
+       << (mcl.findMaxCPULoad(input)) << endl;
+#else
+  cout << "\n max CPU LOAD (Using Endpoint structure) = "
+       << (maxCpuLoad_approach2(input)) << endl;
+
+#endif // !METHOD
+
+  //   cout << "\n max CPU LOAD = " << (maxCpuLoad_approach2(input)) << endl;
 
   return 0;
 }
