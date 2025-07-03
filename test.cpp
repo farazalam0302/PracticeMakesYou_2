@@ -32,6 +32,6 @@ using namespace std;
 
 int main(int argc, char **argv) {
 
-
+cout << "FRAZ ALAM IS BEST\n"<< endl;
   return 0;
 }
